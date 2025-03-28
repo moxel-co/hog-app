@@ -6,6 +6,7 @@ import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
 
+
 function SubMenuItem({ item, parentOpen }: { 
   item: MenuItem;
   parentOpen: boolean;
@@ -230,10 +231,22 @@ function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const headstock = useVariant((state) => state.headstock);
 
   const handleAddToCart = () => {
-    console.log('Adding to cart...');
-    // Add your cart logic here
+    console.log("Adding to Cart");
+
+    const productDetails = {
+      id: "product-id-123",
+      name: "Sample Product",
+      headstock: headstock,
+    };
+    window.parent.postMessage(
+      productDetails,
+      "https://hing62.wixsite.com/hello-guitars"
+    );
+
+    console.log(productDetails);
   };
 
   const menuItems: MenuItem[] = [
