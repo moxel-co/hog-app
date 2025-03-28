@@ -1,0 +1,158 @@
+import {
+  Shield,
+  Music,
+  Brush,
+  Box,
+  Guitar,
+  Frame,
+  Square,
+  Layers,
+  Bookmark,
+} from 'lucide-react';
+import {
+  HeadStockArrowIcon,
+  HeadStockAviatorIcon,
+  HeadStockBriefcaseIcon,
+  HeadStockBroadcasterIcon,
+  HeadStockFallenAngelIcon,
+  HeadStockHeadlessIcon,
+  HeadStockNinjaStarIcon,
+  HeadStockOversizedIcon,
+  HeadStockPlankSpankerIcon,
+  HeadStockReliableIcon,
+  HeadStockSummitIcon,
+  HeadStockThunderbirdIcon,
+  HeadStockViperIcon,
+} from './icons.tsx';
+import { MenuItem } from '../types';
+import { NeckButtonColorSwatches, colorSwatches, presetColorSwatches } from './colors';
+import useVariant from '../stores/useVariant';
+
+export const customiseMenuItems: MenuItem[] = [
+  {
+    icon: <Bookmark size={56} />,
+    label: 'Presets',
+    items: [
+      { icon: <Shield size={24} />, label: 'Aviator' },
+      { icon: <Music size={24} />, label: 'Viper' },
+      {
+        icon: <Brush size={24} />,
+        label: 'Color',
+        isColorPicker: true,
+        swatches: presetColorSwatches,
+        isDualColor: true,
+      },
+    ],
+  },
+  {
+    icon: <Box size={56} />,
+    label: 'Body',
+    items: [
+      { icon: <Shield size={24} />, label: 'Arrow' },
+      { icon: <Music size={24} />, label: 'Angry Viper' },
+      { icon: <Music size={24} />, label: 'Aviator' },
+      { icon: <Music size={24} />, label: 'Summit' },
+      { icon: <Music size={24} />, label: 'Ol Reliable' },
+      { icon: <Music size={24} />, label: 'Fallen Angel' },
+      { icon: <Music size={24} />, label: 'Ninja Star' },
+      { icon: <Music size={24} />, label: 'Headless Strumsman' },
+      { icon: <Music size={24} />, label: 'Broadcaster' },
+      { icon: <Music size={24} />, label: 'Briefcase' },
+      { icon: <Music size={24} />, label: 'Briefcase Handle' },
+      { icon: <Music size={24} />, label: 'Briefcase Teardrop Handle' },
+      { icon: <Music size={24} />, label: 'Thunderbird' },
+      { icon: <Music size={24} />, label: 'Youngster' },
+      { icon: <Music size={24} />, label: 'Silk Timbre' },
+      { icon: <Music size={24} />, label: 'Double Headless Strumsman' },
+      { icon: <Music size={24} />, label: 'Plank Spanker' },
+      { icon: <Music size={24} />, label: 'Shred Hammer' },
+      {
+        icon: <Brush size={24} />,
+        label: 'Color',
+        isColorPicker: true,
+        swatches: colorSwatches,
+      },
+    ],
+  },
+  {
+    icon: <Guitar size={56} />,
+    label: 'Headstock',
+    items: [
+      { icon: <HeadStockArrowIcon size={24} />, label: 'Arrow', onClick: () => useVariant.setState({ headstock: 'arrow' }) },
+      { icon: <HeadStockViperIcon size={24} />, label: 'Angry Viper', onClick: () => useVariant.setState({ headstock: 'viper' }) },
+      { icon: <HeadStockAviatorIcon size={24} />, label: 'Aviator', onClick: () => useVariant.setState({ headstock: 'aviator' }) },
+      { icon: <HeadStockSummitIcon size={24} />, label: 'Summit', onClick: () => useVariant.setState({ headstock: 'summit' }) },
+      { icon: <HeadStockReliableIcon size={24} />, label: 'Ol Reliable 6 String', onClick: () => useVariant.setState({ headstock: 'reliable' }) },
+      { icon: <HeadStockReliableIcon size={24} />, label: 'Ol Reliable 12 String', onClick: () => useVariant.setState({ headstock: 'reliable' }) },
+      { icon: <HeadStockFallenAngelIcon size={24} />, label: 'Fallen Angel', onClick: () => useVariant.setState({ headstock: 'fallenangel' }) },
+      { icon: <HeadStockNinjaStarIcon size={24} />, label: 'Ninja Star', onClick: () => useVariant.setState({ headstock: 'ninjastar' }) },
+      { icon: <HeadStockHeadlessIcon size={24} />, label: 'Headless Strumsman', onClick: () => useVariant.setState({ headstock: 'headless' }) },
+      { icon: <HeadStockBroadcasterIcon size={24} />, label: 'Broadcaster', onClick: () => useVariant.setState({ headstock: 'broadcaster' }) },
+      { icon: <HeadStockOversizedIcon size={24} />, label: 'Oversized', onClick: () => useVariant.setState({ headstock: 'oversized' }) },
+      { icon: <HeadStockBriefcaseIcon size={24} />, label: 'Briefcase', onClick: () => useVariant.setState({ headstock: 'briefcase' }) },
+      { icon: <HeadStockThunderbirdIcon size={24} />, label: 'Thunderbird', onClick: () => useVariant.setState({ headstock: 'thunderbird' }) },
+    ],
+  },
+  {
+    icon: <Frame size={56} />,
+    label: 'Neck',
+    items: [
+      { icon: <Shield size={24} />, label: 'Tree of Life' },
+      { icon: <Music size={24} />, label: 'Trapezoid' },
+      { icon: <Music size={24} />, label: 'Parallelogram' },
+      { icon: <Music size={24} />, label: 'Block' },
+      { icon: <Music size={24} />, label: 'Birds' },
+      { icon: <Music size={24} />, label: 'Classic Dots' },
+      { icon: <Music size={24} />, label: 'Offset Swapped' },
+      { icon: <Music size={24} />, label: 'Offset' },
+      { icon: <Music size={24} />, label: 'Snake' },
+      { icon: <Music size={24} />, label: 'Deathbat' },
+      { icon: <Music size={24} />, label: 'Razor' },
+      { icon: <Music size={24} />, label: 'Shark Fin' },
+      { icon: <Music size={24} />, label: 'Lighting' },
+      {
+        icon: <Brush size={24} />,
+        label: 'Color',
+        isColorPicker: true,
+        swatches: NeckButtonColorSwatches,
+      },
+    ],
+  },
+  {
+    icon: <Layers size={56} />,
+    label: 'Fretboard',
+    items: [
+      { icon: <Square size={24} />, label: 'Overlay' },
+      {
+        icon: <Brush size={24} />,
+        label: 'Color',
+        isColorPicker: true,
+        swatches: colorSwatches,
+      },
+    ],
+  },
+  {
+    icon: <Shield size={56} />,
+    label: 'Pick Guard',
+    items: [
+      {
+        icon: <Brush size={24} />,
+        label: 'Color',
+        isColorPicker: true,
+        swatches: colorSwatches,
+      },
+    ],
+  },
+  {
+    icon: <Box size={56} />,
+    label: 'Hardware',
+    items: [
+      {
+        icon: <Brush size={24} />,
+        label: 'Color',
+        isColorPicker: true,
+        swatches: colorSwatches,
+      },
+    ],
+  },
+];

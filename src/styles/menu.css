@@ -1,0 +1,143 @@
+/* Base menu styles */
+.menu-container {
+  @apply relative z-[1];
+}
+
+.menu-items-container {
+  @apply fixed right-0 bottom-0 space-y-1.35 p-5.4 md:right-7.2 md:bottom-7.2 md:space-y-2.7 md:p-0 4xl:right-10.8 4xl:bottom-10.8 4xl:space-y-4.5;
+}
+
+/* Menu button styles */
+.menu-button {
+  @apply relative flex items-center justify-center w-[1.912rem] h-[1.912rem] md:w-[2.734rem] md:h-[2.734rem] 2xl:w-[3.828rem] 2xl:h-[3.828rem] 4xl:w-[6.124rem] 4xl:h-[6.124rem] rounded-full transition-all duration-200 text-white cursor-pointer;
+}
+
+.menu-button-icon {
+  @apply absolute inset-0 flex items-center justify-center scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138];
+}
+
+.menu-button-hover {
+  @apply absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-200;
+}
+
+.menu-button:not(.cart-button):hover .menu-button-hover {
+  @apply opacity-90;
+}
+
+.menu-button-background {
+  @apply absolute inset-0 rounded-full bg-[#0c3d64];
+}
+
+.menu-button-label {
+  @apply hidden md:block text-xs 2xl:text-sm 4xl:text-xl font-medium text-white relative z-10 select-none;
+}
+
+/* Cart button specific styles */
+.cart-button {
+  @apply transition-colors duration-200;
+}
+
+.cart-button .menu-button-icon {
+  @apply transition-all duration-200;
+}
+
+.cart-button:hover .menu-button-icon {
+  @apply text-yellow-400 scale-110;
+}
+
+/* Active menu button styles */
+.menu-button[data-active="true"] {
+  @apply bg-yellow-400;
+}
+
+/* Submenu styles */
+.submenu-container {
+  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1.35 md:mr-1.8 2xl:mr-2.7 4xl:mr-8.1 animate-slide-left;
+}
+
+/* Grid layout for submenu items */
+.submenu-container.grid-layout {
+  @apply grid grid-cols-3 gap-2.7 md:gap-3.6 2xl:gap-4.5 4xl:gap-9;
+  width: max-content;
+}
+
+.submenu-item {
+  @apply relative flex flex-col items-center;
+}
+
+.submenu-label {
+  @apply invisible absolute -top-4.5 md:-top-6.3 2xl:-top-8.1 4xl:-top-10.8 
+         left-1/2 transform -translate-x-1/2 
+         whitespace-nowrap text-white 
+         text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base 
+         font-medium
+         bg-gray-900/90 rounded px-1.35 py-0.9
+         opacity-0 transition-all duration-200 
+         select-none pointer-events-none;
+}
+
+.submenu-item:hover .submenu-label {
+  @apply visible opacity-100 z-50;
+}
+
+/* Submenu button styles */
+.submenu-button {
+  @apply relative w-[1.369rem] h-[1.369rem] md:w-6.3 md:h-6.3 2xl:w-9 2xl:h-9 4xl:w-[5.249rem] 4xl:h-[5.249rem] 
+         rounded-full transition-all duration-200 
+         flex items-center justify-center 
+         text-white hover:bg-[#0c3d64] hover:opacity-90 
+         cursor-pointer z-10;
+}
+
+.submenu-button .menu-button-icon {
+  @apply scale-[0.821] md:scale-[0.985] 2xl:scale-[1.094] 4xl:scale-[2.274];
+}
+
+/* Custom submenu styles */
+.custom-submenu {
+  @apply absolute bottom-full right-0 mb-1.35 md:mb-2.7 2xl:mb-3.6 4xl:mb-9.9 space-y-1.35 md:space-y-2.7 2xl:space-y-3.6 4xl:space-y-9.9;
+}
+
+/* Toggle button states */
+.toggle-button-active {
+  @apply text-white;
+}
+
+.toggle-button-inactive {
+  @apply text-gray-500;
+}
+
+/* Option item styles */
+.option-item {
+  @apply relative w-[1.369rem] h-[1.369rem] md:w-6.3 md:h-6.3 2xl:w-9 2xl:h-9 4xl:w-[5.249rem] 4xl:h-[5.249rem] 
+         rounded-full transition-all duration-200 
+         flex items-center justify-center 
+         text-white hover:bg-[#0c3d64] hover:opacity-90 
+         cursor-pointer z-10;
+}
+
+.option-item-label {
+  @apply invisible absolute -top-4.5 md:-top-6.3 2xl:-top-8.1 4xl:-top-10.8 
+         left-1/2 transform -translate-x-1/2 
+         whitespace-nowrap text-white 
+         text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base 
+         font-medium
+         bg-gray-900/90 rounded px-1.35 py-0.9
+         opacity-0 transition-all duration-200 
+         select-none pointer-events-none;
+}
+
+.option-item:hover .option-item-label {
+  @apply visible opacity-100 z-50;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .submenu-container {
+    @apply max-w-[calc(100vw-2.7rem)] overflow-x-auto pb-1.35;
+  }
+  
+  .submenu-container.grid-layout {
+    @apply grid-cols-2 gap-1.8;
+  }
+}

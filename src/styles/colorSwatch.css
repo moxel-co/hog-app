@@ -1,0 +1,68 @@
+/* Color swatch container */
+.color-swatches {
+  @apply absolute flex items-center justify-center z-[100];
+}
+
+/* Individual color swatch */
+.color-swatch {
+  @apply absolute w-2 h-2 md:w-3.5 md:h-3.5 2xl:w-5 2xl:h-5 4xl:w-8 4xl:h-8
+         rounded-full shadow-lg 
+         transition-all duration-300 ease-in-out 
+         cursor-pointer 
+         hover:scale-125
+         hover:shadow-xl
+         hover:z-[110]
+         animate-swatch-appear 
+         overflow-visible
+         z-[100];
+}
+
+/* Color swatch label */
+.color-swatch-label {
+  @apply absolute left-1/2 top-0 
+         -translate-x-1/2 -translate-y-[calc(100%+8px)]
+         px-1.5 py-0.5
+         bg-gray-900/90 
+         text-white 
+         text-[10px] md:text-xs 2xl:text-sm 4xl:text-base
+         font-medium
+         rounded-md
+         whitespace-nowrap 
+         opacity-0
+         transition-all duration-200 
+         pointer-events-none
+         shadow-lg
+         scale-0
+         z-[120]
+         group-hover:opacity-100
+         group-hover:scale-100;
+}
+
+/* Label arrow */
+.color-swatch-label:after {
+  content: '';
+  @apply absolute left-1/2 bottom-0 
+         translate-y-full -translate-x-1/2 
+         border-[4px] 2xl:border-[5px] 4xl:border-[7px]
+         border-transparent 
+         border-t-gray-900/90;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .color-swatches {
+    @apply scale-90 transform-gpu;
+  }
+
+  .color-swatch {
+    @apply w-1.5 h-1.5;
+  }
+
+  .color-swatch-label {
+    @apply text-[8px] px-1 py-0.5 -translate-y-[calc(100%+6px)];
+  }
+
+  .color-swatch-label:after {
+    @apply border-[3px];
+  }
+}

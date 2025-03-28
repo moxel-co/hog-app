@@ -1,2 +1,2 @@
-# hog-app
-Hammer On Guitar App
+# guitar-app
+Hammer On Guitar project
