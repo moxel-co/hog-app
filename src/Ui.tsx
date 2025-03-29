@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, RotateCcw, Eye, Move, Palette, ShoppingCart, PackagePlus } from 'lucide-react';
-import { colorSwatches, presetColorSwatches } from './data/colors';
+import { Settings, SwitchCamera, Hammer, Move, Palette, ShoppingCart, PackagePlus, Sparkles, Rotate3d } from 'lucide-react';
 import { customiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
@@ -231,6 +230,7 @@ function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const isPostEffectEnabled = useVariant((state) => state.isPostEffectEnabled);
   const headstock = useVariant((state) => state.headstock);
 
   const handleAddToCart = () => {
@@ -251,7 +251,7 @@ function Ui() {
 
   const menuItems: MenuItem[] = [
     {
-      icon: <Palette size={56} />,
+      icon: <Hammer size={56} />,
       label: "Customise",
       subItems: customiseMenuItems,
     },
@@ -260,23 +260,25 @@ function Ui() {
       label: "Settings",
       items: [
         { 
-          icon: <RotateCcw size={24} />, 
-          label: "Rotation", 
+          icon: <Rotate3d size={24} />, 
+          label: "Auto Rotate", 
           isToggle: true,
           active: isRotationEnabled,
-          onToggle: () => useVariant.setState({isRotationEnabled: !isRotationEnabled})
+          onToggle: () => useVariant.setState({isRotationEnabled: !isRotationEnabled}),
         },
         { 
-          icon: <Eye size={24} />, 
+          icon: <SwitchCamera size={24} />, 
           label: "Dynamic View",
           isToggle: true,
           active: isDynamicViewEnabled,
-          onToggle: () => useVariant.setState({isDynamicViewEnabled: !isDynamicViewEnabled})
+          onToggle: () => useVariant.setState({isDynamicViewEnabled: !isDynamicViewEnabled}),
         },
         { 
-          icon: <Move size={24} />, 
-          label: "Free View",
-          onClick: () => console.log("Free View clicked")
+          icon: <Sparkles size={24} />, 
+          label: "Post Effect",
+          isToggle: true,
+          active: isPostEffectEnabled,
+          onClick: () => useVariant.setState({isPostEffectEnabled: !isPostEffectEnabled}),
         },
       ],
     },

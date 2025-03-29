@@ -15,5 +15,6 @@ export default create(() =>
 
         isRotationEnabled: true,
         isDynamicViewEnabled:true,
+        isPostEffectEnabled:false,
     }
 })

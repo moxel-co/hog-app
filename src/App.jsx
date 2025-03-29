@@ -17,9 +17,11 @@ import { Guitar } from "./guitar.jsx";
 import useVariant from "./stores/useVariant.jsx";
 
 export default function App() {
+  const isPostEffectEnabled = useVariant((state) => state.isPostEffectEnabled);
+
   return (
     <>
-      <EffectComposer>
+      <EffectComposer enabled={isPostEffectEnabled}>
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
         <Bloom intensity={0.3} luminanceThreshold={0.8} />
         <ChromaticAberration
