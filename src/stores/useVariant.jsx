@@ -1,3 +1,4 @@
+import { InlayHintKind } from 'typescript';
 import { create } from 'zustand';
 
 export default create(() =>
@@ -5,6 +6,8 @@ export default create(() =>
     return {
         base: 'viper',
         headstock: 'viper',
+        inlay: 'bird',
+        starPowerButton: true,
         baseColor: 'orange',
         neckColor: 'yellow',
         fretBoardColor: 'tan',
@@ -15,6 +18,6 @@ export default create(() =>
 
         isRotationEnabled: true,
         isDynamicViewEnabled:true,
-        isPostEffectEnabled:false,
+        isPostEffectsEnabled:true,
     }
 })

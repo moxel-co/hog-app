@@ -18,4 +18,7 @@ export interface MenuItem {
   onToggle?: () => void;
   active?: boolean;
   onClick?: () => void;
+  id?: string;
+  className?: string;
+  labelClassName?: string;
 }

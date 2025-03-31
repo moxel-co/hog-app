@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, SwitchCamera, Hammer, Move, Palette, ShoppingCart, PackagePlus, Sparkles, Rotate3d } from 'lucide-react';
+import { Settings, Rotate3d, Eye, Move, Palette, ShoppingCart, PackagePlus, Sparkles, SwitchCamera } from 'lucide-react';
+import { colorSwatches, presetColorSwatches } from './data/colors';
 import { customiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
-
 
 function SubMenuItem({ item, parentOpen }: { 
   item: MenuItem;
@@ -14,6 +14,10 @@ function SubMenuItem({ item, parentOpen }: {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const starPowerButton = useVariant((state) => state.starPowerButton);
+  const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
+  const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
 
   useEffect(() => {
     if (!parentOpen) {
@@ -44,12 +48,38 @@ function SubMenuItem({ item, parentOpen }: {
   const handleItemClick = (subItem: MenuItem) => {
     if (subItem.isColorPicker) {
       setShowColorPicker(!showColorPicker);
+    } else if (subItem.isToggle) {
+      switch (subItem.id) {
+        case 'starPowerButton':
+          useVariant.setState({ starPowerButton: !starPowerButton });
+          break;
+        case 'rotation':
+          useVariant.setState({ isRotationEnabled: !isRotationEnabled });
+          break;
+        case 'dynamicView':
+          useVariant.setState({ isDynamicViewEnabled: !isDynamicViewEnabled });
+          break;
+        case 'postEffects':
+          useVariant.setState({ isPostEffectsEnabled: !isPostEffectsEnabled });
+          break;
+      }
     } else if (subItem.onClick) {
       subItem.onClick();
     }
   };
 
   const shouldUseGrid = item.items && item.items.length > 4;
+
+  const getToggleState = (subItem: MenuItem) => {
+    if (!subItem.isToggle || !subItem.id) return false;
+    switch (subItem.id) {
+      case 'starPowerButton': return starPowerButton;
+      case 'rotation': return isRotationEnabled;
+      case 'dynamicView': return isDynamicViewEnabled;
+      case 'postEffects': return isPostEffectsEnabled;
+      default: return subItem.active || false;
+    }
+  };
 
   return (
     <div className="relative" ref={menuRef}>
@@ -77,7 +107,13 @@ function SubMenuItem({ item, parentOpen }: {
                 {subItem.label}
               </div>
               <button
-                className={subItem.className || "submenu-button"}
+                className={`${subItem.className || "submenu-button"} ${
+                  subItem.isToggle 
+                    ? getToggleState(subItem)
+                      ? 'toggle-button-active' 
+                      : 'toggle-button-inactive'
+                    : ''
+                }`}
                 style={subItem.isColorPicker && selectedColor ? { color: selectedColor } : undefined}
                 onClick={() => handleItemClick(subItem)}
               >
@@ -114,6 +150,10 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const starPowerButton = useVariant((state) => state.starPowerButton);
+  const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
+  const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -139,8 +179,21 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
   const handleItemClick = (subItem: MenuItem) => {
     if (subItem.isColorPicker) {
       setShowColorPicker(!showColorPicker);
-    } else if (subItem.isToggle && subItem.onToggle) {
-      subItem.onToggle();
+    } else if (subItem.isToggle) {
+      switch (subItem.id) {
+        case 'starPowerButton':
+          useVariant.setState({ starPowerButton: !starPowerButton });
+          break;
+        case 'rotation':
+          useVariant.setState({ isRotationEnabled: !isRotationEnabled });
+          break;
+        case 'dynamicView':
+          useVariant.setState({ isDynamicViewEnabled: !isDynamicViewEnabled });
+          break;
+        case 'postEffects':
+          useVariant.setState({ isPostEffectsEnabled: !isPostEffectsEnabled });
+          break;
+      }
     } else if (subItem.onClick) {
       subItem.onClick();
     }
@@ -148,6 +201,17 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
 
   const buttonClassName = `menu-button ${item.onClick ? 'cart-button' : ''}`;
   const shouldUseGrid = item.items && item.items.length > 4;
+
+  const getToggleState = (subItem: MenuItem) => {
+    if (!subItem.isToggle || !subItem.id) return false;
+    switch (subItem.id) {
+      case 'starPowerButton': return starPowerButton;
+      case 'rotation': return isRotationEnabled;
+      case 'dynamicView': return isDynamicViewEnabled;
+      case 'postEffects': return isPostEffectsEnabled;
+      default: return subItem.active || false;
+    }
+  };
 
   return (
     <div className="relative" ref={menuRef}>
@@ -186,7 +250,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
               <button
                 className={`${subItem.className || "submenu-button"} ${
                   subItem.isToggle 
-                    ? subItem.active 
+                    ? getToggleState(subItem)
                       ? 'toggle-button-active' 
                       : 'toggle-button-inactive'
                     : ''
@@ -228,9 +292,6 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
 
 function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
-  const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
-  const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
-  const isPostEffectEnabled = useVariant((state) => state.isPostEffectEnabled);
   const headstock = useVariant((state) => state.headstock);
 
   const handleAddToCart = () => {
@@ -251,7 +312,7 @@ function Ui() {
 
   const menuItems: MenuItem[] = [
     {
-      icon: <Hammer size={56} />,
+      icon: <Palette size={56} />,
       label: "Customise",
       subItems: customiseMenuItems,
     },
@@ -263,22 +324,19 @@ function Ui() {
           icon: <Rotate3d size={24} />, 
           label: "Auto Rotate", 
           isToggle: true,
-          active: isRotationEnabled,
-          onToggle: () => useVariant.setState({isRotationEnabled: !isRotationEnabled}),
+          id: "rotation"
         },
         { 
           icon: <SwitchCamera size={24} />, 
           label: "Dynamic View",
           isToggle: true,
-          active: isDynamicViewEnabled,
-          onToggle: () => useVariant.setState({isDynamicViewEnabled: !isDynamicViewEnabled}),
+          id: "dynamicView"
         },
         { 
           icon: <Sparkles size={24} />, 
-          label: "Post Effect",
+          label: "Post Effects",
           isToggle: true,
-          active: isPostEffectEnabled,
-          onClick: () => useVariant.setState({isPostEffectEnabled: !isPostEffectEnabled}),
+          id: "postEffects"
         },
       ],
     },

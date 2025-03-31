@@ -129,3 +129,183 @@ export const HeadStockViperIcon = ({ size }: { size: number }) => (
     style={{ display: 'block' }}
   />
 );
+
+export const BodyBriefcaseIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/body-briefcase.png"
+    alt="Body Briefcase Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const BodyBroadcasterIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/body-broadcaster.png"
+    alt="Body Broadcaster Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const BodyJazzyIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/body-jazzy.png"
+    alt="Body Jazzy Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const BodyReliableIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/body-reliable.png"
+    alt="Body Reliable Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const BodyThunderbirdIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/body-thunderbird.png"
+    alt="Body Thunderbird Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const BodyViperIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/body-viper.png"
+    alt="Body Viper Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayBirdIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-bird.png"
+    alt="Inlay Bird Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayBlockIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-block.png"
+    alt="Inlay Block Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayDeathbatIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-deathbat.png"
+    alt="Inlay Deathbat Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayClassicdotIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-classicDot.png"
+    alt="Inlay Classic Dot Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayLightningIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-lightning.png"
+    alt="Inlay Lightning Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayOffsetdotIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-offsetDot.png"
+    alt="Inlay Offset Dot Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayParallelogramIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-parallelogram.png"
+    alt="Inlay Parallelogram Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayRazorIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-razor.png"
+    alt="Inlay Razor Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlaySharkfinIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-sharkfin.png"
+    alt="Inlay Shark Fin Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlaySnakeIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-snake.png"
+    alt="Inlay Snake Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayTrapezoidIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-trapezoid.png"
+    alt="Inlay Trapezoid Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
+
+export const InlayTreeIcon = ({ size }: { size: number }) => (
+  <img
+    src="/icons/inlay-tree.png"
+    alt="Inlay Tree Icon"
+    width={size}
+    height={size}
+    style={{ display: 'block' }}
+  />
+);
