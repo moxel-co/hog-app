@@ -1,14 +1,13 @@
-import { InlayHintKind } from 'typescript';
 import { create } from 'zustand';
 
 export default create(() =>
 {
     return {
-        base: 'viper',
-        headstock: 'viper',
-        inlay: 'bird',
+        body: 'body_briefcase',
+        headstock: 'headstock_briefcase',
+        inlay: 'inlay_bird',
         starPowerButton: true,
-        baseColor: 'orange',
+        bodyColor: 'orange',
         neckColor: 'yellow',
         fretBoardColor: 'tan',
         fretBoardBindingColor: 'black',
@@ -18,6 +17,6 @@ export default create(() =>
 
         isRotationEnabled: true,
         isDynamicViewEnabled:true,
-        isPostEffectsEnabled:true,
+        isPostEffectsEnabled:false,
     }
 })

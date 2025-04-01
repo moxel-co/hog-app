@@ -6,6 +6,13 @@ export interface ColorSwatch {
   label: string;
 }
 
+export interface GuitarVariant {
+  id: string;
+  name: string;
+  type: 'headstock' | 'body' | 'inlay';
+  icon: ReactNode;
+}
+
 export interface MenuItem {
   icon: ReactNode;
   label: string;

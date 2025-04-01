@@ -3,17 +3,18 @@ import { useFrame } from '@react-three/fiber'
 import { Text, OrbitControls, useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import useVariant from './stores/useVariant.jsx'
+import MeshFresnelMaterial from './components/MeshFresnelMaterial.jsx'
 
 const asset_name = 'prpGuitar'
 
 export function Guitar(props) {
   const { nodes, materials } = useGLTF(`./assets/${asset_name}/model.glb`)
 
-  const base = useVariant((state) => state.base);
+  const body = useVariant((state) => state.body);
   const headstock = useVariant((state) => state.headstock);
   const inlay = useVariant((state) => state.inlay);
   const starPowerButton = useVariant((state) => state.starPowerButton);
-  const baseColor = useVariant((state) => state.baseColor);
+  const bodyColor = useVariant((state) => state.bodyColor);
   const neckColor = useVariant((state) => state.neckColor);
   const fretBoardColor = useVariant((state) => state.fretBoardColor);
   const fretBoardBindingColor = useVariant((state) => state.fretBoardBindingColor);
@@ -94,7 +95,7 @@ export function Guitar(props) {
   const m_whitePlastic = new THREE.MeshStandardMaterial({color: "white", roughness: 0.3})
   const m_brushedMetal = new THREE.MeshStandardMaterial({color: "grey", roughness: 0.5, metalness: 0.5})
   const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor, roughness: 0.2, metalness: 1})
-  const m_basePlastic = new THREE.MeshStandardMaterial({color: getColorHex(baseColor), roughness: 0.4, metalness: 0})
+  const m_basePlastic = new THREE.MeshStandardMaterial({color: getColorHex(bodyColor), roughness: 0.4, metalness: 0})
   const m_neckPlastic = new THREE.MeshStandardMaterial({color: getColorHex(neckColor), roughness: 0.4, metalness: 0})
   const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: getColorHex(fretBoardBindingColor), roughness: 0.4, metalness: 0})
   const m_fretBoardWood = new THREE.MeshStandardMaterial({color: getColorHex(fretBoardColor), roughness: 0.8, metalness: 0})
@@ -129,7 +130,7 @@ export function Guitar(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group visible={base === "briefcase"}>
+      <group visible={body === "body_briefcase"}>
         <mesh
           castShadow
           receiveShadow
@@ -180,7 +181,7 @@ export function Guitar(props) {
           material={nodes.body_briefcase_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={base === "broadcaster"}>
+      <group visible={body === "body_broadcaster"}>
         <mesh
           castShadow
           receiveShadow
@@ -237,7 +238,7 @@ export function Guitar(props) {
           material={nodes.body_broadcaster_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={base === "jazzy"}>
+      <group visible={body === "body_jazzy"}>
         <mesh
           castShadow
           receiveShadow
@@ -294,7 +295,7 @@ export function Guitar(props) {
           material={nodes.body_jazzy_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={base === "reliable"}>
+      <group visible={body === "body_reliable"}>
         <mesh
           castShadow
           receiveShadow
@@ -351,7 +352,7 @@ export function Guitar(props) {
           material={nodes.body_reliable_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={base === "thunderbird"}>
+      <group visible={body === "body_thunderbird"}>
         <mesh
           castShadow
           receiveShadow
@@ -408,7 +409,7 @@ export function Guitar(props) {
           material={nodes.body_thunderbird_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={base === "viper"}>
+      <group visible={body === "body_viper"}>
         <mesh
           castShadow
           receiveShadow
@@ -453,7 +454,7 @@ export function Guitar(props) {
           material={nodes.body_viper_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "arrow"}>
+      <group visible={headstock === "headstock_arrow"}>
         <mesh
           castShadow
           receiveShadow
@@ -479,7 +480,7 @@ export function Guitar(props) {
           material={nodes.headstock_arrow_pegs__hardwareMetal__geo.material}
         />
       </group>
-      <group visible={headstock === "aviator"}>
+      <group visible={headstock === "headstock_aviator"}>
         <mesh
           castShadow
           receiveShadow
@@ -505,7 +506,7 @@ export function Guitar(props) {
           material={nodes.headstock_aviator_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "briefcase"}>
+      <group visible={headstock === "headstock_briefcase"}>
         <mesh
           castShadow
           receiveShadow
@@ -525,7 +526,7 @@ export function Guitar(props) {
           material={nodes.headstock_briefcase_pegs__hardwareMetal__geo.material}
         />
       </group>
-      <group visible={headstock === "broadcaster"}>
+      <group visible={headstock === "headstock_broadcaster"}>
         <mesh
           castShadow
           receiveShadow
@@ -539,7 +540,7 @@ export function Guitar(props) {
           material={nodes.headstock_broadcaster_pegs__hardwareMetal__geo.material}
         />
       </group>
-      <group visible={headstock === "fallenangel"}>
+      <group visible={headstock === "headstock_fallenangel"}>
         <mesh
           castShadow
           receiveShadow
@@ -576,9 +577,9 @@ export function Guitar(props) {
         receiveShadow
         geometry={nodes.headstock_headless_back__basePlastic__geo.geometry}
         material={nodes.headstock_headless_back__basePlastic__geo.material}
-        visible={headstock === 'headless'}
+        visible={headstock === 'headstock_headless'}
       />
-      <group visible={headstock === "ninjastar"}>
+      <group visible={headstock === "headstock_ninjastar"}>
         <mesh
           castShadow
           receiveShadow
@@ -610,7 +611,7 @@ export function Guitar(props) {
           material={nodes.headstock_ninjastar_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "oversized"}>
+      <group visible={headstock === "headstock_oversized"}>
         <mesh
           castShadow
           receiveShadow
@@ -624,7 +625,7 @@ export function Guitar(props) {
           material={nodes.headstock_oversized_pegs__hardwareMetal__geo.material}
         />
       </group>
-      <group visible={headstock === "plankspanker"}>
+      <group visible={headstock === "headstock_plankspanker"}>
         <mesh
           castShadow
           receiveShadow
@@ -662,7 +663,7 @@ export function Guitar(props) {
           material={nodes.headstock_plankspanker_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "reliable"}>
+      <group visible={headstock === "headstock_reliable"}>
         <mesh
           castShadow
           receiveShadow
@@ -694,7 +695,7 @@ export function Guitar(props) {
           material={nodes.headstock_reliable_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "reliable12"}>
+      <group visible={headstock === "headstock_reliable12"}>
         <mesh
           castShadow
           receiveShadow
@@ -726,7 +727,7 @@ export function Guitar(props) {
           material={nodes.headstock_reliable12_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "summit"}>
+      <group visible={headstock === "headstock_summit"}>
         <mesh
           castShadow
           receiveShadow
@@ -758,7 +759,7 @@ export function Guitar(props) {
           material={nodes.headstock_summit_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "thunderbird"}>
+      <group visible={headstock === "headstock_thunderbird"}>
         <mesh
           castShadow
           receiveShadow
@@ -796,7 +797,7 @@ export function Guitar(props) {
           material={nodes.headstock_thunderbird_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "viper"}>
+      <group visible={headstock === "headstock_viper"}>
         <mesh
           castShadow
           receiveShadow
@@ -827,84 +828,84 @@ export function Guitar(props) {
         receiveShadow
         geometry={nodes.inlay_bird__whitePlastic__geo.geometry}
         material={nodes.inlay_bird__whitePlastic__geo.material}
-        visible={inlay === 'bird'}
+        visible={inlay === 'inlay_bird'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_block__whitePlastic__geo.geometry}
         material={nodes.inlay_block__whitePlastic__geo.material}
-        visible={inlay === 'block'}
+        visible={inlay === 'inlay_block'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_classicDot__whitePlastic__geo.geometry}
         material={nodes.inlay_classicDot__whitePlastic__geo.material}
-        visible={inlay === 'classicDot'}
+        visible={inlay === 'inlay_classicDot'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_deadbat__whitePlastic__geo.geometry}
         material={nodes.inlay_deadbat__whitePlastic__geo.material}
-        visible={inlay === 'deadbat'}
+        visible={inlay === 'inlay_deadbat'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_lightning__whitePlastic__geo.geometry}
         material={nodes.inlay_lightning__whitePlastic__geo.material}
-        visible={inlay === 'lightning'}
+        visible={inlay === 'inlay_lightning'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_offsetDot__whitePlastic__geo.geometry}
         material={nodes.inlay_offsetDot__whitePlastic__geo.material}
-        visible={inlay === 'offsetDot'}
+        visible={inlay === 'inlay_offsetDot'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_parallelogram__whitePlastic__geo.geometry}
         material={nodes.inlay_parallelogram__whitePlastic__geo.material}
-        visible={inlay === 'parallelogram'}
+        visible={inlay === 'inlay_parallelogram'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_razor__whitePlastic__geo.geometry}
         material={nodes.inlay_razor__whitePlastic__geo.material}
-        visible={inlay === 'razor'}
+        visible={inlay === 'inlay_razor'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_sharkfin__whitePlastic__geo.geometry}
         material={nodes.inlay_sharkfin__whitePlastic__geo.material}
-        visible={inlay === 'sharkfin'}
+        visible={inlay === 'inlay_sharkfin'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_snake__whitePlastic__geo.geometry}
         material={nodes.inlay_snake__whitePlastic__geo.material}
-        visible={inlay === 'snake'}
+        visible={inlay === 'inlay_snake'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_trapezoid__whitePlastic__geo.geometry}
         material={nodes.inlay_trapezoid__whitePlastic__geo.material}
-        visible={inlay === 'trapezoid'}
+        visible={inlay === 'inlay_trapezoid'}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.inlay_tree__whitePlastic__geo.geometry}
         material={nodes.inlay_tree__whitePlastic__geo.material}
-        visible={inlay === 'tree'}
+        visible={inlay === 'inlay_tree'}
       />
       <mesh
         castShadow

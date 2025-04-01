@@ -1,78 +1,61 @@
 import {
   Shield,
   Palette,
-  Brush,
   Box,
   Joystick,
-  Frame,
   Square,
   Layers,
-  Bookmark,
   Star,
 } from 'lucide-react';
 import {
-  BodyBriefcaseIcon,
-  BodyBroadcasterIcon,
-  BodyJazzyIcon,
   BodyReliableIcon,
-  BodyThunderbirdIcon,
-  BodyViperIcon,
-  HeadStockArrowIcon,
-  HeadStockAviatorIcon,
-  HeadStockBriefcaseIcon,
-  HeadStockBroadcasterIcon,
-  HeadStockFallenAngelIcon,
-  HeadStockHeadlessIcon,
-  HeadStockNinjaStarIcon,
-  HeadStockOversizedIcon,
-  HeadStockPlankSpankerIcon,
   HeadStockReliableIcon,
-  HeadStockSummitIcon,
-  HeadStockThunderbirdIcon,
-  HeadStockViperIcon,
-  InlayBirdIcon,
-  InlayBlockIcon,
-  InlayClassicdotIcon,
-  InlayDeathbatIcon,
-  InlayLightningIcon,
-  InlayOffsetdotIcon,
-  InlayParallelogramIcon,
-  InlayRazorIcon,
   InlaySharkfinIcon,
-  InlaySnakeIcon,
-  InlayTrapezoidIcon,
-  InlayTreeIcon,
 } from './icons.tsx';
 import { MenuItem } from '../types';
 import { NeckButtonColorSwatches, colorSwatches, presetColorSwatches } from './colors';
 import useVariant from '../stores/useVariant';
+import { guitarVariants } from './guitar';
+import { ReactNode } from 'react';
+
+// Get current selected variants
+const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body');
+const headstockVariants = guitarVariants.filter((variant) => variant.type === 'headstock');
+const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay');
+
+// Dynamic icons for menu items based on selected variant
+const HeadstockIcon = () => {
+  const headstock = useVariant((state) => state.headstock);
+  const variant = guitarVariants.find(v => v.id === `${headstock}`);
+  const IconComponent = variant?.icon || HeadStockReliableIcon;
+  return <IconComponent size={56} />;
+};
+
+const BodyIcon = () => {
+  const body = useVariant((state) => state.body);
+  const variant = guitarVariants.find(v => v.id === `${body}`);
+  const IconComponent = variant?.icon || BodyReliableIcon;
+  return <IconComponent size={56} />;
+};
+
+const InlayIcon = () => {
+  const inlay = useVariant((state) => state.inlay);
+  const variant = guitarVariants.find(v => v.id === `${inlay}`);
+  const IconComponent = variant?.icon || InlaySharkfinIcon;
+  return <IconComponent size={56} />;
+};
+
 
 export const customiseMenuItems: MenuItem[] = [
-  // {
-  //   icon: <Bookmark size={56} />,
-  //   label: 'Presets',
-  //   items: [
-  //     { icon: <Shield size={24} />, label: 'Aviator' },
-  //     { icon: <Music size={24} />, label: 'Viper' },
-  //     {
-  //       icon: <Brush size={24} />,
-  //       label: 'Color',
-  //       isColorPicker: true,
-  //       swatches: presetColorSwatches,
-  //       isDualColor: true,
-  //     },
-  //   ],
-  // },
   {
-    icon: <BodyReliableIcon size={56} />,
+    icon: <BodyIcon /> as ReactNode,
     label: 'Body',
     items: [
-      { icon: <BodyViperIcon size={24} />, label: 'Angry Viper', onClick: () => useVariant.setState({ base: 'viper' }) },
-      { icon: <BodyReliableIcon size={24} />, label: 'Ol Reliable', onClick: () => useVariant.setState({ base: 'reliable' }) },
-      { icon: <BodyBroadcasterIcon size={24} />, label: 'Broadcaster', onClick: () => useVariant.setState({ base: 'broadcaster' }) },
-      { icon: <BodyBriefcaseIcon size={24} />, label: 'Briefcase', onClick: () => useVariant.setState({ base: 'briefcase' }) },
-      { icon: <BodyJazzyIcon size={24} />, label: 'Jazzy', onClick: () => useVariant.setState({ base: 'jazzy' }) },
-      { icon: <BodyThunderbirdIcon size={24} />, label: 'Thunderbird', onClick: () => useVariant.setState({ base: 'thunderbird' }) },
+      ...bodyVariants.map((variant) => ({
+        icon: <variant.icon size={24} />, 
+        label: variant.name,
+        onClick: () => useVariant.setState({ body: variant.id }),
+      })),
       {
         icon: <Palette size={24} />,
         label: 'Color',
@@ -82,58 +65,38 @@ export const customiseMenuItems: MenuItem[] = [
     ],
   },
   {
-    icon: <HeadStockReliableIcon size={56} />,
+    icon: <HeadstockIcon /> as ReactNode,
     label: 'Headstock',
-    items: [
-      { icon: <HeadStockArrowIcon size={24} />, label: 'Arrow', onClick: () => useVariant.setState({ headstock: 'arrow' }) },
-      { icon: <HeadStockViperIcon size={24} />, label: 'Angry Viper', onClick: () => useVariant.setState({ headstock: 'viper' }) },
-      { icon: <HeadStockAviatorIcon size={24} />, label: 'Aviator', onClick: () => useVariant.setState({ headstock: 'aviator' }) },
-      { icon: <HeadStockSummitIcon size={24} />, label: 'Summit', onClick: () => useVariant.setState({ headstock: 'summit' }) },
-      { icon: <HeadStockReliableIcon size={24} />, label: 'Ol Reliable 6 String', onClick: () => useVariant.setState({ headstock: 'reliable' }) },
-      { icon: <HeadStockReliableIcon size={24} />, label: 'Ol Reliable 12 String', onClick: () => useVariant.setState({ headstock: 'reliable12' }) },
-      { icon: <HeadStockFallenAngelIcon size={24} />, label: 'Fallen Angel', onClick: () => useVariant.setState({ headstock: 'fallenangel' }) },
-      { icon: <HeadStockNinjaStarIcon size={24} />, label: 'Ninja Star', onClick: () => useVariant.setState({ headstock: 'ninjastar' }) },
-      { icon: <HeadStockHeadlessIcon size={24} />, label: 'Headless Strumsman', onClick: () => useVariant.setState({ headstock: 'headless' }) },
-      { icon: <HeadStockBroadcasterIcon size={24} />, label: 'Broadcaster', onClick: () => useVariant.setState({ headstock: 'broadcaster' }) },
-      { icon: <HeadStockOversizedIcon size={24} />, label: 'Oversized', onClick: () => useVariant.setState({ headstock: 'oversized' }) },
-      { icon: <HeadStockBriefcaseIcon size={24} />, label: 'Briefcase', onClick: () => useVariant.setState({ headstock: 'briefcase' }) },
-      { icon: <HeadStockThunderbirdIcon size={24} />, label: 'Thunderbird', onClick: () => useVariant.setState({ headstock: 'thunderbird' }) },
-    ],
+    items: headstockVariants.map((variant) => ({
+      icon: <variant.icon size={24} />,
+      label: variant.name,
+      onClick: () => useVariant.setState({ headstock: variant.id }),
+    })),
   },
   {
-    icon: <InlaySharkfinIcon size={56} />,
+    icon: <InlayIcon /> as ReactNode,
     label: 'Inlay',
-    items: [
-      { icon: <InlayTreeIcon size={24} />, label: 'Tree of Life', onClick: () => useVariant.setState({ inlay: 'tree' }) },
-      { icon: <InlayTrapezoidIcon size={24} />, label: 'Trapezoid', onClick: () => useVariant.setState({ inlay: 'trapezoid' }) },
-      { icon: <InlayParallelogramIcon size={24} />, label: 'Parallelogram', onClick: () => useVariant.setState({ inlay: 'parallelogram' }) },
-      { icon: <InlayBlockIcon size={24} />, label: 'Block', onClick: () => useVariant.setState({ inlay: 'block' }) },
-      { icon: <InlayBirdIcon size={24} />, label: 'Birds', onClick: () => useVariant.setState({ inlay: 'bird' }) },
-      { icon: <InlayClassicdotIcon size={24} />, label: 'Classic Dots', onClick: () => useVariant.setState({ inlay: 'classicDot' }) },
-      { icon: <InlayOffsetdotIcon size={24} />, label: 'Offset Dot', onClick: () => useVariant.setState({ inlay: 'offsetDot' }) },
-      { icon: <InlaySnakeIcon size={24} />, label: 'Snake', onClick: () => useVariant.setState({ inlay: 'snake' }) },
-      { icon: <InlayDeathbatIcon size={24} />, label: 'Deathbat', onClick: () => useVariant.setState({ inlay: 'deadbat' }) },
-      { icon: <InlayRazorIcon size={24} />, label: 'Razor', onClick: () => useVariant.setState({ inlay: 'razor' }) },
-      { icon: <InlaySharkfinIcon size={24} />, label: 'Shark Fin', onClick: () => useVariant.setState({ inlay: 'sharkfin' }) },
-      { icon: <InlayLightningIcon size={24} />, label: 'Lighting', onClick: () => useVariant.setState({ inlay: 'lightning' }) },
-      {
-        icon: <Palette size={24} />,
-        label: 'Color',
-        isColorPicker: true,
-        swatches: NeckButtonColorSwatches,
-      },
-    ],
+    items: inlayVariants.map((variant) => ({
+      icon: <variant.icon size={24} />,
+      label: variant.name,
+      onClick: () => useVariant.setState({ inlay: variant.id }),
+    })),
   },
   {
     icon: <Layers size={56} />,
-    label: 'Fretboard',
+    label: 'Neck',
     items: [
-      { icon: <Square size={24} />, label: 'Overlay' },
       {
         icon: <Palette size={24} />,
-        label: 'Color',
+        label: 'Neck Color',
         isColorPicker: true,
         swatches: colorSwatches,
+      },
+      {
+        icon: <Palette size={24} />,
+        label: 'Fretboard Color',
+        isColorPicker: true,
+        swatches: NeckButtonColorSwatches,
       },
     ],
   },
