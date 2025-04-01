@@ -45,6 +45,15 @@ const InlayIcon = () => {
   return <IconComponent size={56} />;
 };
 
+const updateDynamicCamera = (targetType: string) => {
+  console.log('updateDynamicCamera', targetType);
+  useVariant.setState({ 
+    targetType: targetType,
+    targetCameraPosition: [0, 7.5, 3],
+    targetCameraTarget: [0, 7.2, 0],
+    isAnimating: true,
+  });
+};
 
 export const customiseMenuItems: MenuItem[] = [
   {
@@ -70,7 +79,10 @@ export const customiseMenuItems: MenuItem[] = [
     items: headstockVariants.map((variant) => ({
       icon: <variant.icon size={24} />,
       label: variant.name,
-      onClick: () => useVariant.setState({ headstock: variant.id }),
+      onClick: () => {
+        useVariant.setState({ headstock: variant.id });
+        updateDynamicCamera(variant.type);
+      },
     })),
   },
   {
@@ -108,7 +120,7 @@ export const customiseMenuItems: MenuItem[] = [
         icon: <Star size={24} />, 
         label: 'Star Power Button',
         isToggle: true,
-        id: 'starPowerButton'
+        id: 'starPowerButton',
       },
       {
         icon: <Palette size={24} />,

@@ -15,6 +15,7 @@ import { ToneMappingMode } from "postprocessing";
 import { BlendFunction } from "postprocessing";
 import { Guitar } from "./guitar.jsx";
 import useVariant from "./stores/useVariant.jsx";
+import { DynamicCamera } from "./components/DynamicCamera.jsx";
 
 export default function App() {
 
@@ -32,19 +33,11 @@ export default function App() {
       </EffectComposer>
 
       {/* Set the initial position of the camera */}
-      <PerspectiveCamera makeDefault position={[0, 5, 10]} />
-
+      {/* <PerspectiveCamera makeDefault position={[0, 5, 10]} /> */}
+      <DynamicCamera />
       <Environment
         files="./assets/common/latlong/dualSense_1k.hdr"
         environmentRotation={[0, Math.PI * 20, 0]}
-      />
-      <OrbitControls
-        enableDamping
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 1.2}
-        target={[0, 4, 0]}
-        autoRotate={useVariant((state) => state.isRotationEnabled)}
-        autoRotateSpeed={0.4}
       />
       <ContactShadows opacity={0.3} />
       <Guitar />
