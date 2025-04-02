@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, Rotate3d, Eye, Move, Palette, ShoppingCart, PackagePlus, Sparkles, SwitchCamera } from 'lucide-react';
+import { Settings, Rotate3d, Hammer, Home, Palette, ShoppingCart, PackagePlus, Sparkles, SwitchCamera } from 'lucide-react';
 import { colorSwatches, presetColorSwatches } from './data/colors';
 import { customiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
@@ -310,9 +310,13 @@ function Ui() {
     console.log(productDetails);
   };
 
+  const handleResetView = () => {
+    useVariant.setState({ targetType: 'default' });
+  };
+
   const menuItems: MenuItem[] = [
     {
-      icon: <Palette size={56} />,
+      icon: <Hammer size={56} />,
       label: "Customise",
       subItems: customiseMenuItems,
     },
@@ -338,6 +342,11 @@ function Ui() {
           isToggle: true,
           id: "postEffects"
         },
+        {
+          icon: <Home size={24} />,
+          label: "Reset View",
+          onClick: handleResetView
+        }
       ],
     },
     {

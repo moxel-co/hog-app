@@ -46,7 +46,6 @@ const InlayIcon = () => {
 };
 
 const updateDynamicCamera = (targetType: string) => {
-  console.log('updateDynamicCamera', targetType);
   useVariant.setState({ 
     targetType: targetType,
   });

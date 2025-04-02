@@ -18,12 +18,12 @@ export default create(() =>
         // Settings state
         isRotationEnabled: true,
         isDynamicViewEnabled:true,
-        isPostEffectsEnabled:false,
+        isPostEffectsEnabled:true,
 
 
         // Camera state
         cameraPosition: [0, 5, 10],
-        targetType: 'body',
+        targetType: 'default',
         targetCameraPosition: [0, 5, 10],
         cameraTarget: [0, 4, 0],
         targetCameraTarget: [0, 4, 0],
