@@ -51,11 +51,16 @@ export default {
             transform: 'translate(var(--tx), var(--ty)) scale(1)',
             opacity: 1 
           },
+        },
+        'fade-out': {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
         }
       },
       animation: {
         'slide-left': 'slide-left 0.3s ease-out forwards',
         'swatch-appear': 'swatch-appear 0.15s ease-out forwards',
+        'fade-out': 'fade-out 0.3s ease-out forwards'
       },
     },
   },

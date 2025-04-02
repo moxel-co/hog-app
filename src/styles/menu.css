@@ -52,7 +52,7 @@
 
 /* Submenu styles */
 .submenu-container {
-  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1.35 md:mr-1.8 2xl:mr-2.7 4xl:mr-8.1 animate-slide-left;
+  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1.35 md:mr-1.8 2xl:mr-2.7 4xl:mr-8.1 animate-slide-left z-[50];
 }
 
 /* Grid layout for submenu items */
@@ -62,7 +62,11 @@
 }
 
 .submenu-item {
-  @apply relative flex flex-col items-center;
+  @apply relative flex flex-col items-center transition-all duration-300;
+}
+
+.submenu-item.fade-out {
+  @apply opacity-0 pointer-events-none;
 }
 
 .submenu-label {

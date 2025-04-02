@@ -14,12 +14,14 @@ export default create(() =>
         fretBoardBindingColor: 'black',
         pickGuardColor: 'white',
         hardwareColor: 'gold',
+        inlayColor: 'white',
+        arcadeButtonColor: 'red',
+        strummerSideColor: 'black',
 
         // Settings state
         isRotationEnabled: true,
-        isDynamicViewEnabled:true,
-        isPostEffectsEnabled:true,
-
+        isDynamicViewEnabled: true,
+        isPostEffectsEnabled: true,
 
         // Camera state
         cameraPosition: [0, 5, 10],

@@ -25,6 +25,7 @@ export interface MenuItem {
   onToggle?: () => void;
   active?: boolean;
   onClick?: () => void;
+  onColorSelect?: (color: string) => void;
   id?: string;
   className?: string;
   labelClassName?: string;
