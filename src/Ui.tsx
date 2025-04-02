@@ -52,6 +52,7 @@ function SubMenuItem({ item, parentOpen }: {
       switch (subItem.id) {
         case 'starPowerButton':
           useVariant.setState({ starPowerButton: !starPowerButton });
+          useVariant.setState({ targetType: "body" });
           break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });
@@ -183,6 +184,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
       switch (subItem.id) {
         case 'starPowerButton':
           useVariant.setState({ starPowerButton: !starPowerButton });
+          useVariant.setState({ targetType: 'body' });
           break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });

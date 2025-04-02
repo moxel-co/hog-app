@@ -31,6 +31,10 @@ export function DynamicCamera() {
       position: [0, 4.2, 3],
       target: [0, 4.2, 0],
     },
+    starPowerButton: {
+      position: [0, 0, 0],
+      target: [0, 1, 0],
+    },
   };
 
   // Animate camera position and target only when targetType changes and isDynamicViewEnabled is true
