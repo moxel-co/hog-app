@@ -849,7 +849,7 @@ export function Guitar(props) {
         receiveShadow
         geometry={nodes.inlay_deadbat__whitePlastic__geo.geometry}
         material={nodes.inlay_deadbat__whitePlastic__geo.material}
-        visible={inlay === 'inlay_deadbat'}
+        visible={inlay === 'inlay_deathbat'}
       />
       <mesh
         castShadow
