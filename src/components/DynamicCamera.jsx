@@ -1,47 +1,87 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { gsap } from "gsap";
 import useVariant from "../stores/useVariant";
 
 export function DynamicCamera() {
+  const targetType = useVariant((state) => state.targetType);
   const cameraPosition = useVariant((state) => state.cameraPosition);
-  const targetCameraPosition = useVariant((state) => state.targetCameraPosition);
   const cameraTarget = useVariant((state) => state.cameraTarget);
-  const targetCameraTarget = useVariant((state) => state.targetCameraTarget);
-  const isAnimating = useVariant((state) => state.isAnimating);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
-  
-  const currentPos = useRef(new THREE.Vector3(...cameraPosition));
-  const currentTarget = useRef(new THREE.Vector3(...cameraTarget));
+  const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
 
-  useFrame(() => {
-    if (isAnimating) {
-      const targetPos = new THREE.Vector3(...targetCameraPosition);
-      const targetLook = new THREE.Vector3(...targetCameraTarget);
+  const cameraRef = useRef();
+  const controlsRef = useRef();
 
-      // Interpolate camera position
-      currentPos.current.lerp(targetPos, 0.05);
-      currentTarget.current.lerp(targetLook, 0.05);
+  // Define presets for camera positions and targets
+  const cameraPresets = {
+    default: {
+      position: [0, 5, 10],
+      target: [0, 4, 0],
+    },
+    headstock: {
+      position: [0, 7.5, 3],
+      target: [0, 7.2, 0],
+    },
+    body: {
+      position: [0, 2.4, 6],
+      target: [0, 2.4, 0],
+    },
+    inlay: {
+      position: [0, 4.2, 3],
+      target: [0, 4.2, 0],
+    },
+  };
 
-      // Update the store with current values
-      useVariant.setState({ 
-        cameraPosition: [currentPos.current.x, currentPos.current.y, currentPos.current.z],
-        cameraTarget: [currentTarget.current.x, currentTarget.current.y, currentTarget.current.z]
-      });
+  // Animate camera position and target only when targetType changes and isDynamicViewEnabled is true
+  useEffect(() => {
+    if (!isDynamicViewEnabled) return; // Skip animation if dynamic view is disabled
 
-      // Check if we're close enough to stop animating
-      if (currentPos.current.distanceTo(targetPos) < 0.01 && 
-          currentTarget.current.distanceTo(targetLook) < 0.01) {
-        useVariant.setState({ isAnimating: false });
-      }
-    }
-  });
+    const preset = cameraPresets[targetType] || cameraPresets.default;
+
+    // Animate camera position
+    gsap.to(cameraRef.current.position, {
+      x: preset.position[0],
+      y: preset.position[1],
+      z: preset.position[2],
+      duration: 1, // Animation duration
+      ease: "power1.out", // Easing function
+      onUpdate: () => {
+        useVariant.setState({
+          cameraPosition: [
+            cameraRef.current.position.x,
+            cameraRef.current.position.y,
+            cameraRef.current.position.z,
+          ],
+        });
+      },
+    });
+
+    // Animate camera target
+    gsap.to(controlsRef.current.target, {
+      x: preset.target[0],
+      y: preset.target[1],
+      z: preset.target[2],
+      duration: 1, // Animation duration
+      ease: "power1.out", // Easing function
+      onUpdate: () => {
+        useVariant.setState({
+          cameraTarget: [
+            controlsRef.current.target.x,
+            controlsRef.current.target.y,
+            controlsRef.current.target.z,
+          ],
+        });
+        controlsRef.current.update(); // Update controls during animation
+      },
+    });
+  }, [targetType, isDynamicViewEnabled]); // Add isDynamicViewEnabled as a dependency
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={cameraPosition} />
+      <PerspectiveCamera ref={cameraRef} makeDefault position={cameraPosition} />
       <OrbitControls
+        ref={controlsRef}
         enableDamping
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 1.2}

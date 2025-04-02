@@ -49,9 +49,6 @@ const updateDynamicCamera = (targetType: string) => {
   console.log('updateDynamicCamera', targetType);
   useVariant.setState({ 
     targetType: targetType,
-    targetCameraPosition: [0, 7.5, 3],
-    targetCameraTarget: [0, 7.2, 0],
-    isAnimating: true,
   });
 };
 
@@ -63,7 +60,10 @@ export const customiseMenuItems: MenuItem[] = [
       ...bodyVariants.map((variant) => ({
         icon: <variant.icon size={24} />, 
         label: variant.name,
-        onClick: () => useVariant.setState({ body: variant.id }),
+        onClick: () => {
+          useVariant.setState({ body: variant.id });
+          updateDynamicCamera(variant.type);
+        },
       })),
       {
         icon: <Palette size={24} />,
@@ -91,7 +91,10 @@ export const customiseMenuItems: MenuItem[] = [
     items: inlayVariants.map((variant) => ({
       icon: <variant.icon size={24} />,
       label: variant.name,
-      onClick: () => useVariant.setState({ inlay: variant.id }),
+      onClick: () => {
+        useVariant.setState({ inlay: variant.id });
+        updateDynamicCamera(variant.type);
+      },
     })),
   },
   {

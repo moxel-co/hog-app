@@ -27,6 +27,5 @@ export default create(() =>
         targetCameraPosition: [0, 5, 10],
         cameraTarget: [0, 4, 0],
         targetCameraTarget: [0, 4, 0],
-        isAnimating: false
     }
 })
