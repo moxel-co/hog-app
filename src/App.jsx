@@ -13,7 +13,7 @@ import {
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { BlendFunction } from "postprocessing";
-import { Guitar } from "./guitar.jsx";
+import { Guitar } from "./Guitar.jsx";
 import useVariant from "./stores/useVariant.jsx";
 import { DynamicCamera } from "./components/DynamicCamera.jsx";
 

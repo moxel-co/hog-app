@@ -233,6 +233,102 @@ export const BodyViperIcon = ({ size, color = 'currentColor' }: IconProps) => (
   />
 );
 
+export const BodyArrowIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-arrow.png") center/contain no-repeat`,
+      mask: `url("/icons/body-arrow.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodyAviatorIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-aviator.png") center/contain no-repeat`,
+      mask: `url("/icons/body-aviator.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodyFallenAngelIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-fallenangel.png") center/contain no-repeat`,
+      mask: `url("/icons/body-fallenangel.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodyHeadlessIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-headless.png") center/contain no-repeat`,
+      mask: `url("/icons/body-headless.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodyShredHammerIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-shredhammer.png") center/contain no-repeat`,
+      mask: `url("/icons/body-shredhammer.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodyPlankSpankerIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-plankspanker.png") center/contain no-repeat`,
+      mask: `url("/icons/body-plankspanker.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodySummitIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-summit.png") center/contain no-repeat`,
+      mask: `url("/icons/body-summit.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const BodyYoungsterIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-youngster.png") center/contain no-repeat`,
+      mask: `url("/icons/body-youngster.png") center/contain no-repeat`,
+    }}
+  />
+);
+
 export const InlayBirdIcon = ({ size, color = 'currentColor' }: IconProps) => (
   <div
     style={{
@@ -373,6 +469,78 @@ export const InlayTreeIcon = ({ size, color = 'currentColor' }: IconProps) => (
       backgroundColor: color,
       WebkitMask: `url("/icons/inlay-tree.png") center/contain no-repeat`,
       mask: `url("/icons/inlay-tree.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const FretboardIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/fretboard.png") center/contain no-repeat`,
+      mask: `url("/icons/fretboard.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const FretboardBindingIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/fretboardbinding.png") center/contain no-repeat`,
+      mask: `url("/icons/fretboardbinding.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const HardwareIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/hardware.png") center/contain no-repeat`,
+      mask: `url("/icons/hardware.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const NeckIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/neck.png") center/contain no-repeat`,
+      mask: `url("/icons/neck.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const NeckButtonsIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/neckButtons.png") center/contain no-repeat`,
+      mask: `url("/icons/neckButtons.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const PickGuardIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/pickGuard.png") center/contain no-repeat`,
+      mask: `url("/icons/pickGuard.png") center/contain no-repeat`,
     }}
   />
 );

@@ -11,6 +11,12 @@ import {
   BodyReliableIcon,
   HeadStockReliableIcon,
   InlaySharkfinIcon,
+  FretboardIcon,
+  FretboardBindingIcon,
+  HardwareIcon,
+  NeckIcon,
+  NeckButtonsIcon,
+  PickGuardIcon,
 } from './icons.tsx';
 import { MenuItem } from '../types';
 import { 
@@ -115,12 +121,12 @@ const BodyColorIcon = () => {
 
 const NeckColorIcon = () => {
   const color = useVariant((state) => state.neckColor);
-  return <ColorPickerIcon color={color} />;
+  return <NeckIcon size={24} color={color} />;
 };
 
 const FretboardColorIcon = () => {
   const color = useVariant((state) => state.fretBoardColor);
-  return <ColorPickerIcon color={color} />;
+  return <FretboardIcon size={24} color={color} />;
 };
 
 const NeckBindingColorIcon = () => {
@@ -143,12 +149,12 @@ const ArcadeButtonsColorIcon = () => {
 
 const PickGuardColorIcon = () => {
   const color = useVariant((state) => state.pickGuardColor);
-  return <ColorPickerIcon color={color} />;
+  return <PickGuardIcon size={24} color={color} />;
 };
 
 const HardwareColorIcon = () => {
   const color = useVariant((state) => state.hardwareColor);
-  return <ColorPickerIcon color={color} />;
+  return <HardwareIcon size={24} color={color} />;
 };
 
 const StrummerSideColorIcon = () => {

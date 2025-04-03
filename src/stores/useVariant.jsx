@@ -10,6 +10,7 @@ export default create(() =>
         starPowerButton: true,
         bodyColor: 'orange',
         neckColor: 'yellow',
+        buttonColor: 'black',
         fretBoardColor: 'tan',
         fretBoardBindingColor: 'black',
         pickGuardColor: 'white',

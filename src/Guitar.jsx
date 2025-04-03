@@ -15,7 +15,9 @@ export function Guitar(props) {
   const inlay = useVariant((state) => state.inlay);
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const bodyColor = useVariant((state) => state.bodyColor);
+  const buttonColor = useVariant((state) => state.buttonColor);
   const neckColor = useVariant((state) => state.neckColor);
+  const inlayColor = useVariant((state) => state.inlayColor);
   const fretBoardColor = useVariant((state) => state.fretBoardColor);
   const fretBoardBindingColor = useVariant((state) => state.fretBoardBindingColor);
   const pickGuardColor = useVariant((state) => state.pickGuardColor);
@@ -31,7 +33,10 @@ export function Guitar(props) {
   const m_whitePlastic = new THREE.MeshStandardMaterial({color: "white", roughness: 0.3})
   const m_brushedMetal = new THREE.MeshStandardMaterial({color: "grey", roughness: 0.5, metalness: 0.5})
   const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor, roughness: 0.2, metalness: 1})
-  const m_basePlastic = new THREE.MeshStandardMaterial({color: bodyColor, roughness: 0.4, metalness: 0})
+  const m_chromeMetal = new THREE.MeshStandardMaterial({color: "white", roughness: 0.1, metalness: 1})
+  const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor, roughness: 0.4, metalness: 0})
+  const m_buttonPlastic = new THREE.MeshStandardMaterial({color: buttonColor, roughness: 0.4, metalness: 0})
+  const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor, roughness: 0.4, metalness: 0})
   const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor, roughness: 0.4, metalness: 0})
   const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
   const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0})
@@ -48,8 +53,11 @@ export function Guitar(props) {
     '__whitePlastic__': m_whitePlastic,
     '__brushedMetal__': m_brushedMetal,
     '__hardwareMetal__': m_hardwareMetal,
-    '__basePlastic__': m_basePlastic,
+    '__chromeMetal__': m_chromeMetal,
+    '__bodyPlastic__': m_bodyPlastic,
+    '__buttonPlastic__': m_buttonPlastic,
     '__neckPlastic__': m_neckPlastic,
+    '__inlayPlastic__': m_inlayPlastic,
     '__fretBoardBindingPlastic__': m_fretboardBindingPlastic,
     '__fretBoardWood__': m_fretBoardWood,
     '__pickGuardPlastic__': m_pickGuardPlastic,
@@ -66,37 +74,163 @@ export function Guitar(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group visible={body === "body_briefcase"}>
+      <group visible={body === "body_arrow"}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_briefcase_back__basePlastic__geo.geometry}
-          material={nodes.body_briefcase_back__basePlastic__geo.material}
+          geometry={nodes.body_arrow_back__bodyPlastic__geo.geometry}
+          material={nodes.body_arrow_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_briefcase_buttonA__blackPlastic__geo.geometry}
-          material={nodes.body_briefcase_buttonA__blackPlastic__geo.material}
+          geometry={nodes.body_arrow_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_arrow_buttonA__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_briefcase_buttonB__blackPlastic__geo.geometry}
-          material={nodes.body_briefcase_buttonB__blackPlastic__geo.material}
+          geometry={nodes.body_arrow_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_arrow_buttonB__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_briefcase_buttonSP__blackPlastic__geo.geometry}
-          material={nodes.body_briefcase_buttonSP__blackPlastic__geo.material}
+          geometry={nodes.body_arrow_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_arrow_buttonSP__buttonPlastic__geo.material}
           visible={starPowerButton}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_briefcase_front__basePlastic__geo.geometry}
-          material={nodes.body_briefcase_front__basePlastic__geo.material}
+          geometry={nodes.body_arrow_front__bodyPlastic__geo.geometry}
+          material={nodes.body_arrow_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_arrow_mmPivot__buttonPlastic__geo.geometry}
+          material={nodes.body_arrow_mmPivot__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_arrow_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_arrow_pickGuard__pickGuardPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_arrow_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_arrow_strapMount__blackPlastic__geo.material}
+        />
+      </group>
+      <group visible={body === "body_aviator"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_back__bodyPlastic__geo.geometry}
+          material={nodes.body_aviator_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_aviator_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_aviator_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_aviator_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_details__blackMattePlastic__geo.geometry}
+          material={nodes.body_aviator_details__blackMattePlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_front__bodyPlastic__geo.geometry}
+          material={nodes.body_aviator_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_aviator_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_pegs__hardwareMetal__geo.geometry}
+          material={nodes.body_aviator_pegs__hardwareMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_aviator_strapMount__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_strummer_insertA__strummerPlastic__geo.geometry}
+          material={nodes.body_aviator_strummer_insertA__strummerPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_strummer_insertB__strummerPlastic__geo.geometry}
+          material={nodes.body_aviator_strummer_insertB__strummerPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_aviator_strummer_main__translucentPlastic__geo.geometry}
+          material={nodes.body_aviator_strummer_main__translucentPlastic__geo.material}
+        />
+      </group>
+      <group visible={body === "body_briefcase"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_briefcase_back__bodyPlastic__geo.geometry}
+          material={nodes.body_briefcase_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_briefcase_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_briefcase_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_briefcase_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_briefcase_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_briefcase_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_briefcase_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_briefcase_front__bodyPlastic__geo.geometry}
+          material={nodes.body_briefcase_front__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -121,26 +255,26 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_broadcaster_back__basePlastic__geo.geometry}
-          material={nodes.body_broadcaster_back__basePlastic__geo.material}
+          geometry={nodes.body_broadcaster_back__bodyPlastic__geo.geometry}
+          material={nodes.body_broadcaster_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_broadcaster_buttonA__blackPlastic__geo.geometry}
-          material={nodes.body_broadcaster_buttonA__blackPlastic__geo.material}
+          geometry={nodes.body_broadcaster_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_broadcaster_buttonA__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_broadcaster_buttonB__blackPlastic__geo.geometry}
-          material={nodes.body_broadcaster_buttonB__blackPlastic__geo.material}
+          geometry={nodes.body_broadcaster_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_broadcaster_buttonB__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_broadcaster_buttonSP__blackPlastic__geo.geometry}
-          material={nodes.body_broadcaster_buttonSP__blackPlastic__geo.material}
+          geometry={nodes.body_broadcaster_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_broadcaster_buttonSP__buttonPlastic__geo.material}
           visible={starPowerButton}
         />
         <mesh
@@ -152,8 +286,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_broadcaster_front__basePlastic__geo.geometry}
-          material={nodes.body_broadcaster_front__basePlastic__geo.material}
+          geometry={nodes.body_broadcaster_front__bodyPlastic__geo.geometry}
+          material={nodes.body_broadcaster_front__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -174,12 +308,114 @@ export function Guitar(props) {
           material={nodes.body_broadcaster_strapMount__blackPlastic__geo.material}
         />
       </group>
+      <group visible={body === "body_fallenangel"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_back__bodyPlastic__geo.geometry}
+          material={nodes.body_fallenangel_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_fallenangel_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_fallenangel_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_fallenangel_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_detail__whitePlastic__geo.geometry}
+          material={nodes.body_fallenangel_detail__whitePlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_front__bodyPlastic__geo.geometry}
+          material={nodes.body_fallenangel_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_fallenangel_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_fallenangel_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_fallenangel_strapMount__blackPlastic__geo.material}
+        />
+      </group>
+      <group visible={body === "body_headless"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_back__bodyPlastic__geo.geometry}
+          material={nodes.body_headless_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_headless_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_headless_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_headless_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_front__bodyPlastic__geo.geometry}
+          material={nodes.body_headless_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_headless_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_headless_pickGuard__pickGuardPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_headless_strapMount__blackPlastic__geo.material}
+        />
+      </group>
       <group visible={body === "body_jazzy"}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_jazzy_back__basePlastic__geo.geometry}
-          material={nodes.body_jazzy_back__basePlastic__geo.material}
+          geometry={nodes.body_jazzy_back__bodyPlastic__geo.geometry}
+          material={nodes.body_jazzy_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -190,27 +426,27 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_jazzy_buttonA__blackPlastic__geo.geometry}
-          material={nodes.body_jazzy_buttonA__blackPlastic__geo.material}
+          geometry={nodes.body_jazzy_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_jazzy_buttonA__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_jazzy_buttonB__blackPlastic__geo.geometry}
-          material={nodes.body_jazzy_buttonB__blackPlastic__geo.material}
+          geometry={nodes.body_jazzy_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_jazzy_buttonB__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_jazzy_buttonSP__blackPlastic__geo.geometry}
-          material={nodes.body_jazzy_buttonSP__blackPlastic__geo.material}
+          geometry={nodes.body_jazzy_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_jazzy_buttonSP__buttonPlastic__geo.material}
           visible={starPowerButton}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_jazzy_front__basePlastic__geo.geometry}
-          material={nodes.body_jazzy_front__basePlastic__geo.material}
+          geometry={nodes.body_jazzy_front__bodyPlastic__geo.geometry}
+          material={nodes.body_jazzy_front__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -231,12 +467,75 @@ export function Guitar(props) {
           material={nodes.body_jazzy_strapMount__blackPlastic__geo.material}
         />
       </group>
+      <group visible={body === "body_plankspanker"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_back__bodyPlastic__geo.geometry}
+          material={nodes.body_plankspanker_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_bridge__hardwareMetal__geo.geometry}
+          material={nodes.body_plankspanker_bridge__hardwareMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_plankspanker_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_plankspanker_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_plankspanker_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_detail__blackPlastic__geo.geometry}
+          material={nodes.body_plankspanker_detail__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_front__bodyPlastic__geo.geometry}
+          material={nodes.body_plankspanker_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_plankspanker_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_plankspanker_pickGuard__pickGuardPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_plankspanker_strapMount__blackPlastic__geo.material}
+        />
+      </group>
       <group visible={body === "body_reliable"}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_reliable_back__basePlastic__geo.geometry}
-          material={nodes.body_reliable_back__basePlastic__geo.material}
+          geometry={nodes.body_reliable_back__bodyPlastic__geo.geometry}
+          material={nodes.body_reliable_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -247,27 +546,27 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_reliable_buttonA__blackPlastic__geo.geometry}
-          material={nodes.body_reliable_buttonA__blackPlastic__geo.material}
+          geometry={nodes.body_reliable_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_reliable_buttonA__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_reliable_buttonB__blackPlastic__geo.geometry}
-          material={nodes.body_reliable_buttonB__blackPlastic__geo.material}
+          geometry={nodes.body_reliable_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_reliable_buttonB__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_reliable_buttonSP__blackPlastic__geo.geometry}
-          material={nodes.body_reliable_buttonSP__blackPlastic__geo.material}
+          geometry={nodes.body_reliable_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_reliable_buttonSP__buttonPlastic__geo.material}
           visible={starPowerButton}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_reliable_front__basePlastic__geo.geometry}
-          material={nodes.body_reliable_front__basePlastic__geo.material}
+          geometry={nodes.body_reliable_front__bodyPlastic__geo.geometry}
+          material={nodes.body_reliable_front__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -288,30 +587,130 @@ export function Guitar(props) {
           material={nodes.body_reliable_strapMount__blackPlastic__geo.material}
         />
       </group>
+      <group visible={body === "body_shredhammer"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_back__bodyPlastic__geo.geometry}
+          material={nodes.body_shredhammer_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_bridge__hardwareMetal__geo.geometry}
+          material={nodes.body_shredhammer_bridge__hardwareMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_shredhammer_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_shredhammer_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_shredhammer_buttonSP__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_detail__blackMattePlastic__geo.geometry}
+          material={nodes.body_shredhammer_detail__blackMattePlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_front__bodyPlastic__geo.geometry}
+          material={nodes.body_shredhammer_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_shredhammer_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_shredhammer_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_shredhammer_strapMount__blackPlastic__geo.material}
+        />
+      </group>
+      <group visible={body === "body_summit"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_back__bodyPlastic__geo.geometry}
+          material={nodes.body_summit_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_summit_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_summit_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_summit_buttonSP__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_front__bodyPlastic__geo.geometry}
+          material={nodes.body_summit_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_summit_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_summit_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_summit_strapMount__blackPlastic__geo.material}
+        />
+      </group>
       <group visible={body === "body_thunderbird"}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_back__basePlastic__geo.geometry}
-          material={nodes.body_thunderbird_back__basePlastic__geo.material}
+          geometry={nodes.body_thunderbird_back__bodyPlastic__geo.geometry}
+          material={nodes.body_thunderbird_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_buttonA__blackPlastic__geo.geometry}
-          material={nodes.body_thunderbird_buttonA__blackPlastic__geo.material}
+          geometry={nodes.body_thunderbird_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_thunderbird_buttonA__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_buttonB__blackPlastic__geo.geometry}
-          material={nodes.body_thunderbird_buttonB__blackPlastic__geo.material}
+          geometry={nodes.body_thunderbird_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_thunderbird_buttonB__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_buttonSP__blackPlastic__geo.geometry}
-          material={nodes.body_thunderbird_buttonSP__blackPlastic__geo.material}
+          geometry={nodes.body_thunderbird_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_thunderbird_buttonSP__buttonPlastic__geo.material}
           visible={starPowerButton}
         />
         <mesh
@@ -319,6 +718,7 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_thunderbird_detail__basePlastic__geo.geometry}
           material={nodes.body_thunderbird_detail__basePlastic__geo.material}
+          visible={false}
         />
         <mesh
           castShadow
@@ -329,8 +729,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_front__basePlastic__geo.geometry}
-          material={nodes.body_thunderbird_front__basePlastic__geo.material}
+          geometry={nodes.body_thunderbird_front__bodyPlastic__geo.geometry}
+          material={nodes.body_thunderbird_front__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -349,33 +749,33 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_viper_back__basePlastic__geo.geometry}
-          material={nodes.body_viper_back__basePlastic__geo.material}
+          geometry={nodes.body_viper_back__bodyPlastic__geo.geometry}
+          material={nodes.body_viper_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_viper_buttonA__blackPlastic__geo.geometry}
-          material={nodes.body_viper_buttonA__blackPlastic__geo.material}
+          geometry={nodes.body_viper_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_viper_buttonA__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_viper_buttonB__blackPlastic__geo.geometry}
-          material={nodes.body_viper_buttonB__blackPlastic__geo.material}
+          geometry={nodes.body_viper_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_viper_buttonB__buttonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_viper_buttonSP__blackPlastic__geo.geometry}
-          material={nodes.body_viper_buttonSP__blackPlastic__geo.material}
+          geometry={nodes.body_viper_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_viper_buttonSP__buttonPlastic__geo.material}
           visible={starPowerButton}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_viper_front__basePlastic__geo.geometry}
-          material={nodes.body_viper_front__basePlastic__geo.material}
+          geometry={nodes.body_viper_front__bodyPlastic__geo.geometry}
+          material={nodes.body_viper_front__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -390,18 +790,75 @@ export function Guitar(props) {
           material={nodes.body_viper_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "headstock_arrow"}>
+      <group visible={body === "body_youngster"}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_back__basePlastic__geo.geometry}
-          material={nodes.headstock_arrow_back__basePlastic__geo.material}
+          geometry={nodes.body_youngster_back__bodyPlastic__geo.geometry}
+          material={nodes.body_youngster_back__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_detail__basePlastic__geo.geometry}
-          material={nodes.headstock_arrow_detail__basePlastic__geo.material}
+          geometry={nodes.body_youngster_bridge__hardwareMetal__geo.geometry}
+          material={nodes.body_youngster_bridge__hardwareMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_youngster_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_youngster_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_youngster_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_front__bodyPlastic__geo.geometry}
+          material={nodes.body_youngster_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_youngster_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_youngster_pickGuard__pickGuardPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_youngster_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_youngster_strapMount__blackPlastic__geo.material}
+        />
+      </group>
+      <group visible={headstock === "headstock_arrow"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.headstock_arrow_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_arrow_back__neckPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.headstock_arrow_detail__bodyPlastic__geo.geometry}
+          material={nodes.headstock_arrow_detail__bodyPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -420,8 +877,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_aviator_back__basePlastic__geo.geometry}
-          material={nodes.headstock_aviator_back__basePlastic__geo.material}
+          geometry={nodes.headstock_aviator_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_aviator_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -446,8 +903,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_briefcase_back__basePlastic__geo.geometry}
-          material={nodes.headstock_briefcase_back__basePlastic__geo.material}
+          geometry={nodes.headstock_briefcase_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_briefcase_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -466,8 +923,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_broadcaster_back__basePlastic__geo.geometry}
-          material={nodes.headstock_broadcaster_back__basePlastic__geo.material}
+          geometry={nodes.headstock_broadcaster_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_broadcaster_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -480,8 +937,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_fallenangel_back__basePlastic__geo.geometry}
-          material={nodes.headstock_fallenangel_back__basePlastic__geo.material}
+          geometry={nodes.headstock_fallenangel_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_fallenangel_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -508,19 +965,20 @@ export function Guitar(props) {
           material={nodes.headstock_fallenangel_trussRoadCoverTrim__whitePlastic__geo.material}
         />
       </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.headstock_headless_back__basePlastic__geo.geometry}
-        material={nodes.headstock_headless_back__basePlastic__geo.material}
-        visible={headstock === 'headstock_headless'}
-      />
+      <group visible={headstock === "headstock_headless"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.headstock_headless_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_headless_back__neckPlastic__geo.material}
+        />
+      </group>
       <group visible={headstock === "headstock_ninjastar"}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_ninjastar_back__basePlastic__geo.geometry}
-          material={nodes.headstock_ninjastar_back__basePlastic__geo.material}
+          geometry={nodes.headstock_ninjastar_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_ninjastar_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -551,8 +1009,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_oversized_back__basePlastic__geo.geometry}
-          material={nodes.headstock_oversized_back__basePlastic__geo.material}
+          geometry={nodes.headstock_oversized_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_oversized_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -565,8 +1023,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_plankspanker_back__basePlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_back__basePlastic__geo.material}
+          geometry={nodes.headstock_plankspanker_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_plankspanker_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -603,8 +1061,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_reliable_back__basePlastic__geo.geometry}
-          material={nodes.headstock_reliable_back__basePlastic__geo.material}
+          geometry={nodes.headstock_reliable_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_reliable_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -635,8 +1093,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_reliable12_back__basePlastic__geo.geometry}
-          material={nodes.headstock_reliable12_back__basePlastic__geo.material}
+          geometry={nodes.headstock_reliable12_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_reliable12_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -667,8 +1125,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_summit_back__basePlastic__geo.geometry}
-          material={nodes.headstock_summit_back__basePlastic__geo.material}
+          geometry={nodes.headstock_summit_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_summit_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -699,8 +1157,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_thunderbird_back__basePlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_back__basePlastic__geo.material}
+          geometry={nodes.headstock_thunderbird_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_thunderbird_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -737,8 +1195,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_viper_back__basePlastic__geo.geometry}
-          material={nodes.headstock_viper_back__basePlastic__geo.material}
+          geometry={nodes.headstock_viper_back__neckPlastic__geo.geometry}
+          material={nodes.headstock_viper_back__neckPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -762,85 +1220,85 @@ export function Guitar(props) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_bird__whitePlastic__geo.geometry}
-        material={nodes.inlay_bird__whitePlastic__geo.material}
+        geometry={nodes.inlay_bird__inlayPlastic__geo.geometry}
+        material={nodes.inlay_bird__inlayPlastic__geo.material}
         visible={inlay === 'inlay_bird'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_block__whitePlastic__geo.geometry}
-        material={nodes.inlay_block__whitePlastic__geo.material}
+        geometry={nodes.inlay_block__inlayPlastic__geo.geometry}
+        material={nodes.inlay_block__inlayPlastic__geo.material}
         visible={inlay === 'inlay_block'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_classicDot__whitePlastic__geo.geometry}
-        material={nodes.inlay_classicDot__whitePlastic__geo.material}
+        geometry={nodes.inlay_classicDot__inlayPlastic__geo.geometry}
+        material={nodes.inlay_classicDot__inlayPlastic__geo.material}
         visible={inlay === 'inlay_classicDot'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_deadbat__whitePlastic__geo.geometry}
-        material={nodes.inlay_deadbat__whitePlastic__geo.material}
+        geometry={nodes.inlay_deathbat__inlayPlastic__geo.geometry}
+        material={nodes.inlay_deathbat__inlayPlastic__geo.material}
         visible={inlay === 'inlay_deathbat'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_lightning__whitePlastic__geo.geometry}
-        material={nodes.inlay_lightning__whitePlastic__geo.material}
+        geometry={nodes.inlay_lightning__inlayPlastic__geo.geometry}
+        material={nodes.inlay_lightning__inlayPlastic__geo.material}
         visible={inlay === 'inlay_lightning'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_offsetDot__whitePlastic__geo.geometry}
-        material={nodes.inlay_offsetDot__whitePlastic__geo.material}
+        geometry={nodes.inlay_offsetDot__inlayPlastic__geo.geometry}
+        material={nodes.inlay_offsetDot__inlayPlastic__geo.material}
         visible={inlay === 'inlay_offsetDot'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_parallelogram__whitePlastic__geo.geometry}
-        material={nodes.inlay_parallelogram__whitePlastic__geo.material}
+        geometry={nodes.inlay_parallelogram__inlayPlastic__geo.geometry}
+        material={nodes.inlay_parallelogram__inlayPlastic__geo.material}
         visible={inlay === 'inlay_parallelogram'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_razor__whitePlastic__geo.geometry}
-        material={nodes.inlay_razor__whitePlastic__geo.material}
+        geometry={nodes.inlay_razor__inlayPlastic__geo.geometry}
+        material={nodes.inlay_razor__inlayPlastic__geo.material}
         visible={inlay === 'inlay_razor'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_sharkfin__whitePlastic__geo.geometry}
-        material={nodes.inlay_sharkfin__whitePlastic__geo.material}
+        geometry={nodes.inlay_sharkfin__inlayPlastic__geo.geometry}
+        material={nodes.inlay_sharkfin__inlayPlastic__geo.material}
         visible={inlay === 'inlay_sharkfin'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_snake__whitePlastic__geo.geometry}
-        material={nodes.inlay_snake__whitePlastic__geo.material}
+        geometry={nodes.inlay_snake__inlayPlastic__geo.geometry}
+        material={nodes.inlay_snake__inlayPlastic__geo.material}
         visible={inlay === 'inlay_snake'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_trapezoid__whitePlastic__geo.geometry}
-        material={nodes.inlay_trapezoid__whitePlastic__geo.material}
+        geometry={nodes.inlay_trapezoid__inlayPlastic__geo.geometry}
+        material={nodes.inlay_trapezoid__inlayPlastic__geo.material}
         visible={inlay === 'inlay_trapezoid'}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.inlay_tree__whitePlastic__geo.geometry}
-        material={nodes.inlay_tree__whitePlastic__geo.material}
+        geometry={nodes.inlay_tree__inlayPlastic__geo.geometry}
+        material={nodes.inlay_tree__inlayPlastic__geo.material}
         visible={inlay === 'inlay_tree'}
       />
       <mesh
@@ -960,14 +1418,14 @@ export function Guitar(props) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.strummer_insertA__blackPlastic__geo.geometry}
-        material={nodes.strummer_insertA__blackPlastic__geo.material}
+        geometry={nodes.strummer_insertA__strummerPlastic__geo.geometry}
+        material={nodes.strummer_insertA__strummerPlastic__geo.material}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.strummer_insertB__blackPlastic__geo.geometry}
-        material={nodes.strummer_insertB__blackPlastic__geo.material}
+        geometry={nodes.strummer_insertB__strummerPlastic__geo.geometry}
+        material={nodes.strummer_insertB__strummerPlastic__geo.material}
       />
       <mesh
         castShadow
