@@ -37,23 +37,26 @@ const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay
 // Dynamic icons for menu items based on selected variant
 const HeadstockIcon = () => {
   const headstock = useVariant((state) => state.headstock);
+  const neckColor = useVariant((state) => state.neckColor);
   const variant = guitarVariants.find(v => v.id === `${headstock}`);
   const IconComponent = variant?.icon || HeadStockReliableIcon;
-  return <IconComponent size={56} />;
+  return <IconComponent size={56} color={neckColor} />;
 };
 
 const BodyIcon = () => {
   const body = useVariant((state) => state.body);
+  const bodyColor = useVariant((state) => state.bodyColor);
   const variant = guitarVariants.find(v => v.id === `${body}`);
   const IconComponent = variant?.icon || BodyReliableIcon;
-  return <IconComponent size={56} />;
+  return <IconComponent size={56} color={bodyColor} />;
 };
 
 const InlayIcon = () => {
   const inlay = useVariant((state) => state.inlay);
+  const inlayColor = useVariant((state) => state.inlayColor);
   const variant = guitarVariants.find(v => v.id === `${inlay}`);
   const IconComponent = variant?.icon || InlaySharkfinIcon;
-  return <IconComponent size={56} />;
+  return <IconComponent size={56} color={inlayColor} />;
 };
 
 const updateDynamicCamera = (targetType: string) => {
@@ -103,8 +106,11 @@ const ColorPickerIcon = ({ color }: { color: string }) => {
 };
 
 const BodyColorIcon = () => {
-  const color = useVariant((state) => state.bodyColor);
-  return <ColorPickerIcon color={color} />;
+  const body = useVariant((state) => state.body);
+  const bodyColor = useVariant((state) => state.bodyColor);
+  const variant = guitarVariants.find(v => v.id === `${body}`);
+  const IconComponent = variant?.icon || BodyReliableIcon;
+  return <IconComponent size={24} color={bodyColor} />;
 };
 
 const NeckColorIcon = () => {
@@ -123,8 +129,11 @@ const NeckBindingColorIcon = () => {
 };
 
 const InlayColorIcon = () => {
-  const color = useVariant((state) => state.inlayColor);
-  return <ColorPickerIcon color={color} />;
+  const inlay = useVariant((state) => state.inlay);
+  const inlayColor = useVariant((state) => state.inlayColor);
+  const variant = guitarVariants.find(v => v.id === `${inlay}`);
+  const IconComponent = variant?.icon || InlaySharkfinIcon;
+  return <IconComponent size={24} color={inlayColor} />;
 };
 
 const ArcadeButtonsColorIcon = () => {
@@ -152,7 +161,7 @@ export const customiseMenuItems: MenuItem[] = [
     icon: <BodyIcon /> as ReactNode,
     label: 'Body',
     items: bodyVariants.map((variant) => ({
-      icon: <variant.icon size={24} />,
+      icon: <variant.icon size={24} color="white" />,
       label: variant.name,
       onClick: () => {
         useVariant.setState({ body: variant.id });
@@ -164,7 +173,7 @@ export const customiseMenuItems: MenuItem[] = [
     icon: <HeadstockIcon /> as ReactNode,
     label: 'Headstock',
     items: headstockVariants.map((variant) => ({
-      icon: <variant.icon size={24} />,
+      icon: <variant.icon size={24} color="white" />,
       label: variant.name,
       onClick: () => {
         useVariant.setState({ headstock: variant.id });
@@ -176,7 +185,7 @@ export const customiseMenuItems: MenuItem[] = [
     icon: <InlayIcon /> as ReactNode,
     label: 'Inlay',
     items: inlayVariants.map((variant) => ({
-      icon: <variant.icon size={24} />,
+      icon: <variant.icon size={24} color="white" />,
       label: variant.name,
       onClick: () => {
         useVariant.setState({ inlay: variant.id });
@@ -193,7 +202,7 @@ export const customiseMenuItems: MenuItem[] = [
         label: 'Star Power Button',
         isToggle: true,
         id: 'starPowerButton',
-      }
+      },
     ],
   },
   {

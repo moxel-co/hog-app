@@ -1,311 +1,378 @@
 import React from 'react';
 
-export const HeadStockArrowIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-arrow.png"
-    alt="Headstock Arrow Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+interface IconProps {
+  size: number;
+  color?: string;
+}
+
+export const HeadStockArrowIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-arrow.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-arrow.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockAviatorIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-aviator.png"
-    alt="Headstock Aviator Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockAviatorIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-aviator.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-aviator.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockBriefcaseIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-briefcase.png"
-    alt="Headstock Briefcase Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockBriefcaseIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-briefcase.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-briefcase.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockBroadcasterIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-broadcaster.png"
-    alt="Headstock Broadcaster Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockBroadcasterIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-broadcaster.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-broadcaster.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockFallenAngelIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-fallenangel.png"
-    alt="Headstock Fallen Angel Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockFallenAngelIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-fallenangel.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-fallenangel.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockHeadlessIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-headless.png"
-    alt="Headstock Headless Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockHeadlessIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-headless.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-headless.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockNinjaStarIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-ninjastar.png"
-    alt="Headstock Ninja Star Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockNinjaStarIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-ninjastar.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-ninjastar.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockOversizedIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-oversized.png"
-    alt="Headstock Oversized Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockOversizedIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-oversized.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-oversized.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockPlankSpankerIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-plankspanker.png"
-    alt="Headstock Plank Spanker Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockPlankSpankerIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-plankspanker.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-plankspanker.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockReliableIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-reliable.png"
-    alt="Headstock Reliable Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockReliableIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-reliable.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-reliable.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockSummitIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-summit.png"
-    alt="Headstock Summit Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockSummitIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-summit.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-summit.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockThunderbirdIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-thunderbird.png"
-    alt="Headstock Thunderbird Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockThunderbirdIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-thunderbird.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-thunderbird.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const HeadStockViperIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/headstock-viper.png"
-    alt="Headstock Viper Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const HeadStockViperIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/headstock-viper.png") center/contain no-repeat`,
+      mask: `url("/icons/headstock-viper.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const BodyBriefcaseIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/body-briefcase.png"
-    alt="Body Briefcase Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const BodyBriefcaseIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-briefcase.png") center/contain no-repeat`,
+      mask: `url("/icons/body-briefcase.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const BodyBroadcasterIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/body-broadcaster.png"
-    alt="Body Broadcaster Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const BodyBroadcasterIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-broadcaster.png") center/contain no-repeat`,
+      mask: `url("/icons/body-broadcaster.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const BodyJazzyIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/body-jazzy.png"
-    alt="Body Jazzy Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const BodyJazzyIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-jazzy.png") center/contain no-repeat`,
+      mask: `url("/icons/body-jazzy.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const BodyReliableIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/body-reliable.png"
-    alt="Body Reliable Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const BodyReliableIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-reliable.png") center/contain no-repeat`,
+      mask: `url("/icons/body-reliable.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const BodyThunderbirdIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/body-thunderbird.png"
-    alt="Body Thunderbird Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const BodyThunderbirdIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-thunderbird.png") center/contain no-repeat`,
+      mask: `url("/icons/body-thunderbird.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const BodyViperIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/body-viper.png"
-    alt="Body Viper Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const BodyViperIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-viper.png") center/contain no-repeat`,
+      mask: `url("/icons/body-viper.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayBirdIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-bird.png"
-    alt="Inlay Bird Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayBirdIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-bird.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-bird.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayBlockIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-block.png"
-    alt="Inlay Block Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayBlockIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-block.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-block.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayDeathbatIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-deathbat.png"
-    alt="Inlay Deathbat Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayDeathbatIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-deathbat.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-deathbat.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayClassicdotIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-classicDot.png"
-    alt="Inlay Classic Dot Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayClassicdotIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-classicDot.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-classicDot.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayLightningIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-lightning.png"
-    alt="Inlay Lightning Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayLightningIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-lightning.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-lightning.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayOffsetdotIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-offsetDot.png"
-    alt="Inlay Offset Dot Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayOffsetdotIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-offsetDot.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-offsetDot.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayParallelogramIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-parallelogram.png"
-    alt="Inlay Parallelogram Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayParallelogramIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-parallelogram.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-parallelogram.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayRazorIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-razor.png"
-    alt="Inlay Razor Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayRazorIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-razor.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-razor.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlaySharkfinIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-sharkfin.png"
-    alt="Inlay Shark Fin Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlaySharkfinIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-sharkfin.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-sharkfin.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlaySnakeIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-snake.png"
-    alt="Inlay Snake Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlaySnakeIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-snake.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-snake.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayTrapezoidIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-trapezoid.png"
-    alt="Inlay Trapezoid Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayTrapezoidIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-trapezoid.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-trapezoid.png") center/contain no-repeat`,
+    }}
   />
 );
 
-export const InlayTreeIcon = ({ size }: { size: number }) => (
-  <img
-    src="/icons/inlay-tree.png"
-    alt="Inlay Tree Icon"
-    width={size}
-    height={size}
-    style={{ display: 'block' }}
+export const InlayTreeIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-tree.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-tree.png") center/contain no-repeat`,
+    }}
   />
 );

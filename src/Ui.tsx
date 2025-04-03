@@ -5,24 +5,28 @@ import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
 
-function SubMenuItem({ item, parentOpen }: { 
+function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActiveSubMenuId }: { 
   item: MenuItem;
   parentOpen: boolean;
+  onSubMenuOpen: (isOpen: boolean) => void;
+  activeSubMenuId: string | null;
+  setActiveSubMenuId: (id: string | null) => void;
 }) {
   const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
   const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
 
+  const isOpen = activeSubMenuId === item.label;
+
   useEffect(() => {
     if (!parentOpen) {
-      setIsOpen(false);
       setActiveColorPicker(null);
+      setActiveSubMenuId(null);
     }
-  }, [parentOpen]);
+  }, [parentOpen, setActiveSubMenuId]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -69,6 +73,16 @@ function SubMenuItem({ item, parentOpen }: {
     }
   };
 
+  const handleToggleOpen = () => {
+    const newIsOpen = !isOpen;
+    if (newIsOpen) {
+      setActiveSubMenuId(item.label);
+    } else {
+      setActiveSubMenuId(null);
+    }
+    onSubMenuOpen(newIsOpen);
+  };
+
   const shouldUseGrid = item.items && item.items.length > 4;
 
   const getToggleState = (subItem: MenuItem) => {
@@ -85,7 +99,7 @@ function SubMenuItem({ item, parentOpen }: {
   return (
     <div className="relative" ref={menuRef}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggleOpen}
         className="menu-button"
       >
         <div className="menu-button-icon">
@@ -154,10 +168,13 @@ function SubMenuItem({ item, parentOpen }: {
   );
 }
 
-function MenuItemComponent({ item, isOpen, toggleOpen }: { 
+function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubMenuId, setActiveSubMenuId }: { 
   item: MenuItem; 
   isOpen?: boolean;
   toggleOpen?: () => void;
+  onSubMenuOpen: (isOpen: boolean) => void;
+  activeSubMenuId: string | null;
+  setActiveSubMenuId: (id: string | null) => void;
 }) {
   const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -310,7 +327,14 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
       {item.subItems && isOpen && (
         <div className="custom-submenu">
           {item.subItems.map((subItem, index) => (
-            <SubMenuItem key={index} item={subItem} parentOpen={isOpen} />
+            <SubMenuItem 
+              key={index} 
+              item={subItem} 
+              parentOpen={isOpen} 
+              onSubMenuOpen={onSubMenuOpen}
+              activeSubMenuId={activeSubMenuId}
+              setActiveSubMenuId={setActiveSubMenuId}
+            />
           ))}
         </div>
       )}
@@ -320,6 +344,8 @@ function MenuItemComponent({ item, isOpen, toggleOpen }: {
 
 function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
+  const [activeSubMenuId, setActiveSubMenuId] = useState<string | null>(null);
+  const [anySubMenuOpen, setAnySubMenuOpen] = useState(false);
   const headstock = useVariant((state) => state.headstock);
 
   const handleAddToCart = () => {
@@ -340,6 +366,20 @@ function Ui() {
 
   const handleResetView = () => {
     useVariant.setState({ targetType: 'default' });
+  };
+
+  const handleSubMenuOpen = (isOpen: boolean) => {
+    setAnySubMenuOpen(isOpen);
+  };
+
+  const handleMenuToggle = (index: number) => {
+    if (openMenuIndex === index && !anySubMenuOpen) {
+      setOpenMenuIndex(null);
+    } else {
+      setOpenMenuIndex(index);
+      setActiveSubMenuId(null);
+    }
+    setAnySubMenuOpen(false);
   };
 
   const menuItems: MenuItem[] = [
@@ -394,9 +434,12 @@ function Ui() {
             isOpen={openMenuIndex === index}
             toggleOpen={() => {
               if (!item.onClick) {
-                setOpenMenuIndex(openMenuIndex === index ? null : index);
+                handleMenuToggle(index);
               }
             }}
+            onSubMenuOpen={handleSubMenuOpen}
+            activeSubMenuId={activeSubMenuId}
+            setActiveSubMenuId={setActiveSubMenuId}
           />
         ))}
       </div>

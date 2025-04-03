@@ -22,70 +22,6 @@ export function Guitar(props) {
   const hardwareColor = useVariant((state) => state.hardwareColor);
 
 
-  const colorMapping = [
-    {
-      name: 'orange',
-      hex: '#d54a31'
-    },
-    {
-      name: 'pink',
-      hex: '#eb5577'
-    },
-    {
-      name: 'black',
-      hex: '#1a1a1a'
-    },
-    {
-      name: 'blue',
-      hex: '#202f76'
-    },
-    {
-      name: 'green',
-      hex: '#165c44'
-    },
-    {
-      name: 'light blue',
-      hex: '#32819a'
-    },
-    {
-      name: 'light green',
-      hex: '#4c964a'
-    },
-    {
-      name: 'yellow',
-      hex: '#d8aa36'
-    },
-    {
-      name: 'purple',
-      hex: '#8743cb'
-    },
-    {
-      name: 'red',
-      hex: '#861212'
-    },
-    {
-      name: 'white',
-      hex: '#d8d8d8'
-    },
-    {
-      name: 'dark brown',
-      hex: '#3e3028'
-    },
-    {
-      name: 'brown',
-      hex: '#966143'
-    },
-    {
-      name: 'tan',
-      hex: '#d59b7a'
-    },
-  ]
-
-  const getColorHex = (name) => {
-    const color = colorMapping.find(color => color.name === name)
-    return color ? color.hex : null
-  }
-
   const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3})
   const m_redPlastic = new THREE.MeshStandardMaterial({color: "#ce1c1c", roughness: 0.2})
   const m_greenPlastic = new THREE.MeshStandardMaterial({color: "#56aa0e", roughness: 0.3})
@@ -95,11 +31,11 @@ export function Guitar(props) {
   const m_whitePlastic = new THREE.MeshStandardMaterial({color: "white", roughness: 0.3})
   const m_brushedMetal = new THREE.MeshStandardMaterial({color: "grey", roughness: 0.5, metalness: 0.5})
   const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor, roughness: 0.2, metalness: 1})
-  const m_basePlastic = new THREE.MeshStandardMaterial({color: getColorHex(bodyColor), roughness: 0.4, metalness: 0})
-  const m_neckPlastic = new THREE.MeshStandardMaterial({color: getColorHex(neckColor), roughness: 0.4, metalness: 0})
-  const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: getColorHex(fretBoardBindingColor), roughness: 0.4, metalness: 0})
-  const m_fretBoardWood = new THREE.MeshStandardMaterial({color: getColorHex(fretBoardColor), roughness: 0.8, metalness: 0})
-  const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: getColorHex(pickGuardColor), roughness: 0.4, metalness: 0})
+  const m_basePlastic = new THREE.MeshStandardMaterial({color: bodyColor, roughness: 0.4, metalness: 0})
+  const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor, roughness: 0.4, metalness: 0})
+  const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
+  const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0})
+  const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor, roughness: 0.4, metalness: 0})
 
   // Create a mapping between material names and material objects
   const materialMapping = {
