@@ -22,13 +22,14 @@ export default function App() {
 
   return (
     <>
-      <EffectComposer enabled={isPostEffectsEnabled}>
+      <EffectComposer>
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-        <Bloom intensity={0.3} luminanceThreshold={0.8} />
+        {isPostEffectsEnabled && <Bloom intensity={0.3} luminanceThreshold={0.8} />}
+        {isPostEffectsEnabled && 
         <ChromaticAberration
           blendFunction={BlendFunction.NORMAL}
           offset={[0.0005, 0.0005]}
-        />
+        />}
       </EffectComposer>
 
       {/* Set the initial position of the camera */}
