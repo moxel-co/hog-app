@@ -138,7 +138,7 @@
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .submenu-container {
-    @apply max-w-[calc(100vw-2.7rem)] overflow-x-auto pb-1.35;
+    @apply max-w-[calc(100vw-2.7rem)] pb-1.35; /* Removed overflow-x-auto */
   }
   
   .submenu-container.grid-layout {

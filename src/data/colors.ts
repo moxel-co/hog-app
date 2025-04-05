@@ -57,6 +57,16 @@ export const InlayColorSwatches: ColorSwatch[] = [
   { primary_color: '#000000', label: 'Black' },
 ];
 
+export const NeckButtonColorSwatches: ColorSwatch[] = [
+  { primary_color: '#FF0000', label: 'Red' },
+  { primary_color: '#FFFF00', label: 'Yellow' },
+  { primary_color: '#008000', label: 'Green' },
+  { primary_color: '#0000FF', label: 'Blue' },
+  { primary_color: '#000000', label: 'Black' },
+  { primary_color: '#FFFFFF', label: 'White' },
+];
+
+
 export const ArcadeButtonColorSwatches: ColorSwatch[] = [
   { primary_color: '#FF0000', label: 'Red' },
   { primary_color: '#FFFF00', label: 'Yellow' },

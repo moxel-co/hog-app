@@ -365,7 +365,7 @@ function Ui() {
   };
 
   const handleResetView = () => {
-    useVariant.setState({ targetType: 'default' });
+    useVariant.setState({ targetType: Math.random() });
   };
 
   const handleSubMenuOpen = (isOpen: boolean) => {

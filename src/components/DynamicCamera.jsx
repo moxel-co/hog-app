@@ -23,6 +23,10 @@ export function DynamicCamera() {
       position: [0, 7.5, 3],
       target: [0, 7.2, 0],
     },
+    headstock2: {
+      position: [1, 7.5, 3],
+      target: [1, 7.2, 0],
+    },
     body: {
       position: [0, 2.4, 6],
       target: [0, 2.4, 0],

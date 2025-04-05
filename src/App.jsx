@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  PerspectiveCamera,
-  OrbitControls,
   Environment,
   ContactShadows,
 } from "@react-three/drei";
@@ -20,6 +18,7 @@ import { DynamicCamera } from "./components/DynamicCamera.jsx";
 export default function App() {
 
   const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
+  const shadowOffset = useVariant((state) => state.shadowOffset);
 
   return (
     <>
@@ -39,7 +38,7 @@ export default function App() {
         files="./assets/common/latlong/dualSense_1k.hdr"
         environmentRotation={[0, Math.PI * 20, 0]}
       />
-      <ContactShadows opacity={0.3} />
+      <ContactShadows position={[0, shadowOffset, 0]} opacity={0.3} />
       <Guitar />
     </>
   );

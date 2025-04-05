@@ -1,10 +1,6 @@
 import {
-  Shield,
   Palette,
-  Box,
   Joystick,
-  Square,
-  Layers,
   Star,
 } from 'lucide-react';
 import {
@@ -26,6 +22,7 @@ import {
   PickGuardColorSwatches,
   InlayColorSwatches,
   HardwareColorSwatches,
+  NeckButtonColorSwatches,
   ArcadeButtonColorSwatches,
   FretboardColorSwatches,
   NeckBindingColorSwatches,
@@ -40,9 +37,22 @@ const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body')
 const headstockVariants = guitarVariants.filter((variant) => variant.type === 'headstock');
 const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay');
 
+const IsDualNeck = () => {
+  const isDualNeck = useVariant((state) => state.isDualNeck);
+  return isDualNeck;
+}
+
 // Dynamic icons for menu items based on selected variant
 const HeadstockIcon = () => {
   const headstock = useVariant((state) => state.headstock);
+  const neckColor = useVariant((state) => state.neckColor);
+  const variant = guitarVariants.find(v => v.id === `${headstock}`);
+  const IconComponent = variant?.icon || HeadStockReliableIcon;
+  return <IconComponent size={56} color={neckColor} />;
+};
+
+const HeadstockIcon2 = () => {
+  const headstock = useVariant((state) => state.headstock2);
   const neckColor = useVariant((state) => state.neckColor);
   const variant = guitarVariants.find(v => v.id === `${headstock}`);
   const IconComponent = variant?.icon || HeadStockReliableIcon;
@@ -88,6 +98,9 @@ const handleColorSelect = (colorType: string, color: string) => {
     case 'Inlay':
       useVariant.setState({ inlayColor: color });
       break;
+    case 'Neck Buttons':
+        useVariant.setState({ neckButtonColor: color });
+        break;
     case 'Arcade Buttons':
       useVariant.setState({ arcadeButtonColor: color });
       break;
@@ -131,7 +144,7 @@ const FretboardColorIcon = () => {
 
 const NeckBindingColorIcon = () => {
   const color = useVariant((state) => state.fretBoardBindingColor);
-  return <ColorPickerIcon color={color} />;
+  return <FretboardBindingIcon size={24} color={color} />;
 };
 
 const InlayColorIcon = () => {
@@ -142,9 +155,19 @@ const InlayColorIcon = () => {
   return <IconComponent size={24} color={inlayColor} />;
 };
 
+const IsDualNeck2 = () => {
+  const isDualNeck = useVariant((state) => state.isDualNeck);
+  return isDualNeck;
+};
+
+const NeckButtonColorIcon = () => {
+  const color = useVariant((state) => state.neckButtonColor);
+  return <NeckButtonsIcon size={24} color={color} />;
+};
+
 const ArcadeButtonsColorIcon = () => {
   const color = useVariant((state) => state.arcadeButtonColor);
-  return <ColorPickerIcon color={color} />;
+  return <Joystick color={color} />;
 };
 
 const PickGuardColorIcon = () => {
@@ -171,6 +194,11 @@ export const customiseMenuItems: MenuItem[] = [
       label: variant.name,
       onClick: () => {
         useVariant.setState({ body: variant.id });
+        useVariant.setState({ strummerOffset: variant.strummerOffset });
+        useVariant.setState({ shadowOffset: variant.shadowOffset });
+        useVariant.setState({ isDualNeck: variant.isDualNeck });
+        useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
+        useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
         updateDynamicCamera(variant.type);
       },
     })),
@@ -187,6 +215,22 @@ export const customiseMenuItems: MenuItem[] = [
       },
     })),
   },
+  ...(useVariant.getState().isDualNeck // Check if isDualNeck is true
+    ? [
+        {
+          icon: <HeadstockIcon2 /> as ReactNode,
+          label: 'Headstock2',
+          items: headstockVariants.map((variant) => ({
+            icon: <variant.icon size={24} color="white" />,
+            label: variant.name,
+            onClick: () => {
+              useVariant.setState({ headstock2: variant.id });
+              updateDynamicCamera('headstock2');
+            },
+          })),
+        },
+      ]
+    : []), // If false, add nothing
   {
     icon: <InlayIcon /> as ReactNode,
     label: 'Inlay',
@@ -203,8 +247,8 @@ export const customiseMenuItems: MenuItem[] = [
     icon: <Joystick size={56} />,
     label: 'Buttons',
     items: [
-      { 
-        icon: <Star size={24} />, 
+      {
+        icon: <Star size={24} />,
         label: 'Star Power Button',
         isToggle: true,
         id: 'starPowerButton',
@@ -251,6 +295,13 @@ export const customiseMenuItems: MenuItem[] = [
         onColorSelect: (color: string) => handleColorSelect('Inlay', color),
       },
       {
+        icon: <NeckButtonColorIcon />,
+        label: 'Neck Buttons',
+        isColorPicker: true,
+        swatches: NeckButtonColorSwatches,
+        onColorSelect: (color: string) => handleColorSelect('Neck Buttons', color),
+      },
+      {
         icon: <ArcadeButtonsColorIcon />,
         label: 'Arcade Buttons',
         isColorPicker: true,
@@ -277,7 +328,7 @@ export const customiseMenuItems: MenuItem[] = [
         isColorPicker: true,
         swatches: StrummerSideColorSwatches,
         onColorSelect: (color: string) => handleColorSelect('Strummer Side Panels', color),
-      }
+      },
     ],
-  }
+  },
 ];

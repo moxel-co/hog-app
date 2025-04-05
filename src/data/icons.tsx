@@ -491,8 +491,8 @@ export const FretboardBindingIcon = ({ size, color = 'currentColor' }: IconProps
       width: size,
       height: size,
       backgroundColor: color,
-      WebkitMask: `url("/icons/fretboardbinding.png") center/contain no-repeat`,
-      mask: `url("/icons/fretboardbinding.png") center/contain no-repeat`,
+      WebkitMask: `url("/icons/fretboardBinding.png") center/contain no-repeat`,
+      mask: `url("/icons/fretboardBinding.png") center/contain no-repeat`,
     }}
   />
 );

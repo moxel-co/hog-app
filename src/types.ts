@@ -11,6 +11,11 @@ export interface GuitarVariant {
   name: string;
   type: 'headstock' | 'body' | 'inlay';
   icon: ReactNode;
+  strummerOffset: number;
+  shadowOffset: number;
+  isDualNeck?: boolean;
+  dualNeckOffsetPos: number[];
+  dualNeckOffsetRot: number[];
 }
 
 export interface MenuItem {
