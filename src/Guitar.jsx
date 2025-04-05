@@ -17,6 +17,7 @@ export function Guitar(props) {
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const bodyColor = useVariant((state) => state.bodyColor);
   const arcadeButtonColor = useVariant((state) => state.arcadeButtonColor);
+  const neckButtonColor = useVariant((state) => state.neckButtonColor);
   const neckColor = useVariant((state) => state.neckColor);
   const inlayColor = useVariant((state) => state.inlayColor);
   const fretBoardColor = useVariant((state) => state.fretBoardColor);
@@ -27,9 +28,8 @@ export function Guitar(props) {
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
   const dualNeckOffsetRot = useVariant((state) => state.dualNeckOffsetRot);
-  console.log(isDualNeck)
 
-
+  // Define material library
   const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3})
   const m_redPlastic = new THREE.MeshStandardMaterial({color: "#ce1c1c", roughness: 0.2})
   const m_greenPlastic = new THREE.MeshStandardMaterial({color: "#56aa0e", roughness: 0.3})
@@ -42,6 +42,7 @@ export function Guitar(props) {
   const m_chromeMetal = new THREE.MeshStandardMaterial({color: "white", roughness: 0.1, metalness: 1})
   const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor, roughness: 0.4, metalness: 0})
   const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor, roughness: 0.4, metalness: 0})
+  const m_neckButtonPlastic = new THREE.MeshStandardMaterial({color: neckButtonColor, roughness: 0.4, metalness: 0})
   const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor, roughness: 0.4, metalness: 0})
   const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor, roughness: 0.4, metalness: 0})
   const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
@@ -58,6 +59,7 @@ export function Guitar(props) {
     '__bluePlastic__': m_bluePlastic,
     '__orangePlastic__': m_orangePlastic,
     '__whitePlastic__': m_whitePlastic,
+    '__neckButtonPlastic__': m_neckButtonPlastic,
     '__brushedMetal__': m_brushedMetal,
     '__hardwareMetal__': m_hardwareMetal,
     '__chromeMetal__': m_chromeMetal,
@@ -364,6 +366,62 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_fallenangel_strapMount__blackPlastic__geo.geometry}
           material={nodes.body_fallenangel_strapMount__blackPlastic__geo.material}
+        />
+      </group>
+      <group visible={body === "body_hammer"}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_back__bodyPlastic__geo.geometry}
+          material={nodes.body_hammer_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_bridge__hardwareMetal__geo.geometry}
+          material={nodes.body_hammer_bridge__hardwareMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_hammer_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_hammer_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_hammer_buttonSP__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_front__bodyPlastic__geo.geometry}
+          material={nodes.body_hammer_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_hammer_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_hammer_pickGuard__pickGuardPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_hammer_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_hammer_strapMount__blackPlastic__geo.material}
         />
       </group>
       <group visible={body === "body_headless"}>
@@ -1238,6 +1296,13 @@ export function Guitar(props) {
         material={nodes.inlay_block__inlayPlastic__geo.material}
         visible={inlay === 'inlay_block'}
       />
+        <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.inlay_cloud__inlayPlastic__geo.geometry}
+        material={nodes.inlay_cloud__inlayPlastic__geo.material}
+        visible={inlay === 'inlay_cloud'}
+      />
       <mesh
         castShadow
         receiveShadow
@@ -1330,32 +1395,32 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonA__greenPlastic__geo.geometry}
-          material={nodes.neck_buttonA__greenPlastic__geo.material}
+          geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonA__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonB__redPlastic__geo.geometry}
-          material={nodes.neck_buttonB__redPlastic__geo.material}
+          geometry={nodes.neck_buttonB__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonB__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonC__yellowPlastic__geo.geometry}
-          material={nodes.neck_buttonC__yellowPlastic__geo.material}
+          geometry={nodes.neck_buttonC__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonC__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonD__bluePlastic__geo.geometry}
-          material={nodes.neck_buttonD__bluePlastic__geo.material}
+          geometry={nodes.neck_buttonD__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonD__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonE__orangePlastic__geo.geometry}
-          material={nodes.neck_buttonE__orangePlastic__geo.material}
+          geometry={nodes.neck_buttonE__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonE__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1379,7 +1444,7 @@ export function Guitar(props) {
           castShadow
           receiveShadow
           geometry={nodes.neck_polybar__fretboardBindingPlastic__geo.geometry}
-          material={nodes.neck_polybar__fretboardBindingPlastic__geo.material}
+          material={m_fretboardBindingPlastic}
         />
         <mesh
           castShadow
@@ -1790,40 +1855,40 @@ export function Guitar(props) {
           />
         </group>
         <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_back__neckPlastic__geo.geometry}
-          material={nodes.neck_back__neckPlastic__geo.material}
+        castShadow
+        receiveShadow
+        geometry={nodes.neck_back__neckPlastic__geo.geometry}
+        material={nodes.neck_back__neckPlastic__geo.material}
+        />
+        <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
+        material={nodes.neck_buttonA__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonA__greenPlastic__geo.geometry}
-          material={nodes.neck_buttonA__greenPlastic__geo.material}
+          geometry={nodes.neck_buttonB__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonB__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonB__redPlastic__geo.geometry}
-          material={nodes.neck_buttonB__redPlastic__geo.material}
+          geometry={nodes.neck_buttonC__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonC__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonC__yellowPlastic__geo.geometry}
-          material={nodes.neck_buttonC__yellowPlastic__geo.material}
+          geometry={nodes.neck_buttonD__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonD__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.neck_buttonD__bluePlastic__geo.geometry}
-          material={nodes.neck_buttonD__bluePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonE__orangePlastic__geo.geometry}
-          material={nodes.neck_buttonE__orangePlastic__geo.material}
+          geometry={nodes.neck_buttonE__neckButtonPlastic__geo.geometry}
+          material={nodes.neck_buttonE__neckButtonPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1847,7 +1912,7 @@ export function Guitar(props) {
           castShadow
           receiveShadow
           geometry={nodes.neck_polybar__fretboardBindingPlastic__geo.geometry}
-          material={nodes.neck_polybar__fretboardBindingPlastic__geo.material}
+          material={m_fretboardBindingPlastic}
         />
         <mesh
           castShadow

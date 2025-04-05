@@ -53,6 +53,9 @@ export function ColorSwatches({
       case 'Inlay':
         useVariant.setState({ inlayColor: color });
         break;
+      case 'Neck Buttons':
+        useVariant.setState({ neckButtonColor: color });
+        break;
       case 'Arcade Buttons':
         useVariant.setState({ arcadeButtonColor: color });
         break;

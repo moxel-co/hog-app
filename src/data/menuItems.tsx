@@ -99,8 +99,8 @@ const handleColorSelect = (colorType: string, color: string) => {
       useVariant.setState({ inlayColor: color });
       break;
     case 'Neck Buttons':
-        useVariant.setState({ neckButtonColor: color });
-        break;
+      useVariant.setState({ neckButtonColor: color });
+      break;
     case 'Arcade Buttons':
       useVariant.setState({ arcadeButtonColor: color });
       break;

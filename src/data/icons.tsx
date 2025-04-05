@@ -269,6 +269,18 @@ export const BodyFallenAngelIcon = ({ size, color = 'currentColor' }: IconProps)
   />
 );
 
+export const BodyHammerIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-hammer.png") center/contain no-repeat`,
+      mask: `url("/icons/body-hammer.png") center/contain no-repeat`,
+    }}
+  />
+);
+
 export const BodyHeadlessIcon = ({ size, color = 'currentColor' }: IconProps) => (
   <div
     style={{
@@ -349,6 +361,18 @@ export const InlayBlockIcon = ({ size, color = 'currentColor' }: IconProps) => (
       backgroundColor: color,
       WebkitMask: `url("/icons/inlay-block.png") center/contain no-repeat`,
       mask: `url("/icons/inlay-block.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const InlayCloudIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-cloud.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-cloud.png") center/contain no-repeat`,
     }}
   />
 );

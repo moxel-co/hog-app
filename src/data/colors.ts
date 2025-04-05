@@ -58,14 +58,29 @@ export const InlayColorSwatches: ColorSwatch[] = [
 ];
 
 export const NeckButtonColorSwatches: ColorSwatch[] = [
+  { primary_color: '#808080', label: 'Gray (GRYBO)' },
+  { primary_color: '#FFFF11', label: 'Clear' },
   { primary_color: '#FF0000', label: 'Red' },
+  { primary_color: '#FFA500', label: 'Orange' },
   { primary_color: '#FFFF00', label: 'Yellow' },
+  { primary_color: '#556B2F', label: 'Army Green' },
   { primary_color: '#008000', label: 'Green' },
+  { primary_color: '#90EE90', label: 'Light Green' },
+  { primary_color: '#000080', label: 'Navy Blue' },
   { primary_color: '#0000FF', label: 'Blue' },
+  { primary_color: '#ADD8E6', label: 'Light Blue' },
+  { primary_color: '#FFC0CB', label: 'Pink' },
+  { primary_color: '#D8BFD8', label: 'Light Purple' },
+  { primary_color: '#800080', label: 'Purple' },
+  { primary_color: '#D2B48C', label: 'Tan' },
+  { primary_color: '#8B4513', label: 'Brown' },
+  { primary_color: '#654321', label: 'Dark Brown' },
   { primary_color: '#000000', label: 'Black' },
-  { primary_color: '#FFFFFF', label: 'White' },
+  { primary_color: '#FFFF88', label: 'White' },
+  { primary_color: '#F8F8FF', label: 'Silk White' },
+  { primary_color: '#C0C0C0', label: 'Silk Silver' },
+  { primary_color: '#FFD700', label: 'Silk Gold' },
 ];
-
 
 export const ArcadeButtonColorSwatches: ColorSwatch[] = [
   { primary_color: '#FF0000', label: 'Red' },
