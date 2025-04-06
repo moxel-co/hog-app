@@ -185,10 +185,15 @@ const StrummerSideColorIcon = () => {
 
 // Create a custom hook that returns the customiseMenuItems array
 export const useCustomiseMenuItems = (): MenuItem[] => {
-  // Get the isDualNeck state from the useVariant store
+  // Get the states from the useVariant store
   const isDualNeck = useVariant((state) => state.isDualNeck);
+  const body = useVariant((state) => state.body);
+  const headstock = useVariant((state) => state.headstock);
+  const headstock2 = useVariant((state) => state.headstock2);
+  const inlay = useVariant((state) => state.inlay);
+  const inlay2 = useVariant((state) => state.inlay2);
   
-  // Use useMemo to memoize the array and only recreate it when isDualNeck changes
+  // Use useMemo to memoize the array and only recreate it when states change
   return useMemo(() => [
     {
       icon: <BodyIcon /> as ReactNode,
@@ -205,6 +210,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
           updateDynamicCamera(variant.type);
         },
+        isActive: body === variant.id,
       })),
     },
     {
@@ -217,6 +223,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           useVariant.setState({ headstock: variant.id });
           updateDynamicCamera(variant.type);
         },
+        isActive: headstock === variant.id,
       })),
     },
     // Conditionally include the Headstock2 menu item based on isDualNeck
@@ -232,6 +239,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
                 useVariant.setState({ headstock2: variant.id });
                 updateDynamicCamera('headstock2');
               },
+              isActive: headstock2 === variant.id,
             })),
           },
         ]
@@ -246,9 +254,10 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           useVariant.setState({ inlay: variant.id });
           updateDynamicCamera(variant.type);
         },
+        isActive: inlay === variant.id,
       })),
     },
-    // Conditionally include the Headstock2 menu item based on isDualNeck
+    // Conditionally include the Inlay2 menu item based on isDualNeck
     ...(isDualNeck
       ? [
           {
@@ -261,6 +270,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
                 useVariant.setState({ inlay2: variant.id });
                 updateDynamicCamera("inlay2");
               },
+              isActive: inlay2 === variant.id,
             })),
           },
         ]
@@ -353,7 +363,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         },
       ],
     },
-  ], [isDualNeck]); // Only recreate the array when isDualNeck changes
+  ], [isDualNeck, body, headstock, headstock2, inlay, inlay2]); // Recreate the array when any of these states change
 };
 
 // Export a default customiseMenuItems array for backward compatibility
@@ -374,6 +384,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
             updateDynamicCamera(variant.type);
           },
+          isActive: useVariant.getState().body === variant.id,
         })),
       },
       {
@@ -386,6 +397,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ headstock: variant.id });
             updateDynamicCamera(variant.type);
           },
+          isActive: useVariant.getState().headstock === variant.id,
         })),
       },
       {
@@ -398,6 +410,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ headstock2: variant.id });
             updateDynamicCamera('headstock2');
           },
+          isActive: useVariant.getState().headstock2 === variant.id,
         })),
       },
       {
@@ -410,6 +423,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ inlay: variant.id });
             updateDynamicCamera(variant.type);
           },
+          isActive: useVariant.getState().inlay === variant.id,
         })),
       },
       {
@@ -517,6 +531,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
             updateDynamicCamera(variant.type);
           },
+          isActive: useVariant.getState().body === variant.id,
         })),
       },
       {
@@ -529,6 +544,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ headstock: variant.id });
             updateDynamicCamera(variant.type);
           },
+          isActive: useVariant.getState().headstock === variant.id,
         })),
       },
       {
@@ -541,6 +557,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             useVariant.setState({ inlay: variant.id });
             updateDynamicCamera(variant.type);
           },
+          isActive: useVariant.getState().inlay === variant.id,
         })),
       },
       {

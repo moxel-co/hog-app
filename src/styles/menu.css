@@ -111,6 +111,11 @@
   @apply text-gray-500;
 }
 
+/* Active submenu button */
+.submenu-button-active {
+  @apply bg-yellow-400/80 text-white scale-[1] z-20;
+}
+
 /* Option item styles */
 .option-item {
   @apply relative w-[1.369rem] h-[1.369rem] md:w-6.3 md:h-6.3 2xl:w-9 2xl:h-9 4xl:w-[5.249rem] 4xl:h-[5.249rem] 

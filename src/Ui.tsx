@@ -135,7 +135,9 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
                       ? getToggleState(subItem)
                         ? 'toggle-button-active' 
                         : 'toggle-button-inactive'
-                      : ''
+                      : subItem.isActive
+                        ? 'submenu-button-active'
+                        : ''
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -294,7 +296,9 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
                       ? getToggleState(subItem)
                         ? 'toggle-button-active' 
                         : 'toggle-button-inactive'
-                      : ''
+                      : subItem.isActive
+                        ? 'submenu-button-active'
+                        : ''
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
