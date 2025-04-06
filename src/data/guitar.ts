@@ -268,13 +268,13 @@ export const guitarVariants: GuitarVariant[] = [
     },
     {
         id: 'headstock_reliable',
-        name: 'The OL Reliable',
+        name: 'Ol Reliable',
         type: 'headstock',
         icon: HeadStockReliableIcon,
     },
     {
         id: 'headstock_reliable12',
-        name: 'The OL Reliable 12 Strings',
+        name: 'Ol Reliable 12 Strings',
         type: 'headstock',
         icon: HeadStockReliableIcon,
     },

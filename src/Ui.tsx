@@ -4,6 +4,7 @@ import { customiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
+import AddToCartButton from './components/AddToCart.tsx';
 
 function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActiveSubMenuId }: { 
   item: MenuItem;
@@ -346,23 +347,6 @@ function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const [activeSubMenuId, setActiveSubMenuId] = useState<string | null>(null);
   const [anySubMenuOpen, setAnySubMenuOpen] = useState(false);
-  const headstock = useVariant((state) => state.headstock);
-
-  const handleAddToCart = () => {
-    console.log("Adding to Cart");
-
-    const productDetails = {
-      id: "product-id-123",
-      name: "Sample Product",
-      headstock: headstock,
-    };
-    window.parent.postMessage(
-      productDetails,
-      "https://hing62.wixsite.com/hello-guitars"
-    );
-
-    console.log(productDetails);
-  };
 
   const handleResetView = () => {
     useVariant.setState({ targetType: Math.random() });
@@ -417,11 +401,6 @@ function Ui() {
         }
       ],
     },
-    {
-      icon: <ShoppingCart size={56} />,
-      label: "Add to Cart",
-      onClick: handleAddToCart,
-    },
   ];
 
   return (
@@ -442,6 +421,8 @@ function Ui() {
             setActiveSubMenuId={setActiveSubMenuId}
           />
         ))}
+        {/* Add the AddToCartButton as a standalone component */}
+        <AddToCartButton />
       </div>
     </div>
   );

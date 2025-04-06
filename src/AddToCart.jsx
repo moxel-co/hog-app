@@ -1,11 +1,14 @@
 import React from "react";
 
+
 function AddToCartButton() {
   const handleButtonClick = () => {
     console.log("Cart button clicked!");
     // Send a message to the parent Wix site
+
+    const productId = "dea56f68-9339-46ab-b48b-c28c25ce6819"
     const productDetails = {
-      id: "product-id-123",
+      id: productId,
       name: "Sample Product",
       price: 49.99,
     };
