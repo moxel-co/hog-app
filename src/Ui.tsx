@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Settings, Rotate3d, Hammer, Home, Palette, ShoppingCart, PackagePlus, Sparkles, SwitchCamera } from 'lucide-react';
-import { customiseMenuItems } from './data/menuItems';
+import { useCustomiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
@@ -347,6 +347,8 @@ function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const [activeSubMenuId, setActiveSubMenuId] = useState<string | null>(null);
   const [anySubMenuOpen, setAnySubMenuOpen] = useState(false);
+  // Use the custom hook to get the reactive customiseMenuItems array
+  const customiseMenuItems = useCustomiseMenuItems();
 
   const handleResetView = () => {
     useVariant.setState({ targetType: Math.random() });

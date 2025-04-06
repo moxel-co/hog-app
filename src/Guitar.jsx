@@ -14,6 +14,7 @@ export function Guitar(props) {
   const headstock = useVariant((state) => state.headstock);
   const headstock2 = useVariant((state) => state.headstock2);
   const inlay = useVariant((state) => state.inlay);
+  const inlay2 = useVariant((state) => state.inlay2);
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const bodyColor = useVariant((state) => state.bodyColor);
   const arcadeButtonColor = useVariant((state) => state.arcadeButtonColor);
@@ -1955,84 +1956,84 @@ export function Guitar(props) {
         receiveShadow
         geometry={nodes.inlay_bird__inlayPlastic__geo.geometry}
         material={nodes.inlay_bird__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_bird'}
+        visible={inlay2 === 'inlay_bird'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_block__inlayPlastic__geo.geometry}
           material={nodes.inlay_block__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_block'}
+          visible={inlay2 === 'inlay_block'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_classicDot__inlayPlastic__geo.geometry}
           material={nodes.inlay_classicDot__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_classicDot'}
+          visible={inlay2 === 'inlay_classicDot'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_deathbat__inlayPlastic__geo.geometry}
           material={nodes.inlay_deathbat__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_deathbat'}
+          visible={inlay2 === 'inlay_deathbat'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_lightning__inlayPlastic__geo.geometry}
           material={nodes.inlay_lightning__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_lightning'}
+          visible={inlay2 === 'inlay_lightning'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_offsetDot__inlayPlastic__geo.geometry}
           material={nodes.inlay_offsetDot__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_offsetDot'}
+          visible={inlay2 === 'inlay_offsetDot'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_parallelogram__inlayPlastic__geo.geometry}
           material={nodes.inlay_parallelogram__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_parallelogram'}
+          visible={inlay2 === 'inlay_parallelogram'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_razor__inlayPlastic__geo.geometry}
           material={nodes.inlay_razor__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_razor'}
+          visible={inlay2 === 'inlay_razor'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_sharkfin__inlayPlastic__geo.geometry}
           material={nodes.inlay_sharkfin__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_sharkfin'}
+          visible={inlay2 === 'inlay_sharkfin'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_snake__inlayPlastic__geo.geometry}
           material={nodes.inlay_snake__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_snake'}
+          visible={inlay2 === 'inlay_snake'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_trapezoid__inlayPlastic__geo.geometry}
           material={nodes.inlay_trapezoid__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_trapezoid'}
+          visible={inlay2 === 'inlay_trapezoid'}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.inlay_tree__inlayPlastic__geo.geometry}
           material={nodes.inlay_tree__inlayPlastic__geo.material}
-          visible={inlay === 'inlay_tree'}
+          visible={inlay2 === 'inlay_tree'}
         />
       </group>
       <group position={[0, strummerOffset, 0]}>

@@ -6,6 +6,7 @@ export default create((set, get) => ({
     headstock: 'headstock_arrow',
     headstock2: 'headstock_arrow',
     inlay: 'inlay_sharkfin',
+    inlay2: 'inlay_sharkfin',
     starPowerButton: true,
     bodyColor: 'blue',
     neckColor: 'blue',
@@ -20,7 +21,7 @@ export default create((set, get) => ({
     strummerSideColor: 'black',
     strummerOffset: 0,
     shadowOffset: 0,
-    isDualNeck: true,
+    isDualNeck: false,
     dualNeckOffsetPos: [0, 0, 0],
     dualNeckOffsetRot: [0, 0, 0],
 

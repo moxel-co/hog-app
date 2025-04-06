@@ -30,17 +30,12 @@ import {
 } from './colors';
 import useVariant from '../stores/useVariant';
 import { guitarVariants } from './guitar';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 // Get current selected variants
 const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body');
 const headstockVariants = guitarVariants.filter((variant) => variant.type === 'headstock');
 const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay');
-
-const IsDualNeck = () => {
-  const isDualNeck = useVariant((state) => state.isDualNeck);
-  return isDualNeck;
-}
 
 // Dynamic icons for menu items based on selected variant
 const HeadstockIcon = () => {
@@ -69,6 +64,14 @@ const BodyIcon = () => {
 
 const InlayIcon = () => {
   const inlay = useVariant((state) => state.inlay);
+  const inlayColor = useVariant((state) => state.inlayColor);
+  const variant = guitarVariants.find(v => v.id === `${inlay}`);
+  const IconComponent = variant?.icon || InlaySharkfinIcon;
+  return <IconComponent size={56} color={inlayColor} />;
+};
+
+const InlayIcon2 = () => {
+  const inlay = useVariant((state) => state.inlay2);
   const inlayColor = useVariant((state) => state.inlayColor);
   const variant = guitarVariants.find(v => v.id === `${inlay}`);
   const IconComponent = variant?.icon || InlaySharkfinIcon;
@@ -155,11 +158,6 @@ const InlayColorIcon = () => {
   return <IconComponent size={24} color={inlayColor} />;
 };
 
-const IsDualNeck2 = () => {
-  const isDualNeck = useVariant((state) => state.isDualNeck);
-  return isDualNeck;
-};
-
 const NeckButtonColorIcon = () => {
   const color = useVariant((state) => state.neckButtonColor);
   return <NeckButtonsIcon size={24} color={color} />;
@@ -185,150 +183,452 @@ const StrummerSideColorIcon = () => {
   return <ColorPickerIcon color={color} />;
 };
 
-export const customiseMenuItems: MenuItem[] = [
-  {
-    icon: <BodyIcon /> as ReactNode,
-    label: 'Body',
-    items: bodyVariants.map((variant) => ({
-      icon: <variant.icon size={24} color="white" />,
-      label: variant.name,
-      onClick: () => {
-        useVariant.setState({ body: variant.id });
-        useVariant.setState({ strummerOffset: variant.strummerOffset });
-        useVariant.setState({ shadowOffset: variant.shadowOffset });
-        useVariant.setState({ isDualNeck: variant.isDualNeck });
-        useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
-        useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
-        updateDynamicCamera(variant.type);
-      },
-    })),
-  },
-  {
-    icon: <HeadstockIcon /> as ReactNode,
-    label: 'Headstock',
-    items: headstockVariants.map((variant) => ({
-      icon: <variant.icon size={24} color="white" />,
-      label: variant.name,
-      onClick: () => {
-        useVariant.setState({ headstock: variant.id });
-        updateDynamicCamera(variant.type);
-      },
-    })),
-  },
-  ...(useVariant.getState().isDualNeck // Check if isDualNeck is true
-    ? [
-        {
-          icon: <HeadstockIcon2 /> as ReactNode,
-          label: 'Headstock2',
-          items: headstockVariants.map((variant) => ({
-            icon: <variant.icon size={24} color="white" />,
-            label: variant.name,
-            onClick: () => {
-              useVariant.setState({ headstock2: variant.id });
-              updateDynamicCamera('headstock2');
-            },
-          })),
+// Create a custom hook that returns the customiseMenuItems array
+export const useCustomiseMenuItems = (): MenuItem[] => {
+  // Get the isDualNeck state from the useVariant store
+  const isDualNeck = useVariant((state) => state.isDualNeck);
+  
+  // Use useMemo to memoize the array and only recreate it when isDualNeck changes
+  return useMemo(() => [
+    {
+      icon: <BodyIcon /> as ReactNode,
+      label: 'Body',
+      items: bodyVariants.map((variant) => ({
+        icon: <variant.icon size={24} color="white" />,
+        label: variant.name,
+        onClick: () => {
+          useVariant.setState({ body: variant.id });
+          useVariant.setState({ strummerOffset: variant.strummerOffset });
+          useVariant.setState({ shadowOffset: variant.shadowOffset });
+          useVariant.setState({ isDualNeck: variant.isDualNeck });
+          useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
+          useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
+          updateDynamicCamera(variant.type);
         },
-      ]
-    : []), // If false, add nothing
-  {
-    icon: <InlayIcon /> as ReactNode,
-    label: 'Inlay',
-    items: inlayVariants.map((variant) => ({
-      icon: <variant.icon size={24} color="white" />,
-      label: variant.name,
-      onClick: () => {
-        useVariant.setState({ inlay: variant.id });
-        updateDynamicCamera(variant.type);
-      },
-    })),
-  },
-  {
-    icon: <Joystick size={56} />,
-    label: 'Buttons',
-    items: [
+      })),
+    },
+    {
+      icon: <HeadstockIcon /> as ReactNode,
+      label: 'Headstock',
+      items: headstockVariants.map((variant) => ({
+        icon: <variant.icon size={24} color="white" />,
+        label: variant.name,
+        onClick: () => {
+          useVariant.setState({ headstock: variant.id });
+          updateDynamicCamera(variant.type);
+        },
+      })),
+    },
+    // Conditionally include the Headstock2 menu item based on isDualNeck
+    ...(isDualNeck
+      ? [
+          {
+            icon: <HeadstockIcon2 /> as ReactNode,
+            label: 'Headstock2',
+            items: headstockVariants.map((variant) => ({
+              icon: <variant.icon size={24} color="white" />,
+              label: variant.name,
+              onClick: () => {
+                useVariant.setState({ headstock2: variant.id });
+                updateDynamicCamera('headstock2');
+              },
+            })),
+          },
+        ]
+      : []), // If false, add nothing
+    {
+      icon: <InlayIcon /> as ReactNode,
+      label: 'Inlay',
+      items: inlayVariants.map((variant) => ({
+        icon: <variant.icon size={24} color="white" />,
+        label: variant.name,
+        onClick: () => {
+          useVariant.setState({ inlay: variant.id });
+          updateDynamicCamera(variant.type);
+        },
+      })),
+    },
+    // Conditionally include the Headstock2 menu item based on isDualNeck
+    ...(isDualNeck
+      ? [
+          {
+            icon: <InlayIcon2 /> as ReactNode,
+            label: 'Inlay2',
+            items: inlayVariants.map((variant) => ({
+              icon: <variant.icon size={24} color="white" />,
+              label: variant.name,
+              onClick: () => {
+                useVariant.setState({ inlay2: variant.id });
+                updateDynamicCamera("inlay2");
+              },
+            })),
+          },
+        ]
+      : []), // If false, add nothing
+    {
+      icon: <Joystick size={56} />,
+      label: 'Buttons',
+      items: [
+        {
+          icon: <Star size={24} />,
+          label: 'Star Power Button',
+          isToggle: true,
+          id: 'starPowerButton',
+        },
+      ],
+    },
+    {
+      icon: <Palette size={56} />,
+      label: 'Colors',
+      items: [
+        {
+          icon: <BodyColorIcon />,
+          label: 'Body',
+          isColorPicker: true,
+          swatches: BodyColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Body', color),
+        },
+        {
+          icon: <NeckColorIcon />,
+          label: 'Neck',
+          isColorPicker: true,
+          swatches: colorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Neck', color),
+        },
+        {
+          icon: <FretboardColorIcon />,
+          label: 'Fretboard',
+          isColorPicker: true,
+          swatches: FretboardColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Fretboard', color),
+        },
+        {
+          icon: <NeckBindingColorIcon />,
+          label: 'Neck Binding',
+          isColorPicker: true,
+          swatches: NeckBindingColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Neck Binding', color),
+        },
+        {
+          icon: <InlayColorIcon />,
+          label: 'Inlay',
+          isColorPicker: true,
+          swatches: InlayColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Inlay', color),
+        },
+        {
+          icon: <NeckButtonColorIcon />,
+          label: 'Neck Buttons',
+          isColorPicker: true,
+          swatches: NeckButtonColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Neck Buttons', color),
+        },
+        {
+          icon: <ArcadeButtonsColorIcon />,
+          label: 'Arcade Buttons',
+          isColorPicker: true,
+          swatches: ArcadeButtonColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Arcade Buttons', color),
+        },
+        {
+          icon: <PickGuardColorIcon />,
+          label: 'Pick Guard',
+          isColorPicker: true,
+          swatches: PickGuardColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Pick Guard', color),
+        },
+        {
+          icon: <HardwareColorIcon />,
+          label: 'Hardware',
+          isColorPicker: true,
+          swatches: HardwareColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Hardware', color),
+        },
+        {
+          icon: <StrummerSideColorIcon />,
+          label: 'Strummer Side Panels',
+          isColorPicker: true,
+          swatches: StrummerSideColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Strummer Side Panels', color),
+        },
+      ],
+    },
+  ], [isDualNeck]); // Only recreate the array when isDualNeck changes
+};
+
+// Export a default customiseMenuItems array for backward compatibility
+export const customiseMenuItems = useVariant.getState().isDualNeck
+  ? [
       {
-        icon: <Star size={24} />,
-        label: 'Star Power Button',
-        isToggle: true,
-        id: 'starPowerButton',
-      },
-    ],
-  },
-  {
-    icon: <Palette size={56} />,
-    label: 'Colors',
-    items: [
-      {
-        icon: <BodyColorIcon />,
+        icon: <BodyIcon /> as ReactNode,
         label: 'Body',
-        isColorPicker: true,
-        swatches: BodyColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Body', color),
+        items: bodyVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ body: variant.id });
+            useVariant.setState({ strummerOffset: variant.strummerOffset });
+            useVariant.setState({ shadowOffset: variant.shadowOffset });
+            useVariant.setState({ isDualNeck: variant.isDualNeck });
+            useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
+            useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
+            updateDynamicCamera(variant.type);
+          },
+        })),
       },
       {
-        icon: <NeckColorIcon />,
-        label: 'Neck',
-        isColorPicker: true,
-        swatches: colorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Neck', color),
+        icon: <HeadstockIcon /> as ReactNode,
+        label: 'Headstock',
+        items: headstockVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ headstock: variant.id });
+            updateDynamicCamera(variant.type);
+          },
+        })),
       },
       {
-        icon: <FretboardColorIcon />,
-        label: 'Fretboard',
-        isColorPicker: true,
-        swatches: FretboardColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Fretboard', color),
+        icon: <HeadstockIcon2 /> as ReactNode,
+        label: 'Headstock2',
+        items: headstockVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ headstock2: variant.id });
+            updateDynamicCamera('headstock2');
+          },
+        })),
       },
       {
-        icon: <NeckBindingColorIcon />,
-        label: 'Neck Binding',
-        isColorPicker: true,
-        swatches: NeckBindingColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Neck Binding', color),
-      },
-      {
-        icon: <InlayColorIcon />,
+        icon: <InlayIcon /> as ReactNode,
         label: 'Inlay',
-        isColorPicker: true,
-        swatches: InlayColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Inlay', color),
+        items: inlayVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ inlay: variant.id });
+            updateDynamicCamera(variant.type);
+          },
+        })),
       },
       {
-        icon: <NeckButtonColorIcon />,
-        label: 'Neck Buttons',
-        isColorPicker: true,
-        swatches: NeckButtonColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Neck Buttons', color),
+        icon: <Joystick size={56} />,
+        label: 'Buttons',
+        items: [
+          {
+            icon: <Star size={24} />,
+            label: 'Star Power Button',
+            isToggle: true,
+            id: 'starPowerButton',
+          },
+        ],
       },
       {
-        icon: <ArcadeButtonsColorIcon />,
-        label: 'Arcade Buttons',
-        isColorPicker: true,
-        swatches: ArcadeButtonColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Arcade Buttons', color),
+        icon: <Palette size={56} />,
+        label: 'Colors',
+        items: [
+          {
+            icon: <BodyColorIcon />,
+            label: 'Body',
+            isColorPicker: true,
+            swatches: BodyColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Body', color),
+          },
+          {
+            icon: <NeckColorIcon />,
+            label: 'Neck',
+            isColorPicker: true,
+            swatches: colorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Neck', color),
+          },
+          {
+            icon: <FretboardColorIcon />,
+            label: 'Fretboard',
+            isColorPicker: true,
+            swatches: FretboardColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Fretboard', color),
+          },
+          {
+            icon: <NeckBindingColorIcon />,
+            label: 'Neck Binding',
+            isColorPicker: true,
+            swatches: NeckBindingColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Neck Binding', color),
+          },
+          {
+            icon: <InlayColorIcon />,
+            label: 'Inlay',
+            isColorPicker: true,
+            swatches: InlayColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Inlay', color),
+          },
+          {
+            icon: <NeckButtonColorIcon />,
+            label: 'Neck Buttons',
+            isColorPicker: true,
+            swatches: NeckButtonColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Neck Buttons', color),
+          },
+          {
+            icon: <ArcadeButtonsColorIcon />,
+            label: 'Arcade Buttons',
+            isColorPicker: true,
+            swatches: ArcadeButtonColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Arcade Buttons', color),
+          },
+          {
+            icon: <PickGuardColorIcon />,
+            label: 'Pick Guard',
+            isColorPicker: true,
+            swatches: PickGuardColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Pick Guard', color),
+          },
+          {
+            icon: <HardwareColorIcon />,
+            label: 'Hardware',
+            isColorPicker: true,
+            swatches: HardwareColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Hardware', color),
+          },
+          {
+            icon: <StrummerSideColorIcon />,
+            label: 'Strummer Side Panels',
+            isColorPicker: true,
+            swatches: StrummerSideColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Strummer Side Panels', color),
+          },
+        ],
+      },
+    ]
+  : [
+      {
+        icon: <BodyIcon /> as ReactNode,
+        label: 'Body',
+        items: bodyVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ body: variant.id });
+            useVariant.setState({ strummerOffset: variant.strummerOffset });
+            useVariant.setState({ shadowOffset: variant.shadowOffset });
+            useVariant.setState({ isDualNeck: variant.isDualNeck });
+            useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
+            useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
+            updateDynamicCamera(variant.type);
+          },
+        })),
       },
       {
-        icon: <PickGuardColorIcon />,
-        label: 'Pick Guard',
-        isColorPicker: true,
-        swatches: PickGuardColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Pick Guard', color),
+        icon: <HeadstockIcon /> as ReactNode,
+        label: 'Headstock',
+        items: headstockVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ headstock: variant.id });
+            updateDynamicCamera(variant.type);
+          },
+        })),
       },
       {
-        icon: <HardwareColorIcon />,
-        label: 'Hardware',
-        isColorPicker: true,
-        swatches: HardwareColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Hardware', color),
+        icon: <InlayIcon /> as ReactNode,
+        label: 'Inlay',
+        items: inlayVariants.map((variant) => ({
+          icon: <variant.icon size={24} color="white" />,
+          label: variant.name,
+          onClick: () => {
+            useVariant.setState({ inlay: variant.id });
+            updateDynamicCamera(variant.type);
+          },
+        })),
       },
       {
-        icon: <StrummerSideColorIcon />,
-        label: 'Strummer Side Panels',
-        isColorPicker: true,
-        swatches: StrummerSideColorSwatches,
-        onColorSelect: (color: string) => handleColorSelect('Strummer Side Panels', color),
+        icon: <Joystick size={56} />,
+        label: 'Buttons',
+        items: [
+          {
+            icon: <Star size={24} />,
+            label: 'Star Power Button',
+            isToggle: true,
+            id: 'starPowerButton',
+          },
+        ],
       },
-    ],
-  },
-];
+      {
+        icon: <Palette size={56} />,
+        label: 'Colors',
+        items: [
+          {
+            icon: <BodyColorIcon />,
+            label: 'Body',
+            isColorPicker: true,
+            swatches: BodyColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Body', color),
+          },
+          {
+            icon: <NeckColorIcon />,
+            label: 'Neck',
+            isColorPicker: true,
+            swatches: colorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Neck', color),
+          },
+          {
+            icon: <FretboardColorIcon />,
+            label: 'Fretboard',
+            isColorPicker: true,
+            swatches: FretboardColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Fretboard', color),
+          },
+          {
+            icon: <NeckBindingColorIcon />,
+            label: 'Neck Binding',
+            isColorPicker: true,
+            swatches: NeckBindingColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Neck Binding', color),
+          },
+          {
+            icon: <InlayColorIcon />,
+            label: 'Inlay',
+            isColorPicker: true,
+            swatches: InlayColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Inlay', color),
+          },
+          {
+            icon: <NeckButtonColorIcon />,
+            label: 'Neck Buttons',
+            isColorPicker: true,
+            swatches: NeckButtonColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Neck Buttons', color),
+          },
+          {
+            icon: <ArcadeButtonsColorIcon />,
+            label: 'Arcade Buttons',
+            isColorPicker: true,
+            swatches: ArcadeButtonColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Arcade Buttons', color),
+          },
+          {
+            icon: <PickGuardColorIcon />,
+            label: 'Pick Guard',
+            isColorPicker: true,
+            swatches: PickGuardColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Pick Guard', color),
+          },
+          {
+            icon: <HardwareColorIcon />,
+            label: 'Hardware',
+            isColorPicker: true,
+            swatches: HardwareColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Hardware', color),
+          },
+          {
+            icon: <StrummerSideColorIcon />,
+            label: 'Strummer Side Panels',
+            isColorPicker: true,
+            swatches: StrummerSideColorSwatches,
+            onColorSelect: (color: string) => handleColorSelect('Strummer Side Panels', color),
+          },
+        ],
+      },
+    ];
