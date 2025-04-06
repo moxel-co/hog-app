@@ -4,6 +4,7 @@ import { Text, OrbitControls, useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import useVariant from './stores/useVariant.jsx'
 import MeshFresnelMaterial from './components/MeshFresnelMaterial.jsx'
+import createTranslucentMaterial from './components/TranslucentMaterial.jsx'
 
 const asset_name = 'prpGuitar'
 
@@ -49,7 +50,7 @@ export function Guitar(props) {
   const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
   const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0})
   const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor, roughness: 0.4, metalness: 0})
-
+  const m_translucentPlastic = createTranslucentMaterial(0xffffff, 0xccccff)
 
   // Create a mapping between material names and material objects
   const materialMapping = {
@@ -71,6 +72,7 @@ export function Guitar(props) {
     '__fretBoardBindingPlastic__': m_fretboardBindingPlastic,
     '__fretBoardWood__': m_fretBoardWood,
     '__pickGuardPlastic__': m_pickGuardPlastic,
+    '__translucentPlastic__': m_translucentPlastic,
   }
 
   // Assign materials to geometries based on their names
@@ -84,6 +86,12 @@ export function Guitar(props) {
 
   return (
     <group {...props} dispose={null}>
+      {/* Add point light for subsurface scattering effect */}
+      <pointLight 
+        position={[0, 2.5, 0]} 
+        intensity={1000} 
+        color="blue" 
+      />
       <group visible={body === "body_arrow"}>
         <mesh
           castShadow
