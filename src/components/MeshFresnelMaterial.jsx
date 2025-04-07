@@ -85,12 +85,5 @@ export default function MeshFresnelMaterial(
 
     const MeshFresnelMaterial = shaderMaterial( uniforms, vertexShader, fragmentShader )
 
-    extend({ MeshFresnelMaterial })
-
-    return (
-        <meshFresnelMaterial
-            key={ MeshFresnelMaterial.key }
-            transparent={ true }
-        />
-    )
+    return MeshFresnelMaterial;
 }
