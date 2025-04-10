@@ -42,7 +42,7 @@ export function Guitar(props) {
   t_normal.wrapT = THREE.RepeatWrapping;
 
   // Define material library
-  const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
+  const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3, normalMap: t_normal, normalScale: new THREE.Vector2(0.2, 0.2)})
   const m_redPlastic = new THREE.MeshStandardMaterial({color: "#ce1c1c", roughness: 0.2})
   const m_greenPlastic = new THREE.MeshStandardMaterial({color: "#56aa0e", roughness: 0.3})
   const m_yellowPlastic = new THREE.MeshStandardMaterial({color: "#ebab09", roughness: 0.3})
