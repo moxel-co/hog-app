@@ -6,6 +6,8 @@ import useVariant from './stores/useVariant.jsx'
 import meshFresnelMaterial from './components/MeshFresnelMaterial.jsx'
 // import createTranslucentMaterial from './components/TranslucentMaterial.jsx'
 import SSSMaterial from './components/SubSurfaceMaterial.jsx'
+import createFresnelMaterial from './components/TranslucentMaterial.jsx'
+import { useControls } from 'leva'
 
 const asset_name = 'prpGuitar'
 
@@ -32,8 +34,15 @@ export function Guitar(props) {
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
   const dualNeckOffsetRot = useVariant((state) => state.dualNeckOffsetRot);
 
+  // Define textures
+  const t_normal = useTexture(`./assets/${asset_name}/normal.jpg`);
+  t_normal.flipY = false;
+  t_normal.repeat = new THREE.Vector2(2, 2);
+  t_normal.wrapS = THREE.RepeatWrapping;
+  t_normal.wrapT = THREE.RepeatWrapping;
+
   // Define material library
-  const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3})
+  const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
   const m_redPlastic = new THREE.MeshStandardMaterial({color: "#ce1c1c", roughness: 0.2})
   const m_greenPlastic = new THREE.MeshStandardMaterial({color: "#56aa0e", roughness: 0.3})
   const m_yellowPlastic = new THREE.MeshStandardMaterial({color: "#ebab09", roughness: 0.3})
@@ -49,9 +58,22 @@ export function Guitar(props) {
   const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor, roughness: 0.4, metalness: 0})
   const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor, roughness: 0.4, metalness: 0})
   const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
-  const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0})
-  const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor, roughness: 0.4, metalness: 0})
-  const m_translucentPlastic = SSSMaterial()
+  const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
+  const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor, roughness: 0.4, metalness: 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
+  const m_translucentPlastic = createFresnelMaterial({
+    color: '#3955ff',
+    emissiveColor: '#453232',
+    opacity: 0.5,
+    power: 2,
+    bias: 0.7,
+    scale: 2
+  });
+
+  // Animate strummer emission
+  const strummerRef = useRef();
+  useFrame((state, delta) => {
+    strummerRef.current.material.uniforms.scale.value = ((Math.sin(state.clock.elapsedTime) / 4) + 0.8) * 2;
+  });
 
   // Create a mapping between material names and material objects
   const materialMapping = {
@@ -224,6 +246,7 @@ export function Guitar(props) {
           material={nodes.body_aviator_strummer_insertB__strummerPlastic__geo.material}
         />
         <mesh
+          ref={strummerRef}
           castShadow
           receiveShadow
           geometry={nodes.body_aviator_strummer_main__translucentPlastic__geo.geometry}

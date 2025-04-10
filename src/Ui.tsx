@@ -203,12 +203,12 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
     };
   }, [isOpen, toggleOpen]);
 
-  const handleColorSelect = (colorType: string, color: string) => {
-    if (item.onColorSelect) {
-      item.onColorSelect(color);
-    }
-    setActiveColorPicker(null);
-  };
+  // const handleColorSelect = (colorType: string, color: string) => {
+  //   if (item.onColorSelect) {
+  //     item.onColorSelect(color);
+  //   }
+  //   setActiveColorPicker(null);
+  // };
 
   const handleItemClick = (subItem: MenuItem) => {
     if (subItem.isColorPicker) {

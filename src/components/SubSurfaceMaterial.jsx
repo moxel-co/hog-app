@@ -3,29 +3,27 @@ import { SubsurfaceScatteringShader } from 'three/addons/shaders/SubsurfaceScatt
 
 export const SSSMaterial = (
   thicknessDistortion = 0.1,
-  thicknessColor = [0.1, 0.2, 0.8],
+  thicknessColor = [1, 1, 1],
   thicknessAmbient = 0.2,
   thicknessAttenuation = 0.8,
   thicknessPower = 2.0,
-  thicknessScale = 16.0
+  thicknessScale = 1.0
 ) => {
   const loader = new THREE.TextureLoader();
-  const imgTexture = loader.load('./assets/common/white.png');
+  const imgTexture = loader.load('./assets/common/white.jpg');
   imgTexture.colorSpace = THREE.SRGBColorSpace;
 
-  const thicknessTexture = loader.load('./assets/common/white.png');
+  const thicknessTexture = loader.load('./assets/common/white.jpg');
 
   imgTexture.wrapS = imgTexture.wrapT = THREE.RepeatWrapping;
 
   const shader = SubsurfaceScatteringShader;
   const uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 
-  console.log(thicknessAmbient)
-
   uniforms['map'].value = imgTexture;
 
   uniforms['diffuse'].value = new THREE.Vector3(1.0, 1.0, 1.0);
-  uniforms['shininess'].value = 500;
+  uniforms['shininess'].value = 100;
 
   uniforms['thicknessMap'].value = thicknessTexture;
   uniforms['thicknessColor'].value = new THREE.Vector3(thicknessColor);

@@ -103,6 +103,7 @@ const handleColorSelect = (colorType: string, color: string) => {
       break;
     case 'Neck Buttons':
       useVariant.setState({ neckButtonColor: color });
+      console.log("Neck button")
       break;
     case 'Arcade Buttons':
       useVariant.setState({ arcadeButtonColor: color });
@@ -454,7 +455,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             label: 'Neck',
             isColorPicker: true,
             swatches: colorSwatches,
-            onColorSelect: (color: string) => handleColorSelect('Neck', color),
+            onColorSelect: (color: string) => {handleColorSelect('Neck', color)},
           },
           {
             icon: <FretboardColorIcon />,
