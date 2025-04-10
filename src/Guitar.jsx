@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { Text, OrbitControls, useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import useVariant from './stores/useVariant.jsx'
-import MeshFresnelMaterial from './components/MeshFresnelMaterial.jsx'
+import meshFresnelMaterial from './components/MeshFresnelMaterial.jsx'
 // import createTranslucentMaterial from './components/TranslucentMaterial.jsx'
 import SSSMaterial from './components/SubSurfaceMaterial.jsx'
 
@@ -88,22 +88,22 @@ export function Guitar(props) {
   return (
     <group {...props} dispose={null}>
       {/* Add point light for subsurface scattering effect */}
-      <pointLight 
+      {/* <pointLight 
         position={[0, 2.5, 0]} 
-        intensity={0.05} 
+        intensity={1} 
         color="#00a6ed" 
       />
       <pointLight 
         position={[0, 2.8, 0]} 
-        intensity={0.05} 
+        intensity={1} 
         color="#00a6ed" 
       />
       <pointLight 
         position={[0, 2.2, 0]} 
-        intensity={0.05} 
+        intensity={1} 
         color="#00a6ed" 
       />
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.1} /> */}
       <group visible={body === "body_arrow"}>
         <mesh
           castShadow
@@ -1995,6 +1995,13 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
+          geometry={nodes.inlay_cloud__inlayPlastic__geo.geometry}
+          material={nodes.inlay_cloud__inlayPlastic__geo.material}
+          visible={inlay2 === 'inlay_cloud'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.inlay_deathbat__inlayPlastic__geo.geometry}
           material={nodes.inlay_deathbat__inlayPlastic__geo.material}
           visible={inlay2 === 'inlay_deathbat'}
@@ -2055,6 +2062,32 @@ export function Guitar(props) {
           material={nodes.inlay_tree__inlayPlastic__geo.material}
           visible={inlay2 === 'inlay_tree'}
         />
+        <group position={[0, strummerOffset, 0]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.strummer_base__blackPlastic__geo.geometry}
+            material={nodes.strummer_base__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.strummer_insertA__strummerPlastic__geo.geometry}
+            material={nodes.strummer_insertA__strummerPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.strummer_insertB__strummerPlastic__geo.geometry}
+            material={nodes.strummer_insertB__strummerPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.strummer_main__translucentPlastic__geo.geometry}
+            material={nodes.strummer_main__translucentPlastic__geo.material}
+          />
+        </group>
       </group>
       <group position={[0, strummerOffset, 0]}>
         <mesh

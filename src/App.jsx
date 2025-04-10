@@ -32,12 +32,10 @@ export default function App() {
         />}
       </EffectComposer>
 
-      {/* Set the initial position of the camera */}
-      {/* <PerspectiveCamera makeDefault position={[0, 5, 10]} /> */}
       <DynamicCamera />
       <Environment
         files="./assets/common/latlong/dualSense_1k.hdr"
-        environmentRotation={[0, Math.PI * 20, 0]}
+        environmentRotation={[0, Math.PI , 0]}
       />
       <ContactShadows position={[0, shadowOffset, 0]} opacity={0.3} />
       <Guitar />
