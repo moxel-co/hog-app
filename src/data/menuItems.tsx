@@ -17,7 +17,7 @@ import {
 import { MenuItem } from '../types';
 import { 
   BodyColorSwatches,
-  colorSwatches,
+  NeckColorSwatches,
   presetColorSwatches,
   PickGuardColorSwatches,
   InlayColorSwatches,
@@ -33,7 +33,7 @@ import { guitarVariants } from './guitar';
 import { ReactNode, useMemo } from 'react';
 
 // Get current selected variants
-const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body');
+const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body' || variant.type === 'bodyDual');
 const headstockVariants = guitarVariants.filter((variant) => variant.type === 'headstock');
 const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay');
 
@@ -303,7 +303,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           icon: <NeckColorIcon />,
           label: 'Neck',
           isColorPicker: true,
-          swatches: colorSwatches,
+          swatches: NeckColorSwatches,
           onColorSelect: (color: string) => handleColorSelect('Neck', color),
         },
         {
@@ -454,7 +454,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             icon: <NeckColorIcon />,
             label: 'Neck',
             isColorPicker: true,
-            swatches: colorSwatches,
+            swatches: NeckColorSwatches,
             onColorSelect: (color: string) => {handleColorSelect('Neck', color)},
           },
           {
@@ -588,7 +588,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             icon: <NeckColorIcon />,
             label: 'Neck',
             isColorPicker: true,
-            swatches: colorSwatches,
+            swatches: NeckColorSwatches,
             onColorSelect: (color: string) => handleColorSelect('Neck', color),
           },
           {

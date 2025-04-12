@@ -449,6 +449,18 @@ export const InlayRazorIcon = ({ size, color = 'currentColor' }: IconProps) => (
   />
 );
 
+export const InlaySawbladeIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-sawblade.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-sawblade.png") center/contain no-repeat`,
+    }}
+  />
+);
+
 export const InlaySharkfinIcon = ({ size, color = 'currentColor' }: IconProps) => (
   <div
     style={{

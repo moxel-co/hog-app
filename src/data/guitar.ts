@@ -35,6 +35,7 @@ import {
     InlayClassicdotIcon,
     InlayCloudIcon,
     InlayOffsetdotIcon,
+    InlaySawbladeIcon,
     InlaySnakeIcon,
     InlayDeathbatIcon,
     InlayRazorIcon,
@@ -59,7 +60,7 @@ export const guitarVariants: GuitarVariant[] = [
     {
         id: 'body_aviator',
         name: 'Aviator',
-        type: 'body',
+        type: 'bodyDual',
         strummerOffset: 0.09,
         shadowOffset: 0,
         isDualNeck: true,
@@ -158,7 +159,7 @@ export const guitarVariants: GuitarVariant[] = [
     {
         id: 'body_shredhammer',
         name: 'Shred Hammer',
-        type: 'body',
+        type: 'bodyDual',
         strummerOffset: 0.02,
         shadowOffset: 0,
         isDualNeck: true,
@@ -351,6 +352,12 @@ export const guitarVariants: GuitarVariant[] = [
         name: 'Razor',
         type: 'inlay',
         icon: InlayRazorIcon,
+    },
+    {
+        id: 'inlay_sawblade',
+        name: 'Sawblade',
+        type: 'inlay',
+        icon: InlaySawbladeIcon,
     },
     {
         id: 'inlay_sharkfin',

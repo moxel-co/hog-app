@@ -9,6 +9,7 @@ export function DynamicCamera() {
   const cameraTarget = useVariant((state) => state.cameraTarget);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const isDualNeck = useVariant((state) => state.isDualNeck);
 
   const cameraRef = useRef();
   const controlsRef = useRef();
@@ -31,6 +32,10 @@ export function DynamicCamera() {
       position: [0, 2.4, 6],
       target: [0, 2.4, 0],
     },
+    bodyDual: {
+      position: [0.5, 2.4, 6],
+      target: [0.5, 2.4, 0],
+    },
     inlay: {
       position: [0, 4.2, 3],
       target: [0, 4.2, 0],
@@ -44,6 +49,7 @@ export function DynamicCamera() {
       target: [0, 1, 0],
     },
   };
+
 
   // Animate camera position and target only when targetType changes and isDynamicViewEnabled is true
   useEffect(() => {

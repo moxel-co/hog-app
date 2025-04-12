@@ -29,10 +29,22 @@ export function Guitar(props) {
   const fretBoardBindingColor = useVariant((state) => state.fretBoardBindingColor);
   const pickGuardColor = useVariant((state) => state.pickGuardColor);
   const hardwareColor = useVariant((state) => state.hardwareColor);
+  const strummerSideColor = useVariant((state) => state.strummerSideColor);
   const strummerOffset = useVariant((state) => state.strummerOffset);
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
   const dualNeckOffsetRot = useVariant((state) => state.dualNeckOffsetRot);
+
+  // Dynamic rivet color
+  const color = new THREE.Color(fretBoardBindingColor);
+  const hsl = { h: 0, s: 0, l: 0 };
+  let rivetColor = 'white';
+  color.getHSL(hsl); // Get HSL values
+  if (hsl.l > 0.4) {
+    rivetColor = 'black';
+  } else {
+    rivetColor = 'white';
+  }
 
   // Define textures
   const t_normal = useTexture(`./assets/${asset_name}/normal.jpg`);
@@ -43,6 +55,7 @@ export function Guitar(props) {
 
   // Define material library
   const m_blackPlastic = new THREE.MeshStandardMaterial({color: "black", roughness: 0.3, normalMap: t_normal, normalScale: new THREE.Vector2(0.2, 0.2)})
+  const m_rivetsPlastic = new THREE.MeshStandardMaterial({color: rivetColor, roughness: 0.3})
   const m_redPlastic = new THREE.MeshStandardMaterial({color: "#ce1c1c", roughness: 0.2})
   const m_greenPlastic = new THREE.MeshStandardMaterial({color: "#56aa0e", roughness: 0.3})
   const m_yellowPlastic = new THREE.MeshStandardMaterial({color: "#ebab09", roughness: 0.3})
@@ -53,13 +66,14 @@ export function Guitar(props) {
   const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor, roughness: 0.2, metalness: 1})
   const m_chromeMetal = new THREE.MeshStandardMaterial({color: "white", roughness: 0.1, metalness: 1})
   const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor, roughness: 0.4, metalness: 0})
-  const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor, roughness: 0.4, metalness: 0})
+  const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor, roughness: 0.2, metalness: 0})
   const m_neckButtonPlastic = new THREE.MeshStandardMaterial({color: neckButtonColor, roughness: 0.4, metalness: 0})
   const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor, roughness: 0.4, metalness: 0})
   const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor, roughness: 0.4, metalness: 0})
   const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
   const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
   const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor, roughness: 0.4, metalness: 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
+  const m_strummerPlastic = new THREE.MeshStandardMaterial({color: strummerSideColor, roughness: 0.4, metalness: 0})
   const m_translucentPlastic = createFresnelMaterial({
     color: '#3955ff',
     emissiveColor: '#453232',
@@ -96,6 +110,8 @@ export function Guitar(props) {
     '__fretBoardWood__': m_fretBoardWood,
     '__pickGuardPlastic__': m_pickGuardPlastic,
     '__translucentPlastic__': m_translucentPlastic,
+    '__strummerPlastic__': m_strummerPlastic,
+    '_riviets__blackPlastic__': m_rivetsPlastic,
   }
 
   // Assign materials to geometries based on their names
@@ -109,23 +125,6 @@ export function Guitar(props) {
 
   return (
     <group {...props} dispose={null}>
-      {/* Add point light for subsurface scattering effect */}
-      {/* <pointLight 
-        position={[0, 2.5, 0]} 
-        intensity={1} 
-        color="#00a6ed" 
-      />
-      <pointLight 
-        position={[0, 2.8, 0]} 
-        intensity={1} 
-        color="#00a6ed" 
-      />
-      <pointLight 
-        position={[0, 2.2, 0]} 
-        intensity={1} 
-        color="#00a6ed" 
-      />
-      <ambientLight intensity={0.1} /> */}
       <group visible={body === "body_arrow"}>
         <mesh
           castShadow
@@ -1392,6 +1391,13 @@ export function Guitar(props) {
       <mesh
         castShadow
         receiveShadow
+        geometry={nodes.inlay_sawblade__inlayPlastic__geo.geometry}
+        material={nodes.inlay_sawblade__inlayPlastic__geo.material}
+        visible={inlay === 'inlay_sawblade'}
+      />
+      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.inlay_sharkfin__inlayPlastic__geo.geometry}
         material={nodes.inlay_sharkfin__inlayPlastic__geo.material}
         visible={inlay === 'inlay_sharkfin'}
@@ -2056,6 +2062,13 @@ export function Guitar(props) {
           geometry={nodes.inlay_razor__inlayPlastic__geo.geometry}
           material={nodes.inlay_razor__inlayPlastic__geo.material}
           visible={inlay2 === 'inlay_razor'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_sawblade__inlayPlastic__geo.geometry}
+          material={nodes.inlay_sawblade__inlayPlastic__geo.material}
+          visible={inlay2 === 'inlay_sawblade'}
         />
         <mesh
           castShadow
