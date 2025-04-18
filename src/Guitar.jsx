@@ -729,8 +729,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_shredhammer_detail__blackMattePlastic__geo.geometry}
-          material={nodes.body_shredhammer_detail__blackMattePlastic__geo.material}
+          geometry={nodes.body_shredhammer_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_shredhammer_pickGuard__pickGuardPlastic__geo.material}
         />
         <mesh
           castShadow

@@ -29,8 +29,10 @@ export default create((set, get) => ({
     isRotationEnabled: true,
     isDynamicViewEnabled: true,
     isPostEffectsEnabled: false,
+    isShowcaseViewEnabled: false,
 
     // Camera state
+    showcaseCam: true,
     cameraPosition: [0, 5, 10],
     targetType: 'default',
     targetCameraPosition: [0, 5, 10],

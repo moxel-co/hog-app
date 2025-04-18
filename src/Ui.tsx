@@ -1,10 +1,56 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, Rotate3d, Hammer, Home, Palette, ShoppingCart, PackagePlus, Sparkles, SwitchCamera } from 'lucide-react';
+import { Settings, Rotate3d, Hammer, Home, ShoppingCart, PackagePlus, Sparkles, SwitchCamera, Camera } from 'lucide-react';
 import { useCustomiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
 import AddToCartButton from './components/AddToCart.tsx';
+
+// Shared color selection handler
+const handleColorSelect = (colorType: string, color: string) => {
+  switch (colorType) {
+    case 'Body':
+      useVariant.setState({ bodyColor: color });
+      useVariant.setState({ targetType: 'body' });
+      break;
+    case 'Neck':
+      useVariant.setState({ neckColor: color });
+      useVariant.setState({ targetType: 'neck' });
+      break;
+    case 'Fretboard':
+      useVariant.setState({ fretBoardColor: color });
+      useVariant.setState({ targetType: 'fretboard' });
+      break;
+    case 'Neck Binding':
+      useVariant.setState({ fretBoardBindingColor: color });
+      useVariant.setState({ targetType: 'neck' });
+      break;
+    case 'Inlay':
+      useVariant.setState({ inlayColor: color });
+      useVariant.setState({ targetType: 'inlay' });
+      break;
+    case 'Neck Buttons':
+      useVariant.setState({ neckButtonColor: color });
+      useVariant.setState({ targetType: 'neckButtons' });
+      break;
+    case 'Arcade Buttons':
+      useVariant.setState({ arcadeButtonColor: color });
+      useVariant.setState({ targetType: 'body' });
+      break;
+    case 'Pick Guard':
+      useVariant.setState({ pickGuardColor: color });
+      useVariant.setState({ targetType: 'body' });
+      break;
+    case 'Hardware':
+      useVariant.setState({ hardwareColor: color });
+      useVariant.setState({ targetType: 'default' });
+      break;
+    case 'Strummer Side Panels':
+      useVariant.setState({ strummerSideColor: color });
+      useVariant.setState({ targetType: 'body' });
+      break;
+  }
+};
 
 function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActiveSubMenuId }: { 
   item: MenuItem;
@@ -18,7 +64,9 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
   const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
+
 
   const isOpen = activeSubMenuId === item.label;
 
@@ -42,10 +90,8 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
     };
   }, []);
 
-  const handleColorSelect = (colorType: string, color: string) => {
-    if (item.onColorSelect) {
-      item.onColorSelect(color);
-    }
+  const handleColorPickerSelect = (colorType: string, color: string) => {
+    handleColorSelect(colorType, color);
     setActiveColorPicker(null);
   };
 
@@ -65,6 +111,9 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
         case 'dynamicView':
           useVariant.setState({ isDynamicViewEnabled: !isDynamicViewEnabled });
           break;
+          case 'showcaseView':
+            useVariant.setState({ isShowcaseViewEnabled: !isShowcaseViewEnabled });
+            break;
         case 'postEffects':
           useVariant.setState({ isPostEffectsEnabled: !isPostEffectsEnabled });
           break;
@@ -92,6 +141,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
       case 'starPowerButton': return starPowerButton;
       case 'rotation': return isRotationEnabled;
       case 'dynamicView': return isDynamicViewEnabled;
+      case 'showcaseView': return isShowcaseViewEnabled;
       case 'postEffects': return isPostEffectsEnabled;
       default: return subItem.active || false;
     }
@@ -155,7 +205,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <ColorSwatches 
                       swatches={subItem.swatches!} 
-                      onSelect={handleColorSelect}
+                      onSelect={handleColorPickerSelect}
                       isDualColor={subItem.isDualColor}
                       onClose={() => setActiveColorPicker(null)}
                       colorType={subItem.label}
@@ -185,6 +235,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
+  const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
   const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
 
   useEffect(() => {
@@ -203,12 +254,10 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
     };
   }, [isOpen, toggleOpen]);
 
-  // const handleColorSelect = (colorType: string, color: string) => {
-  //   if (item.onColorSelect) {
-  //     item.onColorSelect(color);
-  //   }
-  //   setActiveColorPicker(null);
-  // };
+  const handleColorPickerSelect = (colorType: string, color: string) => {
+    handleColorSelect(colorType, color);
+    setActiveColorPicker(null);
+  };
 
   const handleItemClick = (subItem: MenuItem) => {
     if (subItem.isColorPicker) {
@@ -226,6 +275,9 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
         case 'dynamicView':
           useVariant.setState({ isDynamicViewEnabled: !isDynamicViewEnabled });
           break;
+        case 'showcaseView':
+            useVariant.setState({ isShowcaseViewEnabled: !isShowcaseViewEnabled });
+            break;
         case 'postEffects':
           useVariant.setState({ isPostEffectsEnabled: !isPostEffectsEnabled });
           break;
@@ -244,6 +296,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
       case 'starPowerButton': return starPowerButton;
       case 'rotation': return isRotationEnabled;
       case 'dynamicView': return isDynamicViewEnabled;
+      case 'showcaseView': return isShowcaseViewEnabled;
       case 'postEffects': return isPostEffectsEnabled;
       default: return subItem.active || false;
     }
@@ -316,7 +369,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <ColorSwatches 
                       swatches={subItem.swatches!} 
-                      onSelect={handleColorSelect}
+                      onSelect={handleColorPickerSelect}
                       isDualColor={subItem.isDualColor}
                       onClose={() => setActiveColorPicker(null)}
                       colorType={subItem.label}
@@ -351,7 +404,6 @@ function Ui() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const [activeSubMenuId, setActiveSubMenuId] = useState<string | null>(null);
   const [anySubMenuOpen, setAnySubMenuOpen] = useState(false);
-  // Use the custom hook to get the reactive customiseMenuItems array
   const customiseMenuItems = useCustomiseMenuItems();
 
   const handleResetView = () => {
@@ -395,6 +447,12 @@ function Ui() {
           id: "dynamicView"
         },
         { 
+          icon: <Camera size={24} />, // Use an appropriate icon for Showcase View
+          label: "Showcase View",
+          isToggle: true,
+          id: "showcaseView"
+        },
+        { 
           icon: <Sparkles size={24} />, 
           label: "Post Effects",
           isToggle: true,
@@ -427,7 +485,6 @@ function Ui() {
             setActiveSubMenuId={setActiveSubMenuId}
           />
         ))}
-        {/* Add the AddToCartButton as a standalone component */}
         <AddToCartButton />
       </div>
     </div>

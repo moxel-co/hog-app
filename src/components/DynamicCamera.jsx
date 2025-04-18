@@ -10,6 +10,7 @@ export function DynamicCamera() {
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
   const isDualNeck = useVariant((state) => state.isDualNeck);
+  const showcaseCam = useVariant((state) => state.showcaseCam);
 
   const cameraRef = useRef();
   const controlsRef = useRef();
@@ -44,6 +45,18 @@ export function DynamicCamera() {
       position: [1, 4.2, 3],
       target: [1, 4.2, 0],
     },
+    fretboard: {
+      position: [0, 5.0, 5],
+      target: [0, 5.0, 0],
+    },
+    neck: {
+      position: [-5, 5.0, 5],
+      target: [0, 5.0, 0],
+    },
+    neckButtons: {
+      position: [0, 5.9, 2],
+      target: [0, 5.9, 0],
+    },
     starPowerButton: {
       position: [0, 0, 0],
       target: [0, 1, 0],
@@ -53,7 +66,7 @@ export function DynamicCamera() {
 
   // Animate camera position and target only when targetType changes and isDynamicViewEnabled is true
   useEffect(() => {
-    if (!isDynamicViewEnabled) return; // Skip animation if dynamic view is disabled
+    if (!isDynamicViewEnabled || showcaseCam) return; // Skip animation if dynamic view is disabled
 
     const preset = cameraPresets[targetType] || cameraPresets.default;
 
@@ -101,6 +114,8 @@ export function DynamicCamera() {
       <OrbitControls
         ref={controlsRef}
         enableDamping
+        minDistance={2.2}
+        maxDistance={25}
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 1.2}
         target={cameraTarget}

@@ -580,3 +580,15 @@ export const PickGuardIcon = ({ size, color = 'currentColor' }: IconProps) => (
     }}
   />
 );
+
+export const StrummerSideIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/strummerSide.png") center/contain no-repeat`,
+      mask: `url("/icons/strummerSide.png") center/contain no-repeat`,
+    }}
+  />
+);

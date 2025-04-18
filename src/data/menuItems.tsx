@@ -13,6 +13,7 @@ import {
   NeckIcon,
   NeckButtonsIcon,
   PickGuardIcon,
+  StrummerSideIcon,
 } from './icons.tsx';
 import { MenuItem } from '../types';
 import { 
@@ -181,7 +182,7 @@ const HardwareColorIcon = () => {
 
 const StrummerSideColorIcon = () => {
   const color = useVariant((state) => state.strummerSideColor);
-  return <ColorPickerIcon color={color} />;
+  return <StrummerSideIcon size={24} color={color} />;
 };
 
 // Create a custom hook that returns the customiseMenuItems array
