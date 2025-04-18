@@ -10,7 +10,7 @@ export function DynamicCamera() {
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
   const isDualNeck = useVariant((state) => state.isDualNeck);
-  const showcaseCam = useVariant((state) => state.showcaseCam);
+  const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
 
   const cameraRef = useRef();
   const controlsRef = useRef();
@@ -66,7 +66,7 @@ export function DynamicCamera() {
 
   // Animate camera position and target only when targetType changes and isDynamicViewEnabled is true
   useEffect(() => {
-    if (!isDynamicViewEnabled || showcaseCam) return; // Skip animation if dynamic view is disabled
+    if (!isDynamicViewEnabled || isShowcaseViewEnabled) return; // Skip animation if dynamic view is disabled
 
     const preset = cameraPresets[targetType] || cameraPresets.default;
 
