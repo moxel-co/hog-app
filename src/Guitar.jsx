@@ -12,7 +12,7 @@ import { useControls } from 'leva'
 const asset_name = 'prpGuitar'
 
 export function Guitar(props) {
-  const { nodes, materials } = useGLTF(`./assets/${asset_name}/model.glb`)
+  const { nodes, materials } = useGLTF(`./assets/${asset_name}/model2.glb`)
 
   const body = useVariant((state) => state.body);
   const headstock = useVariant((state) => state.headstock);
@@ -205,8 +205,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_aviator_details__blackMattePlastic__geo.geometry}
-          material={nodes.body_aviator_details__blackMattePlastic__geo.material}
+          geometry={nodes.body_aviator_details__pickGuardPlastic__geo.geometry}
+          material={nodes.body_aviator_details__pickGuardPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -332,8 +332,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_broadcaster_buttonTrim__greyPlastic__geo.geometry}
-          material={nodes.body_broadcaster_buttonTrim__greyPlastic__geo.material}
+          geometry={nodes.body_broadcaster_buttonTrim__hardwareMetal__geo.geometry}
+          material={nodes.body_broadcaster_buttonTrim__hardwareMetal__geo.material}
         />
         <mesh
           castShadow
@@ -389,8 +389,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_fallenangel_detail__whitePlastic__geo.geometry}
-          material={nodes.body_fallenangel_detail__whitePlastic__geo.material}
+          geometry={nodes.body_fallenangel_detail__pickGuardPlastic__geo.geometry}
+          material={nodes.body_fallenangel_detail__pickGuardPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -585,6 +585,18 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
+          geometry={nodes.body_plankspanker_detailA__fretboardBindingPlastic__geo.geometry}
+          material={m_fretboardBindingPlastic}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_plankspanker_detailB__fretboardBindingPlastic__geo.geometry}
+          material={m_fretboardBindingPlastic}
+        />
+        <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.body_plankspanker_bridge__hardwareMetal__geo.geometry}
           material={nodes.body_plankspanker_bridge__hardwareMetal__geo.material}
         />
@@ -650,6 +662,13 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_reliable_bridge__hardwareMetal__geo.geometry}
           material={nodes.body_reliable_bridge__hardwareMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_reliable_bridge2__hardwareMetal__geo.geometry}
+          material={nodes.body_reliable_bridge2__hardwareMetal__geo.material}
+          visible={!starPowerButton}
         />
         <mesh
           castShadow
@@ -775,6 +794,7 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_summit_buttonSP__buttonPlastic__geo.geometry}
           material={nodes.body_summit_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
         />
         <mesh
           castShadow
@@ -824,15 +844,14 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_detail__basePlastic__geo.geometry}
-          material={nodes.body_thunderbird_detail__basePlastic__geo.material}
-          visible={false}
+          geometry={nodes.body_thunderbird_detail__blackPlastic__geo.geometry}
+          material={nodes.body_thunderbird_detail__blackPlastic__geo.material}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.body_thunderbird_detail__whitePlastic__geo.geometry}
-          material={nodes.body_thunderbird_detail__whitePlastic__geo.material}
+          geometry={nodes.body_thunderbird_detail__pickGuardPlastic__geo.geometry}
+          material={nodes.body_thunderbird_detail__pickGuardPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1309,8 +1328,14 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_viper_detail__whitePlastic__geo.geometry}
-          material={nodes.headstock_viper_detail__whitePlastic__geo.material}
+          geometry={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.geometry}
+          material={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.geometry}
+          material={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1888,8 +1913,14 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_viper_detail__whitePlastic__geo.geometry}
-            material={nodes.headstock_viper_detail__whitePlastic__geo.material}
+            geometry={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.material}
           />
           <mesh
             castShadow
@@ -2124,6 +2155,18 @@ export function Guitar(props) {
             material={nodes.strummer_main__translucentPlastic__geo.material}
           />
         </group>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.logo_plate__chromeMetal__geo.geometry}
+          material={nodes.logo_plate__chromeMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.logo_text___blackPlastic__geo.geometry}
+          material={nodes.logo_text___blackPlastic__geo.material}
+        />
       </group>
       <group position={[0, strummerOffset, 0]}>
         <mesh
@@ -2155,4 +2198,4 @@ export function Guitar(props) {
   )
 }
 
-useGLTF.preload(`./assets/${asset_name}/model.glb`)
+useGLTF.preload(`./assets/${asset_name}/model1.glb`)

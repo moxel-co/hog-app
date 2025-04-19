@@ -26,7 +26,7 @@ export default create((set, get) => ({
     dualNeckOffsetRot: [0, 0, 0],
 
     // Settings state
-    isRotationEnabled: true,
+    isRotationEnabled: false,
     isDynamicViewEnabled: true,
     isPostEffectsEnabled: false,
     isShowcaseViewEnabled: false,

@@ -14,7 +14,6 @@ import { BlendFunction } from "postprocessing";
 import { Guitar } from "./Guitar.jsx";
 import useVariant from "./stores/useVariant.jsx";
 import { DynamicCamera } from "./components/DynamicCamera.jsx";
-import RefBalls from "./components/RefBalls.jsx";
 import ShowcaseCamera from "./components/ShowcaseCamera.jsx";
 
 export default function App() {
@@ -41,10 +40,9 @@ export default function App() {
         files={("./assets/common/latlong/guitar_1k.hdr")}
         environmentRotation={[0, Math.PI * 5 , 0]}
         backgroundRotation={[0, Math.PI * 5 , 0]}
-        // ground={{scale:35}}
+        ground={{scale:35}}
       />
       <ContactShadows position={[0, shadowOffset, 0]} opacity={0.3} />
-      {/* <RefBalls /> */}
       <Guitar />
       {isShowcaseViewEnabled && <ShowcaseCamera />}
     </>
