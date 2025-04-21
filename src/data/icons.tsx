@@ -293,6 +293,18 @@ export const BodyHeadlessIcon = ({ size, color = 'currentColor' }: IconProps) =>
   />
 );
 
+export const BodyHeadlessPickguardIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/body-headlessPickGuard.png") center/contain no-repeat`,
+      mask: `url("/icons/body-headlessPickGuard.png") center/contain no-repeat`,
+    }}
+  />
+);
+
 export const BodyShredHammerIcon = ({ size, color = 'currentColor' }: IconProps) => (
   <div
     style={{
@@ -433,6 +445,18 @@ export const InlayParallelogramIcon = ({ size, color = 'currentColor' }: IconPro
       backgroundColor: color,
       WebkitMask: `url("/icons/inlay-parallelogram.png") center/contain no-repeat`,
       mask: `url("/icons/inlay-parallelogram.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+export const InlayOffsetSwappedIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/inlay-offsetSwapped.png") center/contain no-repeat`,
+      mask: `url("/icons/inlay-offsetSwapped.png") center/contain no-repeat`,
     }}
   />
 );

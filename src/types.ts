@@ -16,6 +16,8 @@ export interface GuitarVariant {
   isDualNeck?: boolean;
   dualNeckOffsetPos: number[];
   dualNeckOffsetRot: number[];
+  dualNeckOffsetPosLeft: number[];
+  dualNeckOffsetRotLeft: number[];
 }
 
 export interface MenuItem {

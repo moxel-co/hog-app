@@ -407,7 +407,7 @@ function Ui() {
   const customiseMenuItems = useCustomiseMenuItems();
 
   const handleResetView = () => {
-    useVariant.setState({ targetType: Math.random() });
+    useVariant.setState({ resetCamera: Math.random() });
   };
 
   const handleSubMenuOpen = (isOpen: boolean) => {

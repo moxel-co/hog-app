@@ -24,6 +24,9 @@ export default create((set, get) => ({
     isDualNeck: false,
     dualNeckOffsetPos: [0, 0, 0],
     dualNeckOffsetRot: [0, 0, 0],
+    dualNeckOffsetPosLeft: [0, 0, 0],
+    dualNeckOffsetRotLeft: [0, 0, 0],
+    isLeftHandOrientation: false,
 
     // Settings state
     isRotationEnabled: false,
@@ -32,6 +35,7 @@ export default create((set, get) => ({
     isShowcaseViewEnabled: false,
 
     // Camera state
+    resetCamera: 0,
     cameraPosition: [0, 5, 10],
     targetType: 'default',
     targetCameraPosition: [0, 5, 10],

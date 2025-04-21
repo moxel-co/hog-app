@@ -11,6 +11,7 @@ export function DynamicCamera() {
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
+  const resetCamera = useVariant((state) => state.resetCamera);
 
   const cameraRef = useRef();
   const controlsRef = useRef();
@@ -106,7 +107,50 @@ export function DynamicCamera() {
         controlsRef.current.update(); // Update controls during animation
       },
     });
-  }, [targetType, isDynamicViewEnabled]); // Add isDynamicViewEnabled as a dependency
+  }, [targetType, isDynamicViewEnabled]);
+
+  useEffect(() => {
+    if (isShowcaseViewEnabled) return; // Skip animation if dynamic view is disabled
+
+    const preset = cameraPresets.default;
+
+    // Animate camera position
+    gsap.to(cameraRef.current.position, {
+      x: preset.position[0],
+      y: preset.position[1],
+      z: preset.position[2],
+      duration: 1, // Animation duration
+      ease: "power1.out", // Easing function
+      onUpdate: () => {
+        useVariant.setState({
+          cameraPosition: [
+            cameraRef.current.position.x,
+            cameraRef.current.position.y,
+            cameraRef.current.position.z,
+          ],
+        });
+      },
+    });
+
+    // Animate camera target
+    gsap.to(controlsRef.current.target, {
+      x: preset.target[0],
+      y: preset.target[1],
+      z: preset.target[2],
+      duration: 1, // Animation duration
+      ease: "power1.out", // Easing function
+      onUpdate: () => {
+        useVariant.setState({
+          cameraTarget: [
+            controlsRef.current.target.x,
+            controlsRef.current.target.y,
+            controlsRef.current.target.z,
+          ],
+        });
+        controlsRef.current.update(); // Update controls during animation
+      },
+    });
+  }, [resetCamera]);
 
   return (
     <>

@@ -210,6 +210,8 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           useVariant.setState({ isDualNeck: variant.isDualNeck });
           useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
           useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
+          useVariant.setState({ dualNeckOffsetPosLeft: variant.dualNeckOffsetPosLeft });
+          useVariant.setState({ dualNeckOffsetRotLeft: variant.dualNeckOffsetRotLeft });
           updateDynamicCamera(variant.type);
         },
         isActive: body === variant.id,

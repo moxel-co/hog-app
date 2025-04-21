@@ -23,6 +23,7 @@ import {
     BodyAviatorIcon,
     BodyFallenAngelIcon,
     BodyHeadlessIcon,
+    BodyHeadlessPickguardIcon,
     BodyPlankSpankerIcon,
     BodyShredHammerIcon,
     BodySummitIcon,
@@ -35,6 +36,7 @@ import {
     InlayClassicdotIcon,
     InlayCloudIcon,
     InlayOffsetdotIcon,
+    InlayOffsetSwappedIcon,
     InlaySawbladeIcon,
     InlaySnakeIcon,
     InlayDeathbatIcon,
@@ -47,6 +49,17 @@ import { GuitarVariant } from '../types';
 export const guitarVariants: GuitarVariant[] = [
     // Body Variants
     {
+        id: 'body_viper',
+        name: 'Angry Viper',
+        type: 'body',
+        strummerOffset: 0,
+        shadowOffset: 0,
+        isDualNeck: false,
+        dualNeckOffsetPos: [0, 0, 0],
+        dualNeckOffsetRot: [0, 0, 0],
+        icon: BodyViperIcon,
+    },
+    {
         id: 'body_arrow',
         name: 'Arrow',
         type: 'body',
@@ -54,7 +67,7 @@ export const guitarVariants: GuitarVariant[] = [
         shadowOffset: 0,
         isDualNeck: false,
         dualNeckOffsetPos: [0, 0, 0],
-        dualNeckOffsetRot: [0, 0, 0],
+        dualNeckOffsetRot: [0, 0, 0],    
         icon: BodyArrowIcon,
     },
     {
@@ -66,6 +79,8 @@ export const guitarVariants: GuitarVariant[] = [
         isDualNeck: true,
         dualNeckOffsetPos: [0.58, -0.02, 0],
         dualNeckOffsetRot: [0, 0, -0.08],
+        dualNeckOffsetPosLeft: [-0.57, 0, 0],
+        dualNeckOffsetRotLeft: [0, 0, 0.08],    
         icon: BodyAviatorIcon,
     },
     {
@@ -102,6 +117,17 @@ export const guitarVariants: GuitarVariant[] = [
         icon: BodyFallenAngelIcon,
     },
     {
+        id: 'body_jazzy',
+        name: 'Funk Trunk',
+        type: 'body',
+        strummerOffset: 0.035,
+        shadowOffset: 0,
+        isDualNeck: false,
+        dualNeckOffsetPos: [0, 0, 0],
+        dualNeckOffsetRot: [0, 0, 0],
+        icon: BodyJazzyIcon,
+    },
+    {
         id: 'body_hammer',
         name: 'Hammer',
         type: 'body',
@@ -124,15 +150,15 @@ export const guitarVariants: GuitarVariant[] = [
         icon: BodyHeadlessIcon,
     },
     {
-        id: 'body_jazzy',
-        name: 'Jazzy',
+        id: 'body_headlessPickguard',
+        name: 'Headless Strumsman (Pickguard)',
         type: 'body',
-        strummerOffset: 0.035,
+        strummerOffset: 0.12,
         shadowOffset: 0,
         isDualNeck: false,
         dualNeckOffsetPos: [0, 0, 0],
         dualNeckOffsetRot: [0, 0, 0],
-        icon: BodyJazzyIcon,
+        icon: BodyHeadlessPickguardIcon,
     },
     {
         id: 'body_plankspanker',
@@ -165,6 +191,8 @@ export const guitarVariants: GuitarVariant[] = [
         isDualNeck: true,
         dualNeckOffsetPos: [1.12, 0, 0],
         dualNeckOffsetRot: [0, 0, 0],
+        dualNeckOffsetPosLeft: [-1.13, 0, 0],
+        dualNeckOffsetRotLeft: [0, 0, 0],
         icon: BodyShredHammerIcon,
     },
     {
@@ -190,17 +218,6 @@ export const guitarVariants: GuitarVariant[] = [
         icon: BodyThunderbirdIcon,
     },
     {
-        id: 'body_viper',
-        name: 'Angry Viper',
-        type: 'body',
-        strummerOffset: 0,
-        shadowOffset: 0,
-        isDualNeck: false,
-        dualNeckOffsetPos: [0, 0, 0],
-        dualNeckOffsetRot: [0, 0, 0],
-        icon: BodyViperIcon,
-    },
-    {
         id: 'body_youngster',
         name: 'Youngster',
         type: 'body',
@@ -213,6 +230,12 @@ export const guitarVariants: GuitarVariant[] = [
     },
 
     // Headstock Variants
+    {
+        id: 'headstock_viper',
+        name: 'Angry Viper',
+        type: 'headstock',
+        icon: HeadStockViperIcon,
+    },
     {
         id: 'headstock_arrow',
         name: 'Arrow',
@@ -291,12 +314,7 @@ export const guitarVariants: GuitarVariant[] = [
         type: 'headstock',
         icon: HeadStockThunderbirdIcon,
     },
-    {
-        id: 'headstock_viper',
-        name: 'The Angry Viper',
-        type: 'headstock',
-        icon: HeadStockViperIcon,
-    },
+
 
     // Inlay Variants
     {
@@ -340,6 +358,12 @@ export const guitarVariants: GuitarVariant[] = [
         name: 'Offset Dot',
         type: 'inlay',
         icon: InlayOffsetdotIcon,
+    },
+    {
+        id: 'inlay_offsetSwapped',
+        name: 'Offset Swapped',
+        type: 'inlay',
+        icon: InlayOffsetSwappedIcon,
     },
     {
         id: 'inlay_parallelogram',

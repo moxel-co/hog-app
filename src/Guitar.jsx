@@ -34,6 +34,9 @@ export function Guitar(props) {
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
   const dualNeckOffsetRot = useVariant((state) => state.dualNeckOffsetRot);
+  const dualNeckOffsetPosLeft = useVariant((state) => state.dualNeckOffsetPosLeft);
+  const dualNeckOffsetRotLeft = useVariant((state) => state.dualNeckOffsetRotLeft);
+  const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
   // Dynamic rivet color
   const color = new THREE.Color(fretBoardBindingColor);
@@ -125,7 +128,7 @@ export function Guitar(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group visible={body === "body_arrow"}>
+      <group visible={body === "body_arrow"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03, 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -176,7 +179,7 @@ export function Guitar(props) {
           material={nodes.body_arrow_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_aviator"}>
+      <group visible={body === "body_aviator"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.02 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -232,27 +235,8 @@ export function Guitar(props) {
           geometry={nodes.body_aviator_strapMount__blackPlastic__geo.geometry}
           material={nodes.body_aviator_strapMount__blackPlastic__geo.material}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.body_aviator_strummer_insertA__strummerPlastic__geo.geometry}
-          material={nodes.body_aviator_strummer_insertA__strummerPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.body_aviator_strummer_insertB__strummerPlastic__geo.geometry}
-          material={nodes.body_aviator_strummer_insertB__strummerPlastic__geo.material}
-        />
-        <mesh
-          ref={strummerRef}
-          castShadow
-          receiveShadow
-          geometry={nodes.body_aviator_strummer_main__translucentPlastic__geo.geometry}
-          material={nodes.body_aviator_strummer_main__translucentPlastic__geo.material}
-        />
       </group>
-      <group visible={body === "body_briefcase"}>
+      <group visible={body === "body_briefcase"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -303,7 +287,7 @@ export function Guitar(props) {
           material={nodes.body_briefcase_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_broadcaster"}>
+      <group visible={body === "body_broadcaster"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -360,7 +344,7 @@ export function Guitar(props) {
           material={nodes.body_broadcaster_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_fallenangel"}>
+      <group visible={body === "body_fallenangel"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -411,7 +395,7 @@ export function Guitar(props) {
           material={nodes.body_fallenangel_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_hammer"}>
+      <group visible={body === "body_hammer"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -467,7 +451,59 @@ export function Guitar(props) {
           material={nodes.body_hammer_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_headless"}>
+      <group visible={body === "body_headless"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_back__bodyPlastic__geo.geometry}
+          material={nodes.body_headless_back__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_buttonA__buttonPlastic__geo.geometry}
+          material={nodes.body_headless_buttonA__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_buttonB__buttonPlastic__geo.geometry}
+          material={nodes.body_headless_buttonB__buttonPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_buttonSP__buttonPlastic__geo.geometry}
+          material={nodes.body_headless_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_front__bodyPlastic__geo.geometry}
+          material={nodes.body_headless_front__bodyPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_mmPivot__blackPlastic__geo.geometry}
+          material={nodes.body_headless_mmPivot__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_pickGuard__pickGuardPlastic__geo.geometry}
+          material={nodes.body_headless_pickGuard__pickGuardPlastic__geo.material}
+          visible={false}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.body_headless_strapMount__blackPlastic__geo.geometry}
+          material={nodes.body_headless_strapMount__blackPlastic__geo.material}
+        />
+      </group>
+      <group visible={body === "body_headlessPickguard"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -518,7 +554,7 @@ export function Guitar(props) {
           material={nodes.body_headless_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_jazzy"}>
+      <group visible={body === "body_jazzy"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -575,7 +611,7 @@ export function Guitar(props) {
           material={nodes.body_jazzy_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_plankspanker"}>
+      <group visible={body === "body_plankspanker"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -650,7 +686,7 @@ export function Guitar(props) {
           material={nodes.body_plankspanker_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_reliable"}>
+      <group visible={body === "body_reliable"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -714,7 +750,7 @@ export function Guitar(props) {
           material={nodes.body_reliable_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_shredhammer"}>
+      <group visible={body === "body_shredhammer"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -770,7 +806,7 @@ export function Guitar(props) {
           material={nodes.body_shredhammer_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_summit"}>
+      <group visible={body === "body_summit"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -815,7 +851,7 @@ export function Guitar(props) {
           material={nodes.body_summit_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_thunderbird"}>
+      <group visible={body === "body_thunderbird"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -872,7 +908,7 @@ export function Guitar(props) {
           material={nodes.body_thunderbird_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_viper"}>
+      <group visible={body === "body_viper"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03, 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -917,7 +953,7 @@ export function Guitar(props) {
           material={nodes.body_viper_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_youngster"}>
+      <group visible={body === "body_youngster"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -1402,6 +1438,13 @@ export function Guitar(props) {
       <mesh
         castShadow
         receiveShadow
+        geometry={nodes.inlay_offsetSwapped__inlayPlastic__geo.geometry}
+        material={nodes.inlay_offsetSwapped__inlayPlastic__geo.material}
+        visible={inlay === 'inlay_offsetSwapped'}
+      />
+      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.inlay_parallelogram__inlayPlastic__geo.geometry}
         material={nodes.inlay_parallelogram__inlayPlastic__geo.material}
         visible={inlay === 'inlay_parallelogram'}
@@ -1558,7 +1601,8 @@ export function Guitar(props) {
           material={nodes.neck_riviets__blackPlastic__geo.material}
         />
       </group>
-      <group name='dualNeck' visible={isDualNeck} position={dualNeckOffsetPos} rotation={dualNeckOffsetRot}>
+      {/* position={isLeftHandOrientation? [-0.02 , 0, 0] : [0, 0, 0]} */}
+      <group name='dualNeck' visible={isDualNeck} position={isLeftHandOrientation? dualNeckOffsetPosLeft : dualNeckOffsetPos} rotation={isLeftHandOrientation? dualNeckOffsetRotLeft : dualNeckOffsetRot}>
         <group visible={headstock2 === "headstock_arrow"}>
           <mesh
             castShadow
@@ -2083,6 +2127,13 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
+          geometry={nodes.inlay_offsetSwapped__inlayPlastic__geo.geometry}
+          material={nodes.inlay_offsetSwapped__inlayPlastic__geo.material}
+          visible={inlay2 === 'inlay_offsetSwapped'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.inlay_parallelogram__inlayPlastic__geo.geometry}
           material={nodes.inlay_parallelogram__inlayPlastic__geo.material}
           visible={inlay2 === 'inlay_parallelogram'}
@@ -2179,7 +2230,7 @@ export function Guitar(props) {
           castShadow
           receiveShadow
           geometry={nodes.strummer_insertA__strummerPlastic__geo.geometry}
-          material={nodes.strummer_insertA__strummerPlastic__geo.material}
+          material={body === "body_thunderbird" ? m_blackPlastic : nodes.strummer_insertA__strummerPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -2192,6 +2243,7 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.strummer_main__translucentPlastic__geo.geometry}
           material={nodes.strummer_main__translucentPlastic__geo.material}
+          ref={strummerRef}
         />
       </group>
     </group>

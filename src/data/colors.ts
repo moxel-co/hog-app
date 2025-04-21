@@ -58,6 +58,9 @@ export const PickGuardColorSwatches: ColorSwatch[] = [
   { primary_color: '#654321', label: 'Dark Brown' },
   { primary_color: '#000000', label: 'Black' },
   { primary_color: '#ededed', label: 'White' },
+  { primary_color: '#ededef', label: 'Silk White' },
+  { primary_color: '#ededeg', label: 'Silk Silver' },
+  { primary_color: '#ededeh', label: 'Silk Gold' },
 ];
 
 export const InlayColorSwatches: ColorSwatch[] = [
