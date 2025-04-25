@@ -1,36 +1,45 @@
 /* Color swatch container */
 .color-swatches {
-  @apply fixed flex items-center justify-center z-[9999];
-  pointer-events: all;
+  @apply fixed flex items-center justify-center pointer-events-auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.color-grid {
+  @apply grid grid-cols-3 gap-2 p-2.5 bg-gray-900/90 rounded-lg;
+  min-width: max-content;
 }
 
 /* Individual color swatch */
 .color-swatch {
-  @apply absolute w-2 h-2 md:w-3.5 md:h-3.5 2xl:w-5 2xl:h-5 4xl:w-8 4xl:h-8
+  @apply w-5 h-5 md:w-6 md:h-6 2xl:w-8 2xl:h-8 4xl:w-10 4xl:h-10
          rounded-full shadow-lg 
          transition-all duration-300 ease-in-out 
          cursor-pointer 
-         hover:scale-125
+         hover:scale-110
          hover:shadow-xl
-         hover:z-[9999]
-         animate-swatch-appear 
-         overflow-visible
-         z-[9998];
+         hover:z-[9999];
+}
+
+.color-swatch.selected {
+  @apply ring-1 ring-white/80;
 }
 
 .color-swatch.closing {
-  animation: swatch-disappear 0.3s ease-in-out forwards;
-  pointer-events: none;
+  @apply opacity-0 scale-0;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Color swatch label */
 .color-swatch-label {
   @apply absolute left-1/2 top-0 
-         -translate-x-1/2 -translate-y-[calc(100%+8px)]
-         px-1.5 py-0.5
-         bg-gray-900/90 
+         -translate-x-1/2 -translate-y-[calc(100%+3px)]
+         px-1 py-0.5
+         bg-gray-900
          text-white 
-         text-[10px] md:text-xs 2xl:text-sm 4xl:text-base
+         text-[6px] md:text-[8px] 2xl:text-[10px] 4xl:text-xs
          font-medium
          rounded-md
          whitespace-nowrap 
@@ -49,48 +58,26 @@
   content: '';
   @apply absolute left-1/2 bottom-0 
          translate-y-full -translate-x-1/2 
-         border-[4px] 2xl:border-[5px] 4xl:border-[7px]
+         border-[2px] 2xl:border-[3px] 4xl:border-[4px]
          border-transparent 
-         border-t-gray-900/90;
+         border-t-gray-900;
 }
 
 /* Mobile optimizations */
 @media (max-width: 640px) {
-  .color-swatches {
-    @apply scale-90 transform-gpu;
+  .color-grid {
+    @apply grid-cols-3 gap-1.5 p-2;
   }
 
   .color-swatch {
-    @apply w-1.5 h-1.5;
+    @apply w-4 h-4;
   }
 
   .color-swatch-label {
-    @apply text-[8px] px-1 py-0.5 -translate-y-[calc(100%+6px)];
+    @apply text-[5px] px-0.5 py-0.5 -translate-y-[calc(100%+2px)];
   }
 
   .color-swatch-label:after {
-    @apply border-[3px];
-  }
-}
-
-@keyframes swatch-appear {
-  0% { 
-    transform: translate(0px, 0px) scale(0);
-    opacity: 0 
-  }
-  100% { 
-    transform: translate(var(--tx), var(--ty)) scale(1);
-    opacity: 1 
-  }
-}
-
-@keyframes swatch-disappear {
-  0% {
-    transform: translate(var(--tx), var(--ty)) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(0, 0) scale(0);
-    opacity: 0;
+    @apply border-[1.5px];
   }
 }

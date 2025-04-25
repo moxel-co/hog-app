@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Palette,
   Joystick,
@@ -198,6 +199,59 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
   // Use useMemo to memoize the array and only recreate it when states change
   return useMemo(() => [
     {
+      icon: <Palette size={56} />,
+      label: "Presets",
+      items: [
+        {
+          icon: <BodyReliableIcon size={24} color="white" />,
+          label: "Aviator",
+          onClick: () => {
+            useVariant.setState({
+              body: 'body_aviator',
+              headstock: 'headstock_aviator',
+              headstock2: 'headstock_aviator',
+              inlay: 'inlay_lightning',
+              inlay2: 'inlay_lightning',
+              bodyColor: '#08149c',
+              neckColor: '#08149c',
+              hardwareColor: '#FFD700',
+              isDualNeck: true
+            });
+          }
+        },
+        {
+          icon: <BodyReliableIcon size={24} color="white" />,
+          label: "Summit",
+          onClick: () => {
+            useVariant.setState({
+              body: 'body_summit',
+              headstock: 'headstock_summit',
+              inlay: 'inlay_trapezoid',
+              bodyColor: '#8c1521',
+              neckColor: '#000000',
+              hardwareColor: '#C0C0C0',
+              isDualNeck: false
+            });
+          }
+        },
+        {
+          icon: <BodyReliableIcon size={24} color="white" />,
+          label: "Thunderbird",
+          onClick: () => {
+            useVariant.setState({
+              body: 'body_thunderbird',
+              headstock: 'headstock_thunderbird',
+              inlay: 'inlay_block',
+              bodyColor: '#000000',
+              neckColor: '#000000',
+              hardwareColor: '#C0C0C0',
+              isDualNeck: false
+            });
+          }
+        }
+      ]
+    },
+    {
       icon: <BodyIcon /> as ReactNode,
       label: 'Body',
       items: bodyVariants.map((variant) => ({
@@ -280,16 +334,10 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         ]
       : []), // If false, add nothing
     {
-      icon: <Joystick size={56} />,
-      label: 'Buttons',
-      items: [
-        {
-          icon: <Star size={24} />,
-          label: 'Star Power Button',
-          isToggle: true,
-          id: 'starPowerButton',
-        },
-      ],
+      icon: <Star size={24} />,
+      label: 'Star Power',
+      isToggle: true,
+      id: 'starPowerButton',
     },
     {
       icon: <Palette size={56} />,
@@ -374,6 +422,59 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
 export const customiseMenuItems = useVariant.getState().isDualNeck
   ? [
       {
+        icon: <Palette size={56} />,
+        label: "Presets",
+        items: [
+          {
+            icon: <BodyReliableIcon size={24} color="white" />,
+            label: "Aviator",
+            onClick: () => {
+              useVariant.setState({
+                body: 'body_aviator',
+                headstock: 'headstock_aviator',
+                headstock2: 'headstock_aviator',
+                inlay: 'inlay_lightning',
+                inlay2: 'inlay_lightning',
+                bodyColor: '#08149c',
+                neckColor: '#08149c',
+                hardwareColor: '#FFD700',
+                isDualNeck: true
+              });
+            }
+          },
+          {
+            icon: <BodyReliableIcon size={24} color="white" />,
+            label: "Summit",
+            onClick: () => {
+              useVariant.setState({
+                body: 'body_summit',
+                headstock: 'headstock_summit',
+                inlay: 'inlay_trapezoid',
+                bodyColor: '#8c1521',
+                neckColor: '#000000',
+                hardwareColor: '#C0C0C0',
+                isDualNeck: false
+              });
+            }
+          },
+          {
+            icon: <BodyReliableIcon size={24} color="white" />,
+            label: "Thunderbird",
+            onClick: () => {
+              useVariant.setState({
+                body: 'body_thunderbird',
+                headstock: 'headstock_thunderbird',
+                inlay: 'inlay_block',
+                bodyColor: '#000000',
+                neckColor: '#000000',
+                hardwareColor: '#C0C0C0',
+                isDualNeck: false
+              });
+            }
+          }
+        ]
+      },
+      {
         icon: <BodyIcon /> as ReactNode,
         label: 'Body',
         items: bodyVariants.map((variant) => ({
@@ -431,16 +532,10 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         })),
       },
       {
-        icon: <Joystick size={56} />,
-        label: 'Buttons',
-        items: [
-          {
-            icon: <Star size={24} />,
-            label: 'Star Power Button',
-            isToggle: true,
-            id: 'starPowerButton',
-          },
-        ],
+        icon: <Star size={24} />,
+        label: 'Star Power Button',
+        isToggle: true,
+        id: 'starPowerButton',
       },
       {
         icon: <Palette size={56} />,
@@ -521,6 +616,59 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
     ]
   : [
       {
+        icon: <Palette size={56} />,
+        label: "Presets",
+        items: [
+          {
+            icon: <BodyReliableIcon size={24} color="white" />,
+            label: "Aviator",
+            onClick: () => {
+              useVariant.setState({
+                body: 'body_aviator',
+                headstock: 'headstock_aviator',
+                headstock2: 'headstock_aviator',
+                inlay: 'inlay_lightning',
+                inlay2: 'inlay_lightning',
+                bodyColor: '#08149c',
+                neckColor: '#08149c',
+                hardwareColor: '#FFD700',
+                isDualNeck: true
+              });
+            }
+          },
+          {
+            icon: <BodyReliableIcon size={24} color="white" />,
+            label: "Summit",
+            onClick: () => {
+              useVariant.setState({
+                body: 'body_summit',
+                headstock: 'headstock_summit',
+                inlay: 'inlay_trapezoid',
+                bodyColor: '#8c1521',
+                neckColor: '#000000',
+                hardwareColor: '#C0C0C0',
+                isDualNeck: false
+              });
+            }
+          },
+          {
+            icon: <BodyReliableIcon size={24} color="white" />,
+            label: "Thunderbird",
+            onClick: () => {
+              useVariant.setState({
+                body: 'body_thunderbird',
+                headstock: 'headstock_thunderbird',
+                inlay: 'inlay_block',
+                bodyColor: '#000000',
+                neckColor: '#000000',
+                hardwareColor: '#C0C0C0',
+                isDualNeck: false
+              });
+            }
+          }
+        ]
+      },
+      {
         icon: <BodyIcon /> as ReactNode,
         label: 'Body',
         items: bodyVariants.map((variant) => ({
@@ -565,16 +713,10 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         })),
       },
       {
-        icon: <Joystick size={56} />,
-        label: 'Buttons',
-        items: [
-          {
-            icon: <Star size={24} />,
-            label: 'Star Power Button',
-            isToggle: true,
-            id: 'starPowerButton',
-          },
-        ],
+        icon: <Star size={24} />,
+        label: 'Star Power Button',
+        isToggle: true,
+        id: 'starPowerButton',
       },
       {
         icon: <Palette size={56} />,

@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, Rotate3d, Hammer, Home, ShoppingCart, PackagePlus, Sparkles, SwitchCamera, Camera } from 'lucide-react';
+import { Settings, Rotate3d, Hammer, Home, Sparkles, SwitchCamera, Camera } from 'lucide-react';
 import { useCustomiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
 import useVariant from './stores/useVariant';
-import AddToCartButton from './components/AddToCart.tsx';
+import AddToCartButton from './components/AddToCart';
 
-// Shared color selection handler
 const handleColorSelect = (colorType: string, color: string) => {
   switch (colorType) {
     case 'Body':
@@ -67,7 +66,6 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
   const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
   const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
 
-
   const isOpen = activeSubMenuId === item.label;
 
   useEffect(() => {
@@ -81,14 +79,17 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setActiveColorPicker(null);
+        setActiveSubMenuId(null);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isOpen, setActiveSubMenuId]);
 
   const handleColorPickerSelect = (colorType: string, color: string) => {
     handleColorSelect(colorType, color);
@@ -103,7 +104,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
       switch (subItem.id) {
         case 'starPowerButton':
           useVariant.setState({ starPowerButton: !starPowerButton });
-          useVariant.setState({ targetType: "body" });
+          useVariant.setState({ targetType: 'body' });
           break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });
@@ -111,9 +112,9 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
         case 'dynamicView':
           useVariant.setState({ isDynamicViewEnabled: !isDynamicViewEnabled });
           break;
-          case 'showcaseView':
-            useVariant.setState({ isShowcaseViewEnabled: !isShowcaseViewEnabled });
-            break;
+        case 'showcaseView':
+          useVariant.setState({ isShowcaseViewEnabled: !isShowcaseViewEnabled });
+          break;
         case 'postEffects':
           useVariant.setState({ isPostEffectsEnabled: !isPostEffectsEnabled });
           break;
@@ -151,7 +152,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
     <div className="relative" ref={menuRef}>
       <button
         onClick={handleToggleOpen}
-        className="menu-button"
+        className={`menu-button ${activeColorPicker ? 'hidden-button' : ''}`}
       >
         <div className="menu-button-icon">
           {item.icon}
@@ -188,10 +189,14 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
                       : subItem.isActive
                         ? 'submenu-button-active'
                         : ''
-                  }`}
+                  } ${isColorPickerActive ? 'hidden-button' : ''}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleItemClick(subItem);
+                    if (subItem.onClick) {
+                      subItem.onClick();
+                    } else {
+                      handleItemClick(subItem);
+                    }
                   }}
                 >
                   <div className="menu-button-icon">
@@ -230,7 +235,6 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
   setActiveSubMenuId: (id: string | null) => void;
 }) {
   const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
@@ -241,18 +245,20 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        if (isOpen) {
+        setActiveColorPicker(null);
+        if (item.label !== "Customise") {
           toggleOpen?.();
         }
-        setActiveColorPicker(null);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, toggleOpen]);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isOpen, toggleOpen, item.label]);
 
   const handleColorPickerSelect = (colorType: string, color: string) => {
     handleColorSelect(colorType, color);
@@ -276,8 +282,8 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
           useVariant.setState({ isDynamicViewEnabled: !isDynamicViewEnabled });
           break;
         case 'showcaseView':
-            useVariant.setState({ isShowcaseViewEnabled: !isShowcaseViewEnabled });
-            break;
+          useVariant.setState({ isShowcaseViewEnabled: !isShowcaseViewEnabled });
+          break;
         case 'postEffects':
           useVariant.setState({ isPostEffectsEnabled: !isPostEffectsEnabled });
           break;
@@ -287,7 +293,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
     }
   };
 
-  const buttonClassName = `menu-button ${item.onClick ? 'cart-button' : ''}`;
+  const buttonClassName = `menu-button ${item.onClick ? 'cart-button' : ''} ${activeColorPicker ? 'hidden-button' : ''}`;
   const shouldUseGrid = item.items && item.items.length > 4;
 
   const getToggleState = (subItem: MenuItem) => {
@@ -308,24 +314,16 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
         onClick={item.onClick || toggleOpen}
         className={buttonClassName}
         data-active={isOpen}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <div className="menu-button-icon">
-          {item.onClick ? (
-            isHovered ? <PackagePlus size={56} /> : <ShoppingCart size={56} />
-          ) : (
-            item.icon
-          )}
+          {item.icon}
         </div>
-        {!item.onClick && (
-          <div className="menu-button-hover">
-            <div className="menu-button-background" />
-            <span className="menu-button-label">
-              {item.label}
-            </span>
-          </div>
-        )}
+        <div className="menu-button-hover">
+          <div className="menu-button-background" />
+          <span className="menu-button-label">
+            {item.label}
+          </span>
+        </div>
       </button>
       
       {item.items && isOpen && (
@@ -352,10 +350,14 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
                       : subItem.isActive
                         ? 'submenu-button-active'
                         : ''
-                  }`}
+                  } ${isColorPickerActive ? 'hidden-button' : ''}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleItemClick(subItem);
+                    if (subItem.onClick) {
+                      subItem.onClick();
+                    } else {
+                      handleItemClick(subItem);
+                    }
                   }}
                 >
                   <div className="menu-button-icon">
@@ -431,6 +433,11 @@ function Ui() {
       subItems: customiseMenuItems,
     },
     {
+      icon: <Home size={56} />,
+      label: "Reset View",
+      onClick: handleResetView
+    },
+    {
       icon: <Settings size={56} />,
       label: "Settings",
       items: [
@@ -447,7 +454,7 @@ function Ui() {
           id: "dynamicView"
         },
         { 
-          icon: <Camera size={24} />, // Use an appropriate icon for Showcase View
+          icon: <Camera size={24} />,
           label: "Showcase View",
           isToggle: true,
           id: "showcaseView"
@@ -457,14 +464,9 @@ function Ui() {
           label: "Post Effects",
           isToggle: true,
           id: "postEffects"
-        },
-        {
-          icon: <Home size={24} />,
-          label: "Reset View",
-          onClick: handleResetView
         }
       ],
-    },
+    }
   ];
 
   return (

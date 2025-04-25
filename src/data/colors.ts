@@ -92,6 +92,7 @@ export const NeckButtonColorSwatches: ColorSwatch[] = [
   { primary_color: '#F8F8FF', label: 'Silk White' },
   { primary_color: '#C0C0C0', label: 'Silk Silver' },
   { primary_color: '#FFD700', label: 'Silk Gold' },
+  { primary_color: 'rainbow', label: 'Rainbow' },
 ];
 
 export const ArcadeButtonColorSwatches: ColorSwatch[] = [

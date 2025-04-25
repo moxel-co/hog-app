@@ -1,19 +1,31 @@
 /* Base menu styles */
 .menu-container {
-  @apply relative z-[1];
+  @apply fixed right-0 top-1/2 -translate-y-1/2 z-[1];
 }
 
 .menu-items-container {
-  @apply fixed right-0 bottom-0 space-y-1.35 p-5.4 md:right-7.2 md:bottom-7.2 md:space-y-2.7 md:p-0 4xl:right-10.8 4xl:bottom-10.8 4xl:space-y-4.5;
+  @apply space-y-1 p-3 mr-3 md:mr-4 md:space-y-2 md:p-0 4xl:mr-6 4xl:space-y-3;
 }
 
 /* Menu button styles */
 .menu-button {
-  @apply relative flex items-center justify-center w-[1.912rem] h-[1.912rem] md:w-[2.734rem] md:h-[2.734rem] 2xl:w-[3.828rem] 2xl:h-[3.828rem] 4xl:w-[6.124rem] 4xl:h-[6.124rem] rounded-full transition-all duration-200 text-white cursor-pointer;
+  @apply relative flex items-center justify-center w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem] rounded-full transition-all duration-200 text-white cursor-pointer;
+}
+
+.menu-button:not(.cart-button) {
+  @apply hover:bg-[#0c3d64] hover:opacity-90;
+}
+
+.menu-button.hidden-button {
+  @apply opacity-0 pointer-events-none;
 }
 
 .menu-button-icon {
   @apply absolute inset-0 flex items-center justify-center scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138];
+}
+
+.cart-button-icon {
+  @apply absolute inset-0 flex items-center justify-center scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138] transition-all duration-200;
 }
 
 .menu-button-hover {
@@ -34,14 +46,10 @@
 
 /* Cart button specific styles */
 .cart-button {
-  @apply transition-colors duration-200;
+  @apply transition-colors duration-200 hover:bg-transparent;
 }
 
-.cart-button .menu-button-icon {
-  @apply transition-all duration-200;
-}
-
-.cart-button:hover .menu-button-icon {
+.cart-button:hover .cart-button-icon {
   @apply text-yellow-400 scale-110;
 }
 
@@ -52,12 +60,12 @@
 
 /* Submenu styles */
 .submenu-container {
-  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1.35 md:mr-1.8 2xl:mr-2.7 4xl:mr-8.1 animate-slide-left z-[50];
+  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 animate-slide-left z-[50];
 }
 
 /* Grid layout for submenu items */
 .submenu-container.grid-layout {
-  @apply grid grid-cols-3 gap-2.7 md:gap-3.6 2xl:gap-4.5 4xl:gap-9;
+  @apply grid grid-cols-3 gap-2 md:gap-3 2xl:gap-4 4xl:gap-6;
   width: max-content;
 }
 
@@ -70,12 +78,12 @@
 }
 
 .submenu-label {
-  @apply invisible absolute -top-4.5 md:-top-6.3 2xl:-top-8.1 4xl:-top-10.8 
+  @apply invisible absolute -top-3 md:-top-4 2xl:-top-6 4xl:-top-8 
          left-1/2 transform -translate-x-1/2 
          whitespace-nowrap text-white 
          text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base 
          font-medium
-         bg-gray-900/90 rounded px-1.35 py-0.9
+         bg-gray-900/90 rounded px-1 py-0.5
          opacity-0 transition-all duration-200 
          select-none pointer-events-none;
 }
@@ -86,20 +94,24 @@
 
 /* Submenu button styles */
 .submenu-button {
-  @apply relative w-[1.369rem] h-[1.369rem] md:w-6.3 md:h-6.3 2xl:w-9 2xl:h-9 4xl:w-[5.249rem] 4xl:h-[5.249rem] 
+  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem]
          rounded-full transition-all duration-200 
          flex items-center justify-center 
          text-white hover:bg-[#0c3d64] hover:opacity-90 
          cursor-pointer z-10;
 }
 
+.submenu-button.hidden-button {
+  @apply opacity-0 pointer-events-none;
+}
+
 .submenu-button .menu-button-icon {
-  @apply scale-[0.821] md:scale-[0.985] 2xl:scale-[1.094] 4xl:scale-[2.274];
+  @apply scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138];
 }
 
 /* Custom submenu styles */
 .custom-submenu {
-  @apply absolute bottom-full right-0 mb-1.35 md:mb-2.7 2xl:mb-3.6 4xl:mb-9.9 space-y-1.35 md:space-y-2.7 2xl:space-y-3.6 4xl:space-y-9.9;
+  @apply absolute right-full top-0 mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 space-y-1 md:space-y-2 2xl:space-y-3 4xl:space-y-8;
 }
 
 /* Toggle button states */
@@ -118,7 +130,7 @@
 
 /* Option item styles */
 .option-item {
-  @apply relative w-[1.369rem] h-[1.369rem] md:w-6.3 md:h-6.3 2xl:w-9 2xl:h-9 4xl:w-[5.249rem] 4xl:h-[5.249rem] 
+  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem]
          rounded-full transition-all duration-200 
          flex items-center justify-center 
          text-white hover:bg-[#0c3d64] hover:opacity-90 
@@ -126,12 +138,12 @@
 }
 
 .option-item-label {
-  @apply invisible absolute -top-4.5 md:-top-6.3 2xl:-top-8.1 4xl:-top-10.8 
+  @apply invisible absolute -top-3 md:-top-4 2xl:-top-6 4xl:-top-8 
          left-1/2 transform -translate-x-1/2 
          whitespace-nowrap text-white 
          text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base 
          font-medium
-         bg-gray-900/90 rounded px-1.35 py-0.9
+         bg-gray-900/90 rounded px-1 py-0.5
          opacity-0 transition-all duration-200 
          select-none pointer-events-none;
 }
@@ -143,10 +155,10 @@
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .submenu-container {
-    @apply max-w-[calc(100vw-2.7rem)] pb-1.35; /* Removed overflow-x-auto */
+    @apply max-w-[calc(100vw-2rem)] pb-1;
   }
   
   .submenu-container.grid-layout {
-    @apply grid-cols-2 gap-1.8;
+    @apply grid-cols-2 gap-1.5;
   }
 }

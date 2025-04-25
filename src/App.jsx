@@ -40,7 +40,6 @@ export default function App() {
         files={("./assets/common/latlong/guitar_1k.hdr")}
         environmentRotation={[0, Math.PI * 5 , 0]}
         backgroundRotation={[0, Math.PI * 5 , 0]}
-        ground={{scale:35}}
       />
       <ContactShadows position={[0, shadowOffset, 0]} opacity={0.3} />
       <Guitar />
