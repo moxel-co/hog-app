@@ -116,7 +116,7 @@
 
 /* Toggle button states */
 .toggle-button-active {
-  @apply text-white;
+  @apply bg-yellow-400 text-white;
 }
 
 .toggle-button-inactive {

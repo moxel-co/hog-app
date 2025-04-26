@@ -104,7 +104,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
       switch (subItem.id) {
         case 'starPowerButton':
           useVariant.setState({ starPowerButton: !starPowerButton });
-          useVariant.setState({ targetType: 'body' });
+          useVariant.setState({ targetType: 'starPowerButton' });
           break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });
@@ -152,7 +152,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
     <div className="relative" ref={menuRef}>
       <button
         onClick={handleToggleOpen}
-        className={`menu-button ${activeColorPicker ? 'hidden-button' : ''}`}
+        className={`menu-button ${activeColorPicker ? 'hidden-button' : ''} ${item.isToggle && getToggleState(item) ? 'toggle-button-active' : ''}`}
       >
         <div className="menu-button-icon">
           {item.icon}
@@ -273,7 +273,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
       switch (subItem.id) {
         case 'starPowerButton':
           useVariant.setState({ starPowerButton: !starPowerButton });
-          useVariant.setState({ targetType: 'body' });
+          useVariant.setState({ targetType: 'starPowerButton' });
           break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });
@@ -293,7 +293,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
     }
   };
 
-  const buttonClassName = `menu-button ${item.onClick ? 'cart-button' : ''} ${activeColorPicker ? 'hidden-button' : ''}`;
+  const buttonClassName = `menu-button ${item.onClick ? 'cart-button' : ''} ${activeColorPicker ? 'hidden-button' : ''} ${item.isToggle && getToggleState(item) ? 'toggle-button-active' : ''}`;
   const shouldUseGrid = item.items && item.items.length > 4;
 
   const getToggleState = (subItem: MenuItem) => {
@@ -311,7 +311,7 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
   return (
     <div className="relative" ref={menuRef}>
       <button
-        onClick={item.onClick || toggleOpen}
+        onClick={item.isToggle ? () => handleItemClick(item) : (item.onClick || toggleOpen)}
         className={buttonClassName}
         data-active={isOpen}
       >
@@ -442,25 +442,25 @@ function Ui() {
       label: "Settings",
       items: [
         { 
-          icon: <Rotate3d size={24} />, 
+          icon: <Rotate3d size={56} />, 
           label: "Auto Rotate", 
           isToggle: true,
           id: "rotation"
         },
         { 
-          icon: <SwitchCamera size={24} />, 
+          icon: <SwitchCamera size={56} />, 
           label: "Dynamic View",
           isToggle: true,
           id: "dynamicView"
         },
         { 
-          icon: <Camera size={24} />,
+          icon: <Camera size={56} />,
           label: "Showcase View",
           isToggle: true,
           id: "showcaseView"
         },
         { 
-          icon: <Sparkles size={24} />, 
+          icon: <Sparkles size={56} />, 
           label: "Post Effects",
           isToggle: true,
           id: "postEffects"
@@ -478,7 +478,7 @@ function Ui() {
             item={item}
             isOpen={openMenuIndex === index}
             toggleOpen={() => {
-              if (!item.onClick) {
+              if (!item.onClick && !item.isToggle) {
                 handleMenuToggle(index);
               }
             }}

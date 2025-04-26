@@ -68,13 +68,8 @@ export function ColorSwatches({
             onClick={(e) => handleClick(e, swatch.primary_color)}
             className={`color-swatch group ${swatch.primary_color === currentColor ? 'selected' : ''}`}
             style={{
-              border: swatch.primary_color === currentColor 
-                ? '1px solid rgba(255, 255, 255, 0.4)'
-                : swatch.primary_color === '#FFFFFF' 
-                  ? '1px solid #E5E7EB' 
-                  : 'none',
               background: swatch.primary_color === 'rainbow' 
-                ? 'linear-gradient(180deg, green 0 20%, red 20% 40%, yellow 40% 60%, blue 60% 80%, orange 80% 100%)'
+                ? 'linear-gradient(180deg, green 0%, red 20%, yellow 40%, blue 60%, orange 80%)'
                 : isDualColor && swatch.secondary_color 
                   ? `linear-gradient(45deg, ${swatch.primary_color} 50%, ${swatch.secondary_color} 50%)`
                   : swatch.primary_color

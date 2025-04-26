@@ -90,34 +90,43 @@ const handleColorSelect = (colorType: string, color: string) => {
   switch (colorType) {
     case 'Body':
       useVariant.setState({ bodyColor: color });
+      useVariant.setState({ targetType: 'body' });
       break;
     case 'Neck':
       useVariant.setState({ neckColor: color });
+      useVariant.setState({ targetType: 'neck' });
       break;
     case 'Fretboard':
       useVariant.setState({ fretBoardColor: color });
+      useVariant.setState({ targetType: 'fretboard' });
       break;
     case 'Neck Binding':
       useVariant.setState({ fretBoardBindingColor: color });
+      useVariant.setState({ targetType: 'neck' });
       break;
     case 'Inlay':
       useVariant.setState({ inlayColor: color });
+      useVariant.setState({ targetType: 'inlay' });
       break;
     case 'Neck Buttons':
       useVariant.setState({ neckButtonColor: color });
-      console.log("Neck button")
+      useVariant.setState({ targetType: 'neckButtons' });
       break;
     case 'Arcade Buttons':
       useVariant.setState({ arcadeButtonColor: color });
+      useVariant.setState({ targetType: 'body' });
       break;
     case 'Pick Guard':
       useVariant.setState({ pickGuardColor: color });
+      useVariant.setState({ targetType: 'body' });
       break;
     case 'Hardware':
       useVariant.setState({ hardwareColor: color });
+      useVariant.setState({ targetType: 'default' });
       break;
     case 'Strummer Side Panels':
       useVariant.setState({ strummerSideColor: color });
+      useVariant.setState({ targetType: 'body' });
       break;
   }
 };
@@ -125,7 +134,7 @@ const handleColorSelect = (colorType: string, color: string) => {
 const ColorPickerIcon = ({ color }: { color: string }) => {
   return (
     <div style={{ color }}>
-      <Palette size={24} />
+      <Palette size={56} />
     </div>
   );
 };
@@ -135,22 +144,22 @@ const BodyColorIcon = () => {
   const bodyColor = useVariant((state) => state.bodyColor);
   const variant = guitarVariants.find(v => v.id === `${body}`);
   const IconComponent = variant?.icon || BodyReliableIcon;
-  return <IconComponent size={24} color={bodyColor} />;
+  return <IconComponent size={56} color={bodyColor} />;
 };
 
 const NeckColorIcon = () => {
   const color = useVariant((state) => state.neckColor);
-  return <NeckIcon size={24} color={color} />;
+  return <NeckIcon size={56} color={color} />;
 };
 
 const FretboardColorIcon = () => {
   const color = useVariant((state) => state.fretBoardColor);
-  return <FretboardIcon size={24} color={color} />;
+  return <FretboardIcon size={56} color={color} />;
 };
 
 const NeckBindingColorIcon = () => {
   const color = useVariant((state) => state.fretBoardBindingColor);
-  return <FretboardBindingIcon size={24} color={color} />;
+  return <FretboardBindingIcon size={56} color={color} />;
 };
 
 const InlayColorIcon = () => {
@@ -158,32 +167,32 @@ const InlayColorIcon = () => {
   const inlayColor = useVariant((state) => state.inlayColor);
   const variant = guitarVariants.find(v => v.id === `${inlay}`);
   const IconComponent = variant?.icon || InlaySharkfinIcon;
-  return <IconComponent size={24} color={inlayColor} />;
+  return <IconComponent size={56} color={inlayColor} />;
 };
 
 const NeckButtonColorIcon = () => {
   const color = useVariant((state) => state.neckButtonColor);
-  return <NeckButtonsIcon size={24} color={color} />;
+  return <NeckButtonsIcon size={56} color={color} />;
 };
 
 const ArcadeButtonsColorIcon = () => {
   const color = useVariant((state) => state.arcadeButtonColor);
-  return <Joystick color={color} />;
+  return <Joystick size={56} color={color} />;
 };
 
 const PickGuardColorIcon = () => {
   const color = useVariant((state) => state.pickGuardColor);
-  return <PickGuardIcon size={24} color={color} />;
+  return <PickGuardIcon size={56} color={color} />;
 };
 
 const HardwareColorIcon = () => {
   const color = useVariant((state) => state.hardwareColor);
-  return <HardwareIcon size={24} color={color} />;
+  return <HardwareIcon size={56} color={color} />;
 };
 
 const StrummerSideColorIcon = () => {
   const color = useVariant((state) => state.strummerSideColor);
-  return <StrummerSideIcon size={24} color={color} />;
+  return <StrummerSideIcon size={56} color={color} />;
 };
 
 // Create a custom hook that returns the customiseMenuItems array
@@ -195,6 +204,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
   const headstock2 = useVariant((state) => state.headstock2);
   const inlay = useVariant((state) => state.inlay);
   const inlay2 = useVariant((state) => state.inlay2);
+  const starPowerButton = useVariant((state) => state.starPowerButton);
   
   // Use useMemo to memoize the array and only recreate it when states change
   return useMemo(() => [
@@ -203,7 +213,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       label: "Presets",
       items: [
         {
-          icon: <BodyReliableIcon size={24} color="white" />,
+          icon: <BodyReliableIcon size={56} color="white" />,
           label: "Aviator",
           onClick: () => {
             useVariant.setState({
@@ -220,7 +230,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           }
         },
         {
-          icon: <BodyReliableIcon size={24} color="white" />,
+          icon: <BodyReliableIcon size={56} color="white" />,
           label: "Summit",
           onClick: () => {
             useVariant.setState({
@@ -235,7 +245,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           }
         },
         {
-          icon: <BodyReliableIcon size={24} color="white" />,
+          icon: <BodyReliableIcon size={56} color="white" />,
           label: "Thunderbird",
           onClick: () => {
             useVariant.setState({
@@ -255,7 +265,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       icon: <BodyIcon /> as ReactNode,
       label: 'Body',
       items: bodyVariants.map((variant) => ({
-        icon: <variant.icon size={24} color="white" />,
+        icon: <variant.icon size={56} color="white" />,
         label: variant.name,
         onClick: () => {
           useVariant.setState({ body: variant.id });
@@ -275,7 +285,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       icon: <HeadstockIcon /> as ReactNode,
       label: 'Headstock',
       items: headstockVariants.map((variant) => ({
-        icon: <variant.icon size={24} color="white" />,
+        icon: <variant.icon size={56} color="white" />,
         label: variant.name,
         onClick: () => {
           useVariant.setState({ headstock: variant.id });
@@ -291,7 +301,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
             icon: <HeadstockIcon2 /> as ReactNode,
             label: 'Headstock2',
             items: headstockVariants.map((variant) => ({
-              icon: <variant.icon size={24} color="white" />,
+              icon: <variant.icon size={56} color="white" />,
               label: variant.name,
               onClick: () => {
                 useVariant.setState({ headstock2: variant.id });
@@ -306,7 +316,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       icon: <InlayIcon /> as ReactNode,
       label: 'Inlay',
       items: inlayVariants.map((variant) => ({
-        icon: <variant.icon size={24} color="white" />,
+        icon: <variant.icon size={56} color="white" />,
         label: variant.name,
         onClick: () => {
           useVariant.setState({ inlay: variant.id });
@@ -322,7 +332,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
             icon: <InlayIcon2 /> as ReactNode,
             label: 'Inlay2',
             items: inlayVariants.map((variant) => ({
-              icon: <variant.icon size={24} color="white" />,
+              icon: <variant.icon size={56} color="white" />,
               label: variant.name,
               onClick: () => {
                 useVariant.setState({ inlay2: variant.id });
@@ -334,10 +344,11 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         ]
       : []), // If false, add nothing
     {
-      icon: <Star size={24} />,
+      icon: <Star size={56} />,
       label: 'Star Power',
       isToggle: true,
       id: 'starPowerButton',
+      active: starPowerButton,
     },
     {
       icon: <Palette size={56} />,
@@ -415,7 +426,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         },
       ],
     },
-  ], [isDualNeck, body, headstock, headstock2, inlay, inlay2]); // Recreate the array when any of these states change
+  ], [isDualNeck, body, headstock, headstock2, inlay, inlay2, starPowerButton]); // Recreate the array when any of these states change
 };
 
 // Export a default customiseMenuItems array for backward compatibility
@@ -426,7 +437,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         label: "Presets",
         items: [
           {
-            icon: <BodyReliableIcon size={24} color="white" />,
+            icon: <BodyReliableIcon size={56} color="white" />,
             label: "Aviator",
             onClick: () => {
               useVariant.setState({
@@ -443,7 +454,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             }
           },
           {
-            icon: <BodyReliableIcon size={24} color="white" />,
+            icon: <BodyReliableIcon size={56} color="white" />,
             label: "Summit",
             onClick: () => {
               useVariant.setState({
@@ -458,7 +469,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             }
           },
           {
-            icon: <BodyReliableIcon size={24} color="white" />,
+            icon: <BodyReliableIcon size={56} color="white" />,
             label: "Thunderbird",
             onClick: () => {
               useVariant.setState({
@@ -478,7 +489,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <BodyIcon /> as ReactNode,
         label: 'Body',
         items: bodyVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ body: variant.id });
@@ -496,7 +507,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <HeadstockIcon /> as ReactNode,
         label: 'Headstock',
         items: headstockVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ headstock: variant.id });
@@ -509,7 +520,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <HeadstockIcon2 /> as ReactNode,
         label: 'Headstock2',
         items: headstockVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ headstock2: variant.id });
@@ -522,7 +533,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <InlayIcon /> as ReactNode,
         label: 'Inlay',
         items: inlayVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ inlay: variant.id });
@@ -532,10 +543,11 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         })),
       },
       {
-        icon: <Star size={24} />,
-        label: 'Star Power Button',
+        icon: <Star size={56} />,
+        label: 'Star Power',
         isToggle: true,
         id: 'starPowerButton',
+        active: useVariant.getState().starPowerButton,
       },
       {
         icon: <Palette size={56} />,
@@ -553,7 +565,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             label: 'Neck',
             isColorPicker: true,
             swatches: NeckColorSwatches,
-            onColorSelect: (color: string) => {handleColorSelect('Neck', color)},
+            onColorSelect: (color: string) => handleColorSelect('Neck', color),
           },
           {
             icon: <FretboardColorIcon />,
@@ -620,7 +632,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         label: "Presets",
         items: [
           {
-            icon: <BodyReliableIcon size={24} color="white" />,
+            icon: <BodyReliableIcon size={56} color="white" />,
             label: "Aviator",
             onClick: () => {
               useVariant.setState({
@@ -637,7 +649,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             }
           },
           {
-            icon: <BodyReliableIcon size={24} color="white" />,
+            icon: <BodyReliableIcon size={56} color="white" />,
             label: "Summit",
             onClick: () => {
               useVariant.setState({
@@ -652,7 +664,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
             }
           },
           {
-            icon: <BodyReliableIcon size={24} color="white" />,
+            icon: <BodyReliableIcon size={56} color="white" />,
             label: "Thunderbird",
             onClick: () => {
               useVariant.setState({
@@ -672,7 +684,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <BodyIcon /> as ReactNode,
         label: 'Body',
         items: bodyVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ body: variant.id });
@@ -690,7 +702,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <HeadstockIcon /> as ReactNode,
         label: 'Headstock',
         items: headstockVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ headstock: variant.id });
@@ -703,7 +715,7 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         icon: <InlayIcon /> as ReactNode,
         label: 'Inlay',
         items: inlayVariants.map((variant) => ({
-          icon: <variant.icon size={24} color="white" />,
+          icon: <variant.icon size={56} color="white" />,
           label: variant.name,
           onClick: () => {
             useVariant.setState({ inlay: variant.id });
@@ -713,10 +725,11 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         })),
       },
       {
-        icon: <Star size={24} />,
-        label: 'Star Power Button',
+        icon: <Star size={56} />,
+        label: 'Star Power',
         isToggle: true,
         id: 'starPowerButton',
+        active: useVariant.getState().starPowerButton,
       },
       {
         icon: <Palette size={56} />,

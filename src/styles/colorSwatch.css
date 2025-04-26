@@ -20,11 +20,19 @@
          cursor-pointer 
          hover:scale-110
          hover:shadow-xl
-         hover:z-[9999];
+         hover:z-[9999]
+         border border-transparent;
 }
 
 .color-swatch.selected {
-  @apply ring-1 ring-white/80;
+  @apply border-white/40;
+}
+
+.color-swatch[style*="background: #FFFFFF"],
+.color-swatch[style*="background: #FFFF88"],
+.color-swatch[style*="background: #F8F8FF"],
+.color-swatch[style*="background: #FFFF11"] {
+  @apply border-gray-200;
 }
 
 .color-swatch.closing {
