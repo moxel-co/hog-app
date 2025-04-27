@@ -4,6 +4,7 @@ export interface ColorSwatch {
   primary_color: string;
   secondary_color?: string;
   label: string;
+  metalness?: number;
 }
 
 export interface GuitarVariant {
@@ -18,6 +19,26 @@ export interface GuitarVariant {
   dualNeckOffsetRot: number[];
   dualNeckOffsetPosLeft: number[];
   dualNeckOffsetRotLeft: number[];
+}
+
+export interface GuitarPresets {
+  id: string;
+  name: string;
+  type: 'preset';
+  icon: ReactNode;
+  body: string;
+  headstock: string;
+  headstock2?: string;
+  inlay: string;
+  inlay2?: string;
+  bodyColor: string;
+  neckColor: string;
+  neckButtonColor?: string;
+  pickguardColor?: string;
+  fretboardColor?: string;
+  arcadeButtonColor?: string;
+  hardwareColor: string;
+  isDualNeck: boolean;
 }
 
 export interface MenuItem {

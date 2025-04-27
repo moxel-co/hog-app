@@ -9,23 +9,24 @@
 
 /* Menu button styles */
 .menu-button {
-  @apply relative flex items-center justify-center w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem] rounded-full transition-all duration-200 text-white cursor-pointer;
+  @apply relative flex items-center justify-center w-[1.53rem] h-[1.53rem] 
+         md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 
+         4xl:w-[4.9rem] 4xl:h-[4.9rem] rounded-full transition-all duration-200 
+         text-white cursor-pointer bg-white/5;
 }
 
 .menu-button:not(.cart-button) {
-  @apply hover:bg-[#0c3d64] hover:opacity-90;
+  @apply hover:bg-[#0c3d64];
 }
 
 .menu-button.hidden-button {
   @apply opacity-0 pointer-events-none;
 }
 
-.menu-button-icon {
-  @apply absolute inset-0 flex items-center justify-center scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138];
-}
-
+.menu-button-icon,
 .cart-button-icon {
-  @apply absolute inset-0 flex items-center justify-center scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138] transition-all duration-200;
+  @apply absolute inset-0 flex items-center justify-center scale-[0.41] 
+         md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138] transition-all duration-200;
 }
 
 .menu-button-hover {
@@ -33,15 +34,24 @@
 }
 
 .menu-button:not(.cart-button):hover .menu-button-hover {
-  @apply opacity-90;
+  @apply opacity-100;
 }
 
 .menu-button-background {
-  @apply absolute inset-0 rounded-full bg-[#0c3d64];
+  @apply absolute inset-0 rounded-full;
+}
+
+.menu-button-text {
+  @apply text-white transition-opacity duration-200;
+}
+
+.menu-button:hover .menu-button-text {
+  @apply opacity-100;
 }
 
 .menu-button-label {
-  @apply hidden md:block text-xs 2xl:text-sm 4xl:text-xl font-medium text-white relative z-10 select-none;
+  @apply hidden md:block text-xs 2xl:text-sm 4xl:text-xl font-medium text-white 
+         relative z-10 select-none;
 }
 
 /* Cart button specific styles */
@@ -60,10 +70,10 @@
 
 /* Submenu styles */
 .submenu-container {
-  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 animate-slide-left z-[50];
+  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1 md:mr-1.5 
+         2xl:mr-2 4xl:mr-6 animate-slide-left z-[50];
 }
 
-/* Grid layout for submenu items */
 .submenu-container.grid-layout {
   @apply grid grid-cols-3 gap-2 md:gap-3 2xl:gap-4 4xl:gap-6;
   width: max-content;
@@ -77,28 +87,26 @@
   @apply opacity-0 pointer-events-none;
 }
 
-.submenu-label {
+.submenu-label,
+.option-item-label {
   @apply invisible absolute -top-3 md:-top-4 2xl:-top-6 4xl:-top-8 
-         left-1/2 transform -translate-x-1/2 
-         whitespace-nowrap text-white 
-         text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base 
-         font-medium
-         bg-gray-900/90 rounded px-1 py-0.5
-         opacity-0 transition-all duration-200 
+         left-1/2 transform -translate-x-1/2 whitespace-nowrap text-white 
+         text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base font-medium 
+         bg-gray-900/90 rounded px-1 py-0.5 opacity-0 transition-all duration-200 
          select-none pointer-events-none;
 }
 
-.submenu-item:hover .submenu-label {
+.submenu-item:hover .submenu-label,
+.option-item:hover .option-item-label {
   @apply visible opacity-100 z-50;
 }
 
 /* Submenu button styles */
 .submenu-button {
-  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem]
-         rounded-full transition-all duration-200 
-         flex items-center justify-center 
-         text-white hover:bg-[#0c3d64] hover:opacity-90 
-         cursor-pointer z-10;
+  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 
+         2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem] 
+         rounded-full transition-all duration-200 bg-white/10 flex items-center 
+         justify-center text-white hover:bg-[#0c3d64] hover:opacity-90 cursor-pointer z-10;
 }
 
 .submenu-button.hidden-button {
@@ -111,7 +119,8 @@
 
 /* Custom submenu styles */
 .custom-submenu {
-  @apply absolute right-full top-0 mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 space-y-1 md:space-y-2 2xl:space-y-3 4xl:space-y-8;
+  @apply absolute right-full top-0 mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 
+         space-y-1 md:space-y-2 2xl:space-y-3 4xl:space-y-8;
 }
 
 /* Toggle button states */
@@ -130,35 +139,19 @@
 
 /* Option item styles */
 .option-item {
-  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem]
-         rounded-full transition-all duration-200 
-         flex items-center justify-center 
-         text-white hover:bg-[#0c3d64] hover:opacity-90 
-         cursor-pointer z-10;
-}
-
-.option-item-label {
-  @apply invisible absolute -top-3 md:-top-4 2xl:-top-6 4xl:-top-8 
-         left-1/2 transform -translate-x-1/2 
-         whitespace-nowrap text-white 
-         text-[7.2px] md:text-[11px] 2xl:text-xs 4xl:text-base 
-         font-medium
-         bg-gray-900/90 rounded px-1 py-0.5
-         opacity-0 transition-all duration-200 
-         select-none pointer-events-none;
-}
-
-.option-item:hover .option-item-label {
-  @apply visible opacity-100 z-50;
+  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 
+         2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem] 
+         rounded-full transition-all duration-200 flex items-center justify-center 
+         text-white bg-white/20 hover:bg-[#0c3d64]/20 hover:opacity-90 cursor-pointer z-10;
 }
 
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .submenu-container {
-    @apply max-w-[calc(100vw-2rem)] pb-1;
+    @apply max-w-[calc(100vw-2rem)] pb-2;
   }
-  
+
   .submenu-container.grid-layout {
-    @apply grid-cols-2 gap-1.5;
+    @apply grid-cols-2 gap-2;
   }
 }

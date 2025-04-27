@@ -32,6 +32,7 @@ import {
 } from './colors';
 import useVariant from '../stores/useVariant';
 import { guitarVariants } from './guitar';
+import { guitarPresets } from './presets.ts';
 import { ReactNode, useMemo } from 'react';
 
 
@@ -39,6 +40,7 @@ import { ReactNode, useMemo } from 'react';
 const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body' || variant.type === 'bodyDual');
 const headstockVariants = guitarVariants.filter((variant) => variant.type === 'headstock');
 const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay');
+const guitarPresetVariants = guitarPresets.filter((variant) => variant.type === 'preset');
 
 // Dynamic icons for menu items based on selected variant
 const HeadstockIcon = () => {
@@ -90,6 +92,7 @@ const updateDynamicCamera = (targetType: string) => {
 const handleColorSelect = (colorType: string, color: string) => {
   switch (colorType) {
     case 'Body':
+      console.log('Body color selected:', color);
       useVariant.setState({ bodyColor: color });
       useVariant.setState({ targetType: 'body' });
       break;
@@ -212,56 +215,29 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
   return useMemo(() => [
     {
       icon: <Palette size={56} />,
-      label: "Presets",
-      items: [
-        {
-          icon: <BodyReliableIcon size={56} color="white" />,
-          label: "Aviator",
-          onClick: () => {
-            useVariant.setState({
-              body: 'body_aviator',
-              headstock: 'headstock_aviator',
-              headstock2: 'headstock_aviator',
-              inlay: 'inlay_lightning',
-              inlay2: 'inlay_lightning',
-              bodyColor: '#08149c',
-              neckColor: '#08149c',
-              hardwareColor: '#FFD700',
-              isDualNeck: true
-            });
-          }
+      label: 'Presets',
+      items: guitarPresetVariants.map((variant) => ({
+        icon: <variant.icon size={56} color="white" />,
+        label: variant.name,
+        onClick: () => {
+          useVariant.setState({ body: variant.body });
+          useVariant.setState({ headstock: variant.headstock });
+          useVariant.setState({ headstock2: variant.headstock2 });
+          useVariant.setState({ inlay: variant.inlay });
+          useVariant.setState({ inlay2: variant.inlay2 });
+          useVariant.setState({ bodyColor: variant.bodyColor });
+          useVariant.setState({ neckColor: variant.neckColor });
+          useVariant.setState({ neckButtonColor: variant.neckButtonColor });
+          useVariant.setState({ pickGuardColor: variant.pickguardColor });
+          useVariant.setState({ fretBoardColor: variant.fretboardColor });
+          useVariant.setState({ arcadeButtonColor: variant.arcadeButtonColor });
+          useVariant.setState({ hardwareColor: variant.hardwareColor });
+          useVariant.setState({ isDualNeck: variant.isDualNeck });
+          useVariant.setState({ strummerOffset: variant.strummerOffset });
+          updateDynamicCamera("default");
         },
-        {
-          icon: <BodyReliableIcon size={56} color="white" />,
-          label: "Summit",
-          onClick: () => {
-            useVariant.setState({
-              body: 'body_summit',
-              headstock: 'headstock_summit',
-              inlay: 'inlay_trapezoid',
-              bodyColor: '#8c1521',
-              neckColor: '#000000',
-              hardwareColor: '#C0C0C0',
-              isDualNeck: false
-            });
-          }
-        },
-        {
-          icon: <BodyReliableIcon size={56} color="white" />,
-          label: "Thunderbird",
-          onClick: () => {
-            useVariant.setState({
-              body: 'body_thunderbird',
-              headstock: 'headstock_thunderbird',
-              inlay: 'inlay_block',
-              bodyColor: '#000000',
-              neckColor: '#000000',
-              hardwareColor: '#C0C0C0',
-              isDualNeck: false
-            });
-          }
-        }
-      ]
+        isActive: body === variant.id,
+      })),
     },
     {
       icon: <BodyIcon /> as ReactNode,

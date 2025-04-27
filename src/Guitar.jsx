@@ -38,6 +38,9 @@ export function Guitar(props) {
   const dualNeckOffsetRotLeft = useVariant((state) => state.dualNeckOffsetRotLeft);
   const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
+
+  console.log(bodyColor)
+
   // Dynamic rivet color
   const color = new THREE.Color(fretBoardBindingColor);
   const hsl = { h: 0, s: 0, l: 0 };
