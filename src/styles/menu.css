@@ -19,6 +19,10 @@
   @apply hover:bg-[#0c3d64];
 }
 
+.menu-button:hover .menu-button-icon {
+  @apply opacity-20;
+}
+
 .menu-button.hidden-button {
   @apply opacity-0 pointer-events-none;
 }
@@ -60,7 +64,7 @@
 }
 
 .cart-button:hover .cart-button-icon {
-  @apply text-yellow-400 scale-110;
+  @apply text-yellow-400 scale-110 opacity-100;
 }
 
 /* Active menu button styles */

@@ -47,13 +47,17 @@ export function ColorSwatches({
 
   const currentColor = getCurrentColor();
 
-  const handleClick = (event: React.MouseEvent, color: string) => {
+  const handleClick = (event: React.MouseEvent, swatch: ColorSwatch) => {
     event.stopPropagation();
-    onSelect(colorType, color);
+    onSelect(colorType, swatch.name);
     if (onClose) {
       setIsVisible(false);
       setTimeout(onClose, 300);
     }
+  };
+
+  const getSwatchColor = (swatch: ColorSwatch) => {
+    return swatch.color;
   };
 
   return (
@@ -64,19 +68,19 @@ export function ColorSwatches({
       <div className="color-grid">
         {swatches.map((swatch) => (
           <button
-            key={swatch.primary_color + (swatch.secondary_color || '')}
-            onClick={(e) => handleClick(e, swatch.primary_color)}
-            className={`color-swatch group ${swatch.primary_color === currentColor ? 'selected' : ''}`}
+            key={swatch.color + (swatch.secondary_color || '')}
+            onClick={(e) => handleClick(e, swatch)}
+            className={`color-swatch group ${swatch.name === currentColor ? 'selected' : ''}`}
             style={{
-              background: swatch.primary_color === 'rainbow' 
+              background: swatch.color === 'rainbow' 
                 ? 'linear-gradient(180deg,rgb(34, 146, 120) 0%, rgb(34, 146, 120) 20%,rgb(226, 21, 45) 20%, rgb(226, 21, 45) 40%, #ebce06 40%, #ebce06 60%, #1236a2 60%, #1236a2 80%, #fe6701 80%, #fe6701 100%)'
                 : isDualColor && swatch.secondary_color 
-                  ? `linear-gradient(45deg, ${swatch.primary_color} 50%, ${swatch.secondary_color} 50%)`
-                  : swatch.primary_color
+                  ? `linear-gradient(45deg, ${swatch.color} 50%, ${swatch.secondary_color} 50%)`
+                  : getSwatchColor(swatch)
             }}
           >
             <span className="color-swatch-label">
-              {swatch.label}
+              {swatch.name}
             </span>
           </button>
         ))}
