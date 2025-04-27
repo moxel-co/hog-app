@@ -20,7 +20,6 @@ import { MenuItem } from '../types';
 import { 
   BodyColorSwatches,
   NeckColorSwatches,
-  presetColorSwatches,
   PickGuardColorSwatches,
   InlayColorSwatches,
   HardwareColorSwatches,
@@ -33,6 +32,7 @@ import {
 import useVariant from '../stores/useVariant';
 import { guitarVariants } from './guitar';
 import { ReactNode, useMemo } from 'react';
+
 
 // Get current selected variants
 const bodyVariants = guitarVariants.filter((variant) => variant.type === 'body' || variant.type === 'bodyDual');
@@ -205,7 +205,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
   const inlay = useVariant((state) => state.inlay);
   const inlay2 = useVariant((state) => state.inlay2);
   const starPowerButton = useVariant((state) => state.starPowerButton);
-  
+
   // Use useMemo to memoize the array and only recreate it when states change
   return useMemo(() => [
     {
@@ -349,6 +349,11 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       isToggle: true,
       id: 'starPowerButton',
       active: starPowerButton,
+      onClick: () => {
+        console.log("body"+starPowerButton)
+        useVariant.setState({ starPowerButton: !starPowerButton });
+        useVariant.setState({ targetType: 'starPowerButton' });
+      }
     },
     {
       icon: <Palette size={56} />,
@@ -543,11 +548,16 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         })),
       },
       {
-        icon: <Star size={56} />,
-        label: 'Star Power',
-        isToggle: true,
-        id: 'starPowerButton',
-        active: useVariant.getState().starPowerButton,
+      icon: <Star size={56} />,
+      label: 'Star Power',
+      isToggle: true,
+      id: 'starPowerButton',
+      active: useVariant.getState().starPowerButton,
+      onClick: () => {
+        console.log("Hello")
+        useVariant.setState({ starPowerButton: !useVariant.getState().starPowerButton });
+        useVariant.setState({ targetType: 'starPowerButton' });
+      },
       },
       {
         icon: <Palette size={56} />,
@@ -730,6 +740,11 @@ export const customiseMenuItems = useVariant.getState().isDualNeck
         isToggle: true,
         id: 'starPowerButton',
         active: useVariant.getState().starPowerButton,
+        onClick: () => {
+          console.log("test")
+          useVariant.setState({ starPowerButton: !useVariant.getState().starPowerButton });
+          useVariant.setState({ targetType: 'starPowerButton' });
+        },
       },
       {
         icon: <Palette size={56} />,

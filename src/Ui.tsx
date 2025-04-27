@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, Rotate3d, Hammer, Home, Sparkles, SwitchCamera, Camera } from 'lucide-react';
+import { Settings, Rotate3d, Hammer, Eye, Sparkles, SwitchCamera, Camera } from 'lucide-react';
 import { useCustomiseMenuItems } from './data/menuItems';
 import { MenuItem } from './types';
 import { ColorSwatches } from './components/ColorSwatches';
@@ -60,7 +60,6 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
 }) {
   const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  const starPowerButton = useVariant((state) => state.starPowerButton);
   const isRotationEnabled = useVariant((state) => state.isRotationEnabled);
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
   const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
@@ -102,10 +101,6 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
       setActiveColorPicker(activeColorPicker === colorPickerId ? null : colorPickerId);
     } else if (subItem.isToggle) {
       switch (subItem.id) {
-        case 'starPowerButton':
-          useVariant.setState({ starPowerButton: !starPowerButton });
-          useVariant.setState({ targetType: 'starPowerButton' });
-          break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });
           break;
@@ -139,7 +134,6 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
   const getToggleState = (subItem: MenuItem) => {
     if (!subItem.isToggle || !subItem.id) return false;
     switch (subItem.id) {
-      case 'starPowerButton': return starPowerButton;
       case 'rotation': return isRotationEnabled;
       case 'dynamicView': return isDynamicViewEnabled;
       case 'showcaseView': return isShowcaseViewEnabled;
@@ -271,10 +265,6 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
       setActiveColorPicker(activeColorPicker === colorPickerId ? null : colorPickerId);
     } else if (subItem.isToggle) {
       switch (subItem.id) {
-        case 'starPowerButton':
-          useVariant.setState({ starPowerButton: !starPowerButton });
-          useVariant.setState({ targetType: 'starPowerButton' });
-          break;
         case 'rotation':
           useVariant.setState({ isRotationEnabled: !isRotationEnabled });
           break;
@@ -293,13 +283,12 @@ function MenuItemComponent({ item, isOpen, toggleOpen, onSubMenuOpen, activeSubM
     }
   };
 
-  const buttonClassName = `menu-button ${item.onClick ? 'cart-button' : ''} ${activeColorPicker ? 'hidden-button' : ''} ${item.isToggle && getToggleState(item) ? 'toggle-button-active' : ''}`;
+  const buttonClassName = `menu-button ${item.onClick ? '' : ''} ${activeColorPicker ? 'hidden-button' : ''} ${item.isToggle && getToggleState(item) ? 'toggle-button-active' : ''}`;
   const shouldUseGrid = item.items && item.items.length > 4;
 
   const getToggleState = (subItem: MenuItem) => {
     if (!subItem.isToggle || !subItem.id) return false;
     switch (subItem.id) {
-      case 'starPowerButton': return starPowerButton;
       case 'rotation': return isRotationEnabled;
       case 'dynamicView': return isDynamicViewEnabled;
       case 'showcaseView': return isShowcaseViewEnabled;
@@ -433,7 +422,7 @@ function Ui() {
       subItems: customiseMenuItems,
     },
     {
-      icon: <Home size={56} />,
+      icon: <Eye size={56} />,
       label: "Reset View",
       onClick: handleResetView
     },

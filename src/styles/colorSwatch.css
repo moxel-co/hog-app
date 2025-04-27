@@ -25,7 +25,7 @@
 }
 
 .color-swatch.selected {
-  @apply border-white/40;
+  @apply border-white/80;
 }
 
 .color-swatch[style*="background: #FFFFFF"],
