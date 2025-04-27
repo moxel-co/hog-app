@@ -42,7 +42,7 @@ export default function App() {
         backgroundRotation={[0, Math.PI * 5 , 0]}
       />
       <ContactShadows position={[0, shadowOffset, 0]} opacity={0.3} />
-      {/* <Guitar /> */}
+      <Guitar />
       {isShowcaseViewEnabled && <ShowcaseCamera />}
     </>
   );

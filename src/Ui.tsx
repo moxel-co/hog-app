@@ -96,6 +96,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
   };
 
   const handleItemClick = (subItem: MenuItem) => {
+    console.log("Click");
     if (subItem.isColorPicker) {
       const colorPickerId = `${item.label}-${subItem.label}`;
       setActiveColorPicker(activeColorPicker === colorPickerId ? null : colorPickerId);
