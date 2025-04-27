@@ -78,13 +78,13 @@ export const PickGuardColorSwatches: ColorSwatch[] = [
   { color: '#654321', name: 'Dark Brown', metalness: 0 },
   { color: '#000000', name: 'Black', metalness: 0 },
   { color: '#ededed', name: 'White', metalness: 0 },
-  { color: '#ededef', name: 'Silk White', metalness: 0.9 },
+  { color: '#F8F8F8', name: 'Silk White', metalness: 0 },
   { color: '#ededeg', name: 'Silk Silver', metalness: 0.9 },
   { color: '#ededeh', name: 'Silk Gold', metalness: 0.9 },
 ];
 
 export const InlayColorSwatches: ColorSwatch[] = [
-  { color: '#F8F8FF', name: 'Silk White', metalness: 0.9 },
+  { color: '#F8F8F8', name: 'Silk White', metalness: 0 },
   { color: '#FFD700', name: 'Silk Gold', metalness: 0.9 },
   { color: '#000000', name: 'Black', metalness: 0 },
 ];
@@ -108,10 +108,10 @@ export const NeckButtonColorSwatches: ColorSwatch[] = [
   { color: '#8B4513', name: 'Brown', metalness: 0 },
   { color: '#654321', name: 'Dark Brown', metalness: 0 },
   { color: '#000000', name: 'Black', metalness: 0 },
-  { color: '#FFFF88', name: 'White', metalness: 0 },
-  { color: '#F8F8FF', name: 'Silk White', metalness: 0.9 },
+  { color: '#FFFFFF', name: 'White', metalness: 0 },
+  { color: '#F8F8FF', name: 'Silk White', metalness: 0 },
   { color: '#C0C0C0', name: 'Silk Silver', metalness: 0.9 },
-  { color: '#FFD700', name: 'Silk Gold', metalness: 0.9 },
+  { color: '#ffbe4f', name: 'Silk Gold', metalness: 0.8 },
   { color: 'rainbow', name: 'Rainbow', metalness: 0 },
 ];
 
@@ -164,7 +164,7 @@ export const StrummerSideColorSwatches: ColorSwatch[] = [
   { color: '#654321', name: 'Dark Brown', metalness: 0 },
   { color: '#000000', name: 'Black', metalness: 0 },
   { color: '#ededed', name: 'White', metalness: 0 },
-  { color: '#F8F8FF', name: 'Silk White', metalness: 0.9 },
+  { color: '#F8F8F8', name: 'Silk White', metalness: 0 },
   { color: '#C0C0C0', name: 'Silk Silver', metalness: 0.9 },
   { color: '#FFD700', name: 'Silk Gold', metalness: 0.9 },
 ];

@@ -3,11 +3,21 @@ import { useFrame } from '@react-three/fiber'
 import { Text, OrbitControls, useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import useVariant from './stores/useVariant.jsx'
-import meshFresnelMaterial from './components/MeshFresnelMaterial.jsx'
-// import createTranslucentMaterial from './components/TranslucentMaterial.jsx'
-import SSSMaterial from './components/SubSurfaceMaterial.jsx'
 import createFresnelMaterial from './components/TranslucentMaterial.jsx'
 import { useControls } from 'leva'
+
+import { 
+  BodyColorSwatches,
+  NeckColorSwatches,
+  PickGuardColorSwatches,
+  InlayColorSwatches,
+  HardwareColorSwatches,
+  NeckButtonColorSwatches,
+  ArcadeButtonColorSwatches,
+  FretboardColorSwatches,
+  NeckBindingColorSwatches,
+  StrummerSideColorSwatches
+} from './data/colors';
 
 const asset_name = 'prpGuitar'
 
@@ -20,16 +30,16 @@ export function Guitar(props) {
   const inlay = useVariant((state) => state.inlay);
   const inlay2 = useVariant((state) => state.inlay2);
   const starPowerButton = useVariant((state) => state.starPowerButton);
-  const bodyColor = useVariant((state) => state.bodyColor);
-  const arcadeButtonColor = useVariant((state) => state.arcadeButtonColor);
-  const neckButtonColor = useVariant((state) => state.neckButtonColor);
-  const neckColor = useVariant((state) => state.neckColor);
-  const inlayColor = useVariant((state) => state.inlayColor);
-  const fretBoardColor = useVariant((state) => state.fretBoardColor);
-  const fretBoardBindingColor = useVariant((state) => state.fretBoardBindingColor);
-  const pickGuardColor = useVariant((state) => state.pickGuardColor);
-  const hardwareColor = useVariant((state) => state.hardwareColor);
-  const strummerSideColor = useVariant((state) => state.strummerSideColor);
+  const bodyColorState = useVariant((state) => state.bodyColor);
+  const arcadeButtonColorState = useVariant((state) => state.arcadeButtonColor);
+  const neckButtonColorState = useVariant((state) => state.neckButtonColor);
+  const neckColorState = useVariant((state) => state.neckColor);
+  const inlayColorState = useVariant((state) => state.inlayColor);
+  const fretBoardColorState = useVariant((state) => state.fretBoardColor);
+  const fretBoardBindingColorState = useVariant((state) => state.fretBoardBindingColor);
+  const pickGuardColorState = useVariant((state) => state.pickGuardColor);
+  const hardwareColorState = useVariant((state) => state.hardwareColor);
+  const strummerSideColorState = useVariant((state) => state.strummerSideColor);
   const strummerOffset = useVariant((state) => state.strummerOffset);
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
@@ -38,8 +48,17 @@ export function Guitar(props) {
   const dualNeckOffsetRotLeft = useVariant((state) => state.dualNeckOffsetRotLeft);
   const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
-
-  console.log(bodyColor)
+  // Color library
+  const bodyColor = BodyColorSwatches.find((color) => color.name === bodyColorState);
+  const arcadeButtonColor = ArcadeButtonColorSwatches.find((color) => color.name === arcadeButtonColorState);
+  const neckButtonColor = NeckButtonColorSwatches.find((color) => color.name === neckButtonColorState);
+  const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
+  const inlayColor = InlayColorSwatches.find((color) => color.name === inlayColorState);
+  const fretBoardColor = FretboardColorSwatches.find((color) => color.name === fretBoardColorState);
+  const fretBoardBindingColor = NeckBindingColorSwatches.find((color) => color.name === fretBoardBindingColorState);
+  const pickGuardColor = PickGuardColorSwatches.find((color) => color.name === pickGuardColorState);
+  const hardwareColor = HardwareColorSwatches.find((color) => color.name === hardwareColorState);
+  const strummerSideColor = StrummerSideColorSwatches.find((color) => color.name === strummerSideColorState);
 
   // Dynamic rivet color
   const color = new THREE.Color(fretBoardBindingColor);
@@ -69,17 +88,17 @@ export function Guitar(props) {
   const m_orangePlastic = new THREE.MeshStandardMaterial({color: '#f25530', roughness: 0.3})
   const m_whitePlastic = new THREE.MeshStandardMaterial({color: "white", roughness: 0.3})
   const m_brushedMetal = new THREE.MeshStandardMaterial({color: "grey", roughness: 0.5, metalness: 0.5})
-  const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor, roughness: 0.2, metalness: 1})
+  const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor?.color || '#ffffff', roughness: 0.2, metalness: hardwareColor?.metalness || 0})
   const m_chromeMetal = new THREE.MeshStandardMaterial({color: "white", roughness: 0.1, metalness: 1})
-  const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor, roughness: 0.4, metalness: 0})
-  const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor, roughness: 0.2, metalness: 0})
-  const m_neckButtonPlastic = new THREE.MeshStandardMaterial({color: neckButtonColor, roughness: 0.4, metalness: 0})
-  const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor, roughness: 0.4, metalness: 0})
-  const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor, roughness: 0.4, metalness: 0})
-  const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor, roughness: 0.4, metalness: 0})
-  const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor, roughness: 0.8, metalness: 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
-  const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor, roughness: 0.4, metalness: 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
-  const m_strummerPlastic = new THREE.MeshStandardMaterial({color: strummerSideColor, roughness: 0.4, metalness: 0})
+  const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor?.color || '#ffffff', roughness: 0.4, metalness: bodyColor?.metalness || 0})
+  const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor?.color || '#ffffff', roughness: 0.2, metalness: arcadeButtonColor?.metalness || 0})
+  const m_neckButtonPlastic = new THREE.MeshStandardMaterial({color: neckButtonColor?.color || '#ffffff', roughness: 0.4, metalness: neckButtonColor?.metalness || 0})
+  const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor?.color || '#ffffff', roughness: 0.4, metalness: inlayColor?.metalness || 0})
+  const m_neckPlastic = new THREE.MeshStandardMaterial({color: neckColor?.color || '#ffffff', roughness: 0.4, metalness: neckColor?.metalness || 0})
+  const m_fretboardBindingPlastic = new THREE.MeshStandardMaterial({color: fretBoardBindingColor?.color || '#ffffff', roughness: 0.4, metalness: fretBoardBindingColor?.metalness || 0})
+  const m_fretBoardWood = new THREE.MeshStandardMaterial({color: fretBoardColor?.color || '#ffffff', roughness: 0.8, metalness: fretBoardColor?.metalness || 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
+  const m_pickGuardPlastic = new THREE.MeshStandardMaterial({color: pickGuardColor?.color || '#ffffff', roughness: 0.4, metalness: pickGuardColor?.metalness || 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.4, 0.4)})
+  const m_strummerPlastic = new THREE.MeshStandardMaterial({color: strummerSideColor?.color || '#ffffff', roughness: 0.4, metalness: strummerSideColor?.metalness || 0})
   const m_translucentPlastic = createFresnelMaterial({
     color: '#3955ff',
     emissiveColor: '#453232',
@@ -1517,31 +1536,31 @@ export function Guitar(props) {
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonA__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_greenPlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonB__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonB__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_redPlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonC__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonC__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_yellowPlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonD__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonD__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_bluePlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonE__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonE__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_orangePlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow

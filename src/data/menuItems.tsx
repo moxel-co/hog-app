@@ -42,45 +42,51 @@ const headstockVariants = guitarVariants.filter((variant) => variant.type === 'h
 const inlayVariants = guitarVariants.filter((variant) => variant.type === 'inlay');
 const guitarPresetVariants = guitarPresets.filter((variant) => variant.type === 'preset');
 
+
 // Dynamic icons for menu items based on selected variant
 const HeadstockIcon = () => {
   const headstock = useVariant((state) => state.headstock);
-  const neckColor = useVariant((state) => state.neckColor);
+  const neckColorState = useVariant((state) => state.neckColor);
+  const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
   const variant = guitarVariants.find(v => v.id === `${headstock}`);
   const IconComponent = variant?.icon || HeadStockReliableIcon;
-  return <IconComponent size={56} color={neckColor} />;
+  return <IconComponent size={56} color={neckColor.color} />;
 };
 
 const HeadstockIcon2 = () => {
   const headstock = useVariant((state) => state.headstock2);
-  const neckColor = useVariant((state) => state.neckColor);
+  const neckColorState = useVariant((state) => state.neckColor);
+  const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
   const variant = guitarVariants.find(v => v.id === `${headstock}`);
   const IconComponent = variant?.icon || HeadStockReliableIcon;
-  return <IconComponent size={56} color={neckColor} />;
+  return <IconComponent size={56} color={neckColor.color} />;
 };
 
 const BodyIcon = () => {
   const body = useVariant((state) => state.body);
-  const bodyColor = useVariant((state) => state.bodyColor);
+  const bodyColorState = useVariant((state) => state.bodyColor);
+  const bodyColor = BodyColorSwatches.find((color) => color.name === bodyColorState);
   const variant = guitarVariants.find(v => v.id === `${body}`);
   const IconComponent = variant?.icon || BodyReliableIcon;
-  return <IconComponent size={56} color={bodyColor} />;
+  return <IconComponent size={56} color={bodyColor.color} />;
 };
 
 const InlayIcon = () => {
   const inlay = useVariant((state) => state.inlay);
-  const inlayColor = useVariant((state) => state.inlayColor);
+  const inlayColorState = useVariant((state) => state.inlayColor);
+  const inlayColor = InlayColorSwatches.find((color) => color.name === inlayColorState);
   const variant = guitarVariants.find(v => v.id === `${inlay}`);
   const IconComponent = variant?.icon || InlaySharkfinIcon;
-  return <IconComponent size={56} color={inlayColor} />;
+  return <IconComponent size={56} color={inlayColor.color} />;
 };
 
 const InlayIcon2 = () => {
   const inlay = useVariant((state) => state.inlay2);
-  const inlayColor = useVariant((state) => state.inlayColor);
+  const inlayColorState = useVariant((state) => state.inlayColor);
+  const inlayColor = InlayColorSwatches.find((color) => color.name === inlayColorState);
   const variant = guitarVariants.find(v => v.id === `${inlay}`);
   const IconComponent = variant?.icon || InlaySharkfinIcon;
-  return <IconComponent size={56} color={inlayColor} />;
+  return <IconComponent size={56} color={inlayColor.color} />;
 };
 
 const updateDynamicCamera = (targetType: string) => {
@@ -92,7 +98,6 @@ const updateDynamicCamera = (targetType: string) => {
 const handleColorSelect = (colorType: string, color: string) => {
   switch (colorType) {
     case 'Body':
-      console.log('Body color selected:', color);
       useVariant.setState({ bodyColor: color });
       useVariant.setState({ targetType: 'body' });
       break;
@@ -145,20 +150,23 @@ const ColorPickerIcon = ({ color }: { color: string }) => {
 
 const BodyColorIcon = () => {
   const body = useVariant((state) => state.body);
-  const bodyColor = useVariant((state) => state.bodyColor);
+  const bodyColorState = useVariant((state) => state.bodyColor);
+  const bodyColor = BodyColorSwatches.find((color) => color.name === bodyColorState);
   const variant = guitarVariants.find(v => v.id === `${body}`);
   const IconComponent = variant?.icon || BodyReliableIcon;
-  return <IconComponent size={56} color={bodyColor} />;
+  return <IconComponent size={56} color={bodyColor.color} />;
 };
 
 const NeckColorIcon = () => {
-  const color = useVariant((state) => state.neckColor);
-  return <NeckIcon size={56} color={color} />;
+  const neckColorState = useVariant((state) => state.neckColor);
+  const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
+  return <NeckIcon size={56} color={neckColor.color} />;
 };
 
 const FretboardColorIcon = () => {
-  const color = useVariant((state) => state.fretBoardColor);
-  return <FretboardIcon size={56} color={color} />;
+  const fretBoardColorState = useVariant((state) => state.fretBoardColor);
+  const fretBoardColor = FretboardColorSwatches.find((color) => color.name === fretBoardColorState);
+  return <FretboardIcon size={56} color={fretBoardColor.color} />;
 };
 
 const NeckBindingColorIcon = () => {
@@ -168,35 +176,41 @@ const NeckBindingColorIcon = () => {
 
 const InlayColorIcon = () => {
   const inlay = useVariant((state) => state.inlay);
-  const inlayColor = useVariant((state) => state.inlayColor);
+  const inlayColorState = useVariant((state) => state.inlayColor);
+  const inlayColor = InlayColorSwatches.find((color) => color.name === inlayColorState);
   const variant = guitarVariants.find(v => v.id === `${inlay}`);
   const IconComponent = variant?.icon || InlaySharkfinIcon;
-  return <IconComponent size={56} color={inlayColor} />;
+  return <IconComponent size={56} color={inlayColor.color} />;
 };
 
 const NeckButtonColorIcon = () => {
-  const color = useVariant((state) => state.neckButtonColor);
-  return <NeckButtonsIcon size={56} color={color} />;
+  const neckButtonColorState = useVariant((state) => state.neckButtonColor);
+  const neckButtonColor = NeckButtonColorSwatches.find((color) => color.name === neckButtonColorState);
+  return <NeckButtonsIcon size={56} color={neckButtonColor.color} />;
 };
 
 const ArcadeButtonsColorIcon = () => {
-  const color = useVariant((state) => state.arcadeButtonColor);
-  return <Joystick size={56} color={color} />;
+  const arcadeButtonColorState = useVariant((state) => state.arcadeButtonColor);
+  const arcadeButtonColor = ArcadeButtonColorSwatches.find((color) => color.name === arcadeButtonColorState);
+  return <Joystick size={56} color={arcadeButtonColor.color} />;
 };
 
 const PickGuardColorIcon = () => {
-  const color = useVariant((state) => state.pickGuardColor);
-  return <PickGuardIcon size={56} color={color} />;
+  const pickGuardColorState = useVariant((state) => state.pickGuardColor);
+  const pickGuardColor = PickGuardColorSwatches.find((color) => color.name === pickGuardColorState);
+  return <PickGuardIcon size={56} color={pickGuardColor.color} />;
 };
 
 const HardwareColorIcon = () => {
-  const color = useVariant((state) => state.hardwareColor);
-  return <HardwareIcon size={56} color={color} />;
+  const hardwareColorState = useVariant((state) => state.hardwareColor);
+  const hardwareColor = HardwareColorSwatches.find((color) => color.name === hardwareColorState);
+  return <HardwareIcon size={56} color={hardwareColor.color} />;
 };
 
 const StrummerSideColorIcon = () => {
-  const color = useVariant((state) => state.strummerSideColor);
-  return <StrummerSideIcon size={56} color={color} />;
+  const strummerSideColorState = useVariant((state) => state.strummerSideColor);
+  const strummerSideColor = StrummerSideColorSwatches.find((color) => color.name === strummerSideColorState);
+  return <StrummerSideIcon size={56} color={strummerSideColor.color} />;
 };
 
 // Create a custom hook that returns the customiseMenuItems array
