@@ -3,7 +3,7 @@ import {
   Palette,
   Joystick,
   Star,
-  Home,
+  Hand,
 } from 'lucide-react';
 import {
   BodyReliableIcon,
@@ -206,6 +206,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
   const inlay = useVariant((state) => state.inlay);
   const inlay2 = useVariant((state) => state.inlay2);
   const starPowerButton = useVariant((state) => state.starPowerButton);
+  const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
   // Use useMemo to memoize the array and only recreate it when states change
   return useMemo(() => [
@@ -326,6 +327,20 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         isActive: inlay === variant.id,
       })),
     },
+    {
+      icon: <Star size={56} />,
+      label: 'Star Power',
+      isToggle: true,
+      id: 'starPowerButton',
+      active: starPowerButton,
+    },
+    {
+      icon: <Hand size={56} />,
+      label: 'Left Hand Orientation',
+      isToggle: true,
+      id: 'leftHandOrientation',
+      active: isLeftHandOrientation,
+    },
     // Conditionally include the Inlay2 menu item based on isDualNeck
     ...(isDualNeck
       ? [
@@ -420,14 +435,5 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         },
       ],
     },
-    {
-      icon: <Home size={56} />,
-      label: 'Home',
-      isToggle: true,
-      id: 'home',
-      onClick: () => {
-        console.log('Home button clicked');
-      },
-    },
-  ], [isDualNeck, body, headstock, headstock2, inlay, inlay2, starPowerButton]); // Recreate the array when any of these states change
+  ], [isDualNeck, body, headstock, headstock2, inlay, inlay2, starPowerButton, isLeftHandOrientation]); // Recreate the array when any of these states change
 };

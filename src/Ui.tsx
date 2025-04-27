@@ -64,6 +64,8 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
   const isDynamicViewEnabled = useVariant((state) => state.isDynamicViewEnabled);
   const isShowcaseViewEnabled = useVariant((state) => state.isShowcaseViewEnabled);
   const isPostEffectsEnabled = useVariant((state) => state.isPostEffectsEnabled);
+  const starPowerButton = useVariant((state) => state.starPowerButton);
+  const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
   const isOpen = activeSubMenuId === item.label;
 
@@ -120,7 +122,16 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
     }
   };
 
-  const handleToggleOpen = () => {
+  const handleToggleOpen = (id) => {
+    switch (id) {
+      case 'starPowerButton':
+        useVariant.setState({ starPowerButton: !starPowerButton });
+        console.log("Star Power Button Clicked");
+        break;
+      case 'leftHandOrientation':
+        useVariant.setState({ isLeftHandOrientation: !isLeftHandOrientation });
+        break;
+    }
     const newIsOpen = !isOpen;
     if (newIsOpen) {
       setActiveSubMenuId(item.label);
@@ -146,7 +157,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
   return (
     <div className="relative" ref={menuRef}>
       <button
-        onClick={handleToggleOpen}
+        onClick={() => handleToggleOpen(item.id)}
         className={`menu-button ${activeColorPicker ? 'hidden-button' : ''} ${item.isToggle && getToggleState(item) ? 'toggle-button-active' : ''}`}
       >
         <div className="menu-button-icon">
