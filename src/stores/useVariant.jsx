@@ -41,4 +41,8 @@ export default create((set, get) => ({
     targetCameraPosition: [0, 5, 10],
     cameraTarget: [0, 4, 0],
     targetCameraTarget: [0, 4, 0],
+
+    // Light Boxes
+    isOrderLightBoxOpen: false,
+    setIsOrderLightBoxOpen: (isOpen) => set({ isOrderLightBoxOpen: isOpen }), // Add this setter
 }));

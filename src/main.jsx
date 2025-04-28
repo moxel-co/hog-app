@@ -9,12 +9,16 @@ import { Suspense } from 'react';
 import Loading from './Loading.jsx';
 import App from './App.jsx';
 import Ui from './Ui.tsx';
+import Moxel from './components/Moxel.jsx';
+import OrderLightBox from './components/OrderLightBox.tsx';
 
 const root = ReactDOM.createRoot(document.querySelector('#root'));
 
 root.render(
   <React.StrictMode>
     <Ui />
+    <Moxel/>
+    <OrderLightBox />
     <Canvas>
       <Suspense fallback={<Loading />}>
         <App />

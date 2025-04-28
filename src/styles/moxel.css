@@ -1,0 +1,65 @@
+/* Import Overpass font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@700&display=swap');
+
+.moxel-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 1000;
+  }
+  
+  .logo-container {
+    opacity: 0.2;
+    transition: opacity 0.3s ease; /* Add transition for smooth effect */
+  }
+  
+  .logo-container:hover {
+    opacity: 1; /* Change opacity to 50% on hover */
+  }
+  
+  .social-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .moxel-container:hover .social-container {
+    opacity: 1;
+  }
+  
+  .powered-by {
+    color: white;
+    opacity: 0.7;
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Overpass', sans-serif; /* Use Overpass font */
+    font-weight: 700; /* Make it bold */
+    cursor: pointer; /* Prevent text cursor on hover */
+    transition: opacity 0.3s ease;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .social-icon {
+    color: white;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .social-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .powered-by:hover {
+    opacity: 1;
+  }
