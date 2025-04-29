@@ -84,7 +84,7 @@ export const PickGuardColorSwatches: ColorSwatch[] = [
 ];
 
 export const InlayColorSwatches: ColorSwatch[] = [
-  { color: '#F8F8FF', name: 'Silk White', metalness: 0.8, roughness: 0.2 },
+  { color: '#FFFFFF', name: 'Silk White', metalness: 0, roughness: 0.2 },
   { color: '#f1a405', name: 'Silk Gold', metalness: 0.9, roughness: 0.2 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
 ];
@@ -139,7 +139,7 @@ export const NeckBindingColorSwatches: ColorSwatch[] = [
 ];
 
 export const FretboardColorSwatches: ColorSwatch[] = [
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },

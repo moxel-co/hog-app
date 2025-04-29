@@ -4,24 +4,54 @@ import useVariant from '../stores/useVariant'; // Import useVariant
 import { guitarVariants } from '../data/guitar'; // Import guitar variants
 
 const OrderLightBox: React.FC = () => {
-    const isOrderLightBoxOpen = useVariant((state) => state.isOrderLightBoxOpen); // Get global state
-    const setIsOrderLightBoxOpen = useVariant((state) => state.setIsOrderLightBoxOpen); // Setter for global state
-    const [copied, setCopied] = useState(false);
-    const [animationClass, setAnimationClass] = useState('opacity-0 scale-95');
+  const isOrderLightBoxOpen = useVariant((state) => state.isOrderLightBoxOpen); // Get global state
+  const setIsOrderLightBoxOpen = useVariant((state) => state.setIsOrderLightBoxOpen); // Setter for global state
+  const [copied, setCopied] = useState(false);
+  const [animationClass, setAnimationClass] = useState('opacity-0 scale-95');
 
-    const body = useVariant((state) => state.body);
-    const inlay = useVariant((state) => state.inlay);
-    const headstock = useVariant((state) => state.headstock);
-    const headstock2 = useVariant((state) => state.headstock2);
+  const body = useVariant((state) => state.body);
+  const inlay = useVariant((state) => state.inlay);
+  const inlay2 = useVariant((state) => state.inlay2);
+  const headstock = useVariant((state) => state.headstock);
+  const headstock2 = useVariant((state) => state.headstock2);
+  const starPowerButton = useVariant((state) => state.starPowerButton);
+  const bodyColor = useVariant((state) => state.bodyColor);
+  const neckColor = useVariant((state) => state.neckColor);
+  const fretBoardColor = useVariant((state) => state.fretBoardColor);
+  const fretBoardBindingColor = useVariant((state) => state.fretBoardBindingColor);
+  const pickGuardColor = useVariant((state) => state.pickGuardColor);
+  const hardwareColor = useVariant((state) => state.hardwareColor);
+  const inlayColor = useVariant((state) => state.inlayColor);
+  const neckButtonColor = useVariant((state) => state.neckButtonColor);
+  const arcadeButtonColor = useVariant((state) => state.arcadeButtonColor);
+  const strummerSideColor = useVariant((state) => state.strummerSideColor);
+  const isDualNeck = useVariant((state) => state.isDualNeck);
 
-    const body_name = guitarVariants.find((variant) => variant.id === body)?.name || "Undefined Body";
-    const headstock_name = guitarVariants.find((variant) => variant.id === headstock)?.name || "Undefined Head Stock";
-    const headstock2_name = guitarVariants.find((variant) => variant.id === headstock2)?.name || "Undefined Head Stock";
-    const inlay_name = guitarVariants.find((variant) => variant.id === inlay)?.name || "Undefined Inlay";
-  const order_text = "body: " + body_name + "\n" +
-    "headstock: " + headstock_name + "\n" +
-    "headstock2: " + headstock2_name + "\n" +
-    "inlay: " + inlay_name + "\n";
+  const body_name = guitarVariants.find((variant) => variant.id === body)?.name || "Undefined Body";
+  const headstock_name = guitarVariants.find((variant) => variant.id === headstock)?.name || "Undefined Head Stock";
+  const headstock2_name = guitarVariants.find((variant) => variant.id === headstock2)?.name || "Undefined Head Stock";
+  const inlay_name = guitarVariants.find((variant) => variant.id === inlay)?.name || "Undefined Inlay";
+  const inlay2_name = guitarVariants.find((variant) => variant.id === inlay2)?.name || "Undefined Inlay";
+
+  const order_text = `
+    Body: ${body_name}
+    Headstock: ${headstock_name}
+    ${!isDualNeck ? "" : `Headstock2: ${headstock2_name}`}
+    Inlay: ${inlay_name}
+    ${!isDualNeck ? "" : `Inlay2: ${inlay2_name}`}
+    Star Power Button: ${starPowerButton ? "Enabled" : "Disabled"}
+    Body Color: ${bodyColor}
+    Neck Color: ${neckColor}
+    Fretboard Color: ${fretBoardColor}
+    Fretboard Binding Color: ${fretBoardBindingColor}
+    Pick Guard Color: ${pickGuardColor}
+    Hardware Color: ${hardwareColor}
+    Inlay Color: ${inlayColor}
+    Neck Button Color: ${neckButtonColor}
+    Arcade Button Color: ${arcadeButtonColor}
+    Strummer Side Color: ${strummerSideColor}
+  `;
+
   const orderPageUrl = "https://www.hammeronguitars.com/shop"; // Default value for orderPageUrl
 
   const closeLightbox = () => setIsOrderLightBoxOpen(false); // Update global state to close the lightbox
@@ -46,7 +76,7 @@ const OrderLightBox: React.FC = () => {
   }, [isOrderLightBoxOpen]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(body).then(() => {
+    navigator.clipboard.writeText(order_text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -62,7 +92,8 @@ const OrderLightBox: React.FC = () => {
           />
 
           <div
-            className={`relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6 transition-all duration-300 ${animationClass}`}
+            className={`relative rounded-lg shadow-xl max-w-md w-full mx-4 p-6 transition-all duration-300 ${animationClass}`}
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }} // Set white background with 20% opacity
           >
             <button
               onClick={closeLightbox}
@@ -72,11 +103,11 @@ const OrderLightBox: React.FC = () => {
               <X size={20} className="text-gray-500" />
             </button>
 
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 pr-8">
+            <h3 className="text-sm text-white mb-4 pr-8">
               Whilst we are working on improving your shopping experience, please copy the following order details on our ordering page
             </h3>
 
-            <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-800 font-mono text-sm mb-4">
+            <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-800 text-sm mb-4">
               {order_text}
             </div>
 

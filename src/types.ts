@@ -39,6 +39,12 @@ export interface GuitarPresets {
   arcadeButtonColor?: string;
   hardwareColor: string;
   isDualNeck: boolean;
+  strummerOffset: number;
+  shadowOffset: number;
+  dualNeckOffsetPos: number[];
+  dualNeckOffsetRot: number[];
+  dualNeckOffsetPosLeft: number[];
+  dualNeckOffsetRotLeft: number[];
 }
 
 export interface MenuItem {

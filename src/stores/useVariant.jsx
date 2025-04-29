@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 export default create((set, get) => ({
     // Guitar state
+    preset: 'preset_arrow',
     body: 'body_arrow',
     headstock: 'headstock_arrow',
     headstock2: 'headstock_arrow',
@@ -16,7 +17,6 @@ export default create((set, get) => ({
     hardwareColor: 'Silk Silver',
     inlayColor: 'Silk White',
     neckButtonColor: 'Rainbow',
-    neckBindingColor: 'Black',
     arcadeButtonColor: 'Black',
     strummerSideColor: 'Black',
     strummerOffset: 0,

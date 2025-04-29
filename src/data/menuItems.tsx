@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Palette,
+  Guitar,
   Joystick,
   Star,
   Hand,
@@ -215,7 +216,7 @@ const StrummerSideColorIcon = () => {
 
 // Create a custom hook that returns the customiseMenuItems array
 export const useCustomiseMenuItems = (): MenuItem[] => {
-  // Get the states from the useVariant store
+  const preset = useVariant((state) => state.preset);
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const body = useVariant((state) => state.body);
   const headstock = useVariant((state) => state.headstock);
@@ -225,29 +226,40 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
-  // Use useMemo to memoize the array and only recreate it when states change
   return useMemo(() => [
     {
-      icon: <Palette size={56} />,
+      icon: <Guitar size={56} />,
       label: 'Presets',
       items: guitarPresetVariants.map((variant) => ({
         icon: <variant.icon size={56} color="white" />,
         label: variant.name,
         onClick: () => {
-          useVariant.setState({ body: variant.body });
-          useVariant.setState({ headstock: variant.headstock });
-          useVariant.setState({ headstock2: variant.headstock2 });
-          useVariant.setState({ inlay: variant.inlay });
-          useVariant.setState({ inlay2: variant.inlay2 });
-          useVariant.setState({ bodyColor: variant.bodyColor });
-          useVariant.setState({ neckColor: variant.neckColor });
-          useVariant.setState({ neckButtonColor: variant.neckButtonColor });
-          useVariant.setState({ pickGuardColor: variant.pickguardColor });
-          useVariant.setState({ fretBoardColor: variant.fretboardColor });
-          useVariant.setState({ arcadeButtonColor: variant.arcadeButtonColor });
-          useVariant.setState({ hardwareColor: variant.hardwareColor });
-          useVariant.setState({ isDualNeck: variant.isDualNeck });
-          useVariant.setState({ strummerOffset: variant.strummerOffset });
+          useVariant.setState({
+            preset: variant.id,
+            body: variant.body,
+            headstock: variant.headstock,
+            headstock2: variant.headstock2,
+            inlay: variant.inlay,
+            inlay2: variant.inlay2,
+            starPowerButton: variant.starPowerButton,
+            bodyColor: variant.bodyColor,
+            neckColor: variant.neckColor,
+            fretBoardColor: variant.fretBoardColor,
+            fretBoardBindingColor: variant.fretBoardBindingColor,
+            pickGuardColor: variant.pickGuardColor,
+            hardwareColor: variant.hardwareColor,
+            inlayColor: variant.inlayColor,
+            neckButtonColor: variant.neckButtonColor,
+            arcadeButtonColor: variant.arcadeButtonColor,
+            strummerSideColor: variant.strummerSideColor,
+            isDualNeck: variant.isDualNeck,
+            strummerOffset: variant.strummerOffset,
+            shadowOffset: variant.shadowOffset,
+            dualNeckOffsetPos: variant.dualNeckOffsetPos,
+            dualNeckOffsetRot: variant.dualNeckOffsetRot,
+            dualNeckOffsetPosLeft: variant.dualNeckOffsetPosLeft,
+            dualNeckOffsetRotLeft: variant.dualNeckOffsetRotLeft,
+          });
           updateDynamicCamera("default");
         },
         isActive: body === variant.id,
@@ -260,14 +272,16 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         icon: <variant.icon size={56} color="white" />,
         label: variant.name,
         onClick: () => {
-          useVariant.setState({ body: variant.id });
-          useVariant.setState({ strummerOffset: variant.strummerOffset });
-          useVariant.setState({ shadowOffset: variant.shadowOffset });
-          useVariant.setState({ isDualNeck: variant.isDualNeck });
-          useVariant.setState({ dualNeckOffsetPos: variant.dualNeckOffsetPos });
-          useVariant.setState({ dualNeckOffsetRot: variant.dualNeckOffsetRot });
-          useVariant.setState({ dualNeckOffsetPosLeft: variant.dualNeckOffsetPosLeft });
-          useVariant.setState({ dualNeckOffsetRotLeft: variant.dualNeckOffsetRotLeft });
+          useVariant.setState({
+            body: variant.id,
+            strummerOffset: variant.strummerOffset,
+            shadowOffset: variant.shadowOffset,
+            isDualNeck: variant.isDualNeck,
+            dualNeckOffsetPos: variant.dualNeckOffsetPos,
+            dualNeckOffsetRot: variant.dualNeckOffsetRot,
+            dualNeckOffsetPosLeft: variant.dualNeckOffsetPosLeft,
+            dualNeckOffsetRotLeft: variant.dualNeckOffsetRotLeft,
+          });
           updateDynamicCamera(variant.type);
         },
         isActive: body === variant.id,
@@ -425,5 +439,5 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         },
       ],
     },
-  ], [isDualNeck, body, headstock, headstock2, inlay, inlay2, starPowerButton, isLeftHandOrientation]); // Recreate the array when any of these states change
+  ], [preset, isDualNeck, body, headstock, headstock2, inlay, inlay2, starPowerButton, isLeftHandOrientation]);
 };
