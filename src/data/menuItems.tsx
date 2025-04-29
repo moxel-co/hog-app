@@ -22,6 +22,7 @@ import { MenuItem } from '../types';
 import { 
   BodyColorSwatches,
   NeckColorSwatches,
+  HeadstockColorSwatches,
   PickGuardColorSwatches,
   InlayColorSwatches,
   HardwareColorSwatches,
@@ -47,20 +48,20 @@ const guitarPresetVariants = guitarPresets.filter((variant) => variant.type === 
 // Dynamic icons for menu items based on selected variant
 const HeadstockIcon = () => {
   const headstock = useVariant((state) => state.headstock);
-  const neckColorState = useVariant((state) => state.neckColor);
-  const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
+  const headstockColorState = useVariant((state) => state.headstockColor);
+  const headstockColor = HeadstockColorSwatches.find((color) => color.name === headstockColorState);
   const variant = guitarVariants.find(v => v.id === `${headstock}`);
   const IconComponent = variant?.icon || HeadStockReliableIcon;
-  return <IconComponent size={56} color={neckColor.color} />;
+  return <IconComponent size={56} color={headstockColor.color} />;
 };
 
 const HeadstockIcon2 = () => {
   const headstock = useVariant((state) => state.headstock2);
-  const neckColorState = useVariant((state) => state.neckColor);
-  const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
+  const headstockColorState = useVariant((state) => state.headstockColor);
+  const headstockColor = HeadstockColorSwatches.find((color) => color.name === headstockColorState);
   const variant = guitarVariants.find(v => v.id === `${headstock}`);
   const IconComponent = variant?.icon || HeadStockReliableIcon;
-  return <IconComponent size={56} color={neckColor.color} />;
+  return <IconComponent size={56} color={headstockColor.color} />;
 };
 
 const BodyIcon = () => {
@@ -96,59 +97,6 @@ const updateDynamicCamera = (targetType: string) => {
   });
 };
 
-const handleColorSelect = (colorType: string, color: string) => {
-  switch (colorType) {
-    case 'Body':
-      useVariant.setState({ bodyColor: color });
-      useVariant.setState({ targetType: 'body' });
-      break;
-    case 'Neck':
-      useVariant.setState({ neckColor: color });
-      useVariant.setState({ targetType: 'neck' });
-      break;
-    case 'Fretboard':
-      useVariant.setState({ fretBoardColor: color });
-      useVariant.setState({ targetType: 'fretboard' });
-      break;
-    case 'Neck Binding':
-      useVariant.setState({ fretBoardBindingColor: color });
-      useVariant.setState({ targetType: 'neck' });
-      break;
-    case 'Inlay':
-      useVariant.setState({ inlayColor: color });
-      useVariant.setState({ targetType: 'inlay' });
-      break;
-    case 'Neck Buttons':
-      useVariant.setState({ neckButtonColor: color });
-      useVariant.setState({ targetType: 'neckButtons' });
-      break;
-    case 'Arcade Buttons':
-      useVariant.setState({ arcadeButtonColor: color });
-      useVariant.setState({ targetType: 'body' });
-      break;
-    case 'Pick Guard':
-      useVariant.setState({ pickGuardColor: color });
-      useVariant.setState({ targetType: 'body' });
-      break;
-    case 'Hardware':
-      useVariant.setState({ hardwareColor: color });
-      useVariant.setState({ targetType: 'default' });
-      break;
-    case 'Strummer Side Panels':
-      useVariant.setState({ strummerSideColor: color });
-      useVariant.setState({ targetType: 'body' });
-      break;
-  }
-};
-
-const ColorPickerIcon = ({ color }: { color: string }) => {
-  return (
-    <div style={{ color }}>
-      <Palette size={56} />
-    </div>
-  );
-};
-
 const BodyColorIcon = () => {
   const body = useVariant((state) => state.body);
   const bodyColorState = useVariant((state) => state.bodyColor);
@@ -163,6 +111,15 @@ const NeckColorIcon = () => {
   const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
   return <NeckIcon size={56} color={neckColor.color} />;
 };
+
+const HeadstockColorIcon = () => {
+  const headstock = useVariant((state) => state.headstock);
+  const headstockColorState = useVariant((state) => state.headstockColor);
+  const headstockColor = HeadstockColorSwatches.find((color) => color.name === headstockColorState);
+  const variant = guitarVariants.find(v => v.id === `${headstock}`);
+  const IconComponent = variant?.icon || HeadStockArrowIcon;
+  return <IconComponent size={56} color={headstockColor.color} />;
+}
 
 const FretboardColorIcon = () => {
   const fretBoardColorState = useVariant((state) => state.fretBoardColor);
@@ -255,6 +212,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
             isDualNeck: variant.isDualNeck,
             strummerOffset: variant.strummerOffset,
             shadowOffset: variant.shadowOffset,
+            offsetPos: variant.offsetPos,
             dualNeckOffsetPos: variant.dualNeckOffsetPos,
             dualNeckOffsetRot: variant.dualNeckOffsetRot,
             dualNeckOffsetPosLeft: variant.dualNeckOffsetPosLeft,
@@ -277,6 +235,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
             strummerOffset: variant.strummerOffset,
             shadowOffset: variant.shadowOffset,
             isDualNeck: variant.isDualNeck,
+            offsetPos: variant.offsetPos,
             dualNeckOffsetPos: variant.dualNeckOffsetPos,
             dualNeckOffsetRot: variant.dualNeckOffsetRot,
             dualNeckOffsetPosLeft: variant.dualNeckOffsetPosLeft,
@@ -311,7 +270,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
               label: variant.name,
               onClick: () => {
                 useVariant.setState({ headstock2: variant.id });
-                updateDynamicCamera('headstock2');
+                updateDynamicCamera(variant.type);
               },
               isActive: headstock2 === variant.id,
             })),
@@ -331,6 +290,24 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
         isActive: inlay === variant.id,
       })),
     },
+    // Conditionally include the Inlay2 menu item based on isDualNeck
+    ...(isDualNeck
+      ? [
+          {
+            icon: <InlayIcon2 /> as ReactNode,
+            label: 'Inlay2',
+            items: inlayVariants.map((variant) => ({
+              icon: <variant.icon size={56} color="white" />,
+              label: variant.name,
+              onClick: () => {
+                useVariant.setState({ inlay2: variant.id });
+                updateDynamicCamera(variant.type);
+              },
+              isActive: inlay2 === variant.id,
+            })),
+          },
+        ]
+      : []), // If false, add nothing
     {
       icon: <Star size={56} />,
       label: 'Star Power',
@@ -345,24 +322,6 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       id: 'leftHandOrientation',
       active: isLeftHandOrientation,
     },
-    // Conditionally include the Inlay2 menu item based on isDualNeck
-    ...(isDualNeck
-      ? [
-          {
-            icon: <InlayIcon2 /> as ReactNode,
-            label: 'Inlay2',
-            items: inlayVariants.map((variant) => ({
-              icon: <variant.icon size={56} color="white" />,
-              label: variant.name,
-              onClick: () => {
-                useVariant.setState({ inlay2: variant.id });
-                updateDynamicCamera("inlay2");
-              },
-              isActive: inlay2 === variant.id,
-            })),
-          },
-        ]
-      : []), // If false, add nothing
     {
       icon: <Palette size={56} />,
       label: 'Colors',
@@ -380,6 +339,13 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
           isColorPicker: true,
           swatches: NeckColorSwatches,
           onColorSelect: (color: string) => handleColorSelect('Neck', color),
+        },
+        {
+          icon: <HeadstockColorIcon />,
+          label: 'Headstock',
+          isColorPicker: true,
+          swatches: HeadstockColorSwatches,
+          onColorSelect: (color: string) => handleColorSelect('Headstock', color),
         },
         {
           icon: <FretboardColorIcon />,

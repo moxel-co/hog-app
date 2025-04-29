@@ -71,6 +71,7 @@ export const guitarPresets: GuitarPresets[] = [
         shadowOffset: 0,
         strummerOffset: 0.03,
         isDualNeck: false,
+        offsetPos: [0,0],
         icon: BodyArrowIcon,
     },
     {
@@ -95,6 +96,7 @@ export const guitarPresets: GuitarPresets[] = [
         strummerSideColor: 'Blue',
         strummerOffset: 0.01,
         shadowOffset: -0.5,
+        offsetPos: [0,0],
         isDualNeck: false,
         icon: BodyThunderbirdIcon,
     },
@@ -121,6 +123,7 @@ export const guitarPresets: GuitarPresets[] = [
         isDualNeck: true,
         strummerOffset: 0.02,
         shadowOffset: 0,
+        offsetPos: [-0.55,0],
         dualNeckOffsetPos: [1.12, 0, 0],
         dualNeckOffsetRot: [0, 0, 0],
         dualNeckOffsetPosLeft: [-1.13, 0, 0],

@@ -9,6 +9,7 @@ import { useControls } from 'leva'
 import { 
   BodyColorSwatches,
   NeckColorSwatches,
+  HeadstockColorSwatches,
   PickGuardColorSwatches,
   InlayColorSwatches,
   HardwareColorSwatches,
@@ -31,6 +32,7 @@ export function Guitar(props) {
   const inlay2 = useVariant((state) => state.inlay2);
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const bodyColorState = useVariant((state) => state.bodyColor);
+  const headstockColorState = useVariant((state) => state.headstockColor);
   const arcadeButtonColorState = useVariant((state) => state.arcadeButtonColor);
   const neckButtonColorState = useVariant((state) => state.neckButtonColor);
   const neckColorState = useVariant((state) => state.neckColor);
@@ -42,17 +44,21 @@ export function Guitar(props) {
   const strummerSideColorState = useVariant((state) => state.strummerSideColor);
   const strummerOffset = useVariant((state) => state.strummerOffset);
   const isDualNeck = useVariant((state) => state.isDualNeck);
+  const offsetPos = useVariant((state) => state.offsetPos);
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
   const dualNeckOffsetRot = useVariant((state) => state.dualNeckOffsetRot);
   const dualNeckOffsetPosLeft = useVariant((state) => state.dualNeckOffsetPosLeft);
   const dualNeckOffsetRotLeft = useVariant((state) => state.dualNeckOffsetRotLeft);
   const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
+  // console.log(headstockColorState)
+
   // Color library
   const bodyColor = BodyColorSwatches.find((color) => color.name === bodyColorState);
   const arcadeButtonColor = ArcadeButtonColorSwatches.find((color) => color.name === arcadeButtonColorState);
   const neckButtonColor = NeckButtonColorSwatches.find((color) => color.name === neckButtonColorState);
   const neckColor = NeckColorSwatches.find((color) => color.name === neckColorState);
+  const headstockColor = HeadstockColorSwatches.find((color) => color.name === headstockColorState);
   const inlayColor = InlayColorSwatches.find((color) => color.name === inlayColorState);
   const fretBoardColor = FretboardColorSwatches.find((color) => color.name === fretBoardColorState);
   const fretBoardBindingColor = NeckBindingColorSwatches.find((color) => color.name === fretBoardBindingColorState);
@@ -91,6 +97,7 @@ export function Guitar(props) {
   const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor?.color || '#ffffff', roughness: 0.2, metalness: hardwareColor?.metalness || 0})
   const m_chromeMetal = new THREE.MeshStandardMaterial({color: "white", roughness: 0.1, metalness: 1})
   const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor?.color || '#ffffff', roughness: 0.4, metalness: bodyColor?.metalness || 0})
+  const m_headstockPlastic = new THREE.MeshStandardMaterial({color: headstockColor?.color || '#ffffff', roughness: 0.4, metalness: headstockColor?.metalness || 0})
   const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor?.color || '#ffffff', roughness: 0.2, metalness: arcadeButtonColor?.metalness || 0})
   const m_neckButtonPlastic = new THREE.MeshStandardMaterial({color: neckButtonColor?.color || '#ffffff', roughness: neckButtonColor?.roughness || 0.3, metalness: neckButtonColor?.metalness || 0})
   const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor?.color || '#ffffff', roughness: 0.4, metalness: inlayColor?.metalness || 0})
@@ -128,6 +135,7 @@ export function Guitar(props) {
     '__hardwareMetal__': m_hardwareMetal,
     '__chromeMetal__': m_chromeMetal,
     '__bodyPlastic__': m_bodyPlastic,
+    '__headstockPlastic' : m_headstockPlastic,
     '__buttonPlastic__': m_arcadeButtonPlastic,
     '__neckPlastic__': m_neckPlastic,
     '__inlayPlastic__': m_inlayPlastic,
@@ -149,7 +157,7 @@ export function Guitar(props) {
   })
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} position={isLeftHandOrientation? [-offsetPos[0],offsetPos[1],0] : [offsetPos[0],offsetPos[1],0]}>
       <group visible={body === "body_arrow"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03, 0, 0] : [0, 0, 0]}>
         <mesh
           castShadow

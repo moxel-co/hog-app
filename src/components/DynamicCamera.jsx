@@ -34,10 +34,6 @@ export function DynamicCamera() {
       position: [0, 2.4, 6],
       target: [0, 2.4, 0],
     },
-    bodyDual: {
-      position: [0.5, 2.4, 6],
-      target: [0.5, 2.4, 0],
-    },
     inlay: {
       position: [0, 4.2, 3],
       target: [0, 4.2, 0],

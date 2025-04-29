@@ -26,6 +26,7 @@ const OrderLightBox: React.FC = () => {
   const arcadeButtonColor = useVariant((state) => state.arcadeButtonColor);
   const strummerSideColor = useVariant((state) => state.strummerSideColor);
   const isDualNeck = useVariant((state) => state.isDualNeck);
+  const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
   const body_name = guitarVariants.find((variant) => variant.id === body)?.name || "Undefined Body";
   const headstock_name = guitarVariants.find((variant) => variant.id === headstock)?.name || "Undefined Head Stock";
@@ -33,24 +34,27 @@ const OrderLightBox: React.FC = () => {
   const inlay_name = guitarVariants.find((variant) => variant.id === inlay)?.name || "Undefined Inlay";
   const inlay2_name = guitarVariants.find((variant) => variant.id === inlay2)?.name || "Undefined Inlay";
 
-  const order_text = `
-    Body: ${body_name}
-    Headstock: ${headstock_name}
-    ${!isDualNeck ? "" : `Headstock2: ${headstock2_name}`}
-    Inlay: ${inlay_name}
-    ${!isDualNeck ? "" : `Inlay2: ${inlay2_name}`}
-    Star Power Button: ${starPowerButton ? "Enabled" : "Disabled"}
-    Body Color: ${bodyColor}
-    Neck Color: ${neckColor}
-    Fretboard Color: ${fretBoardColor}
-    Fretboard Binding Color: ${fretBoardBindingColor}
-    Pick Guard Color: ${pickGuardColor}
-    Hardware Color: ${hardwareColor}
-    Inlay Color: ${inlayColor}
-    Neck Button Color: ${neckButtonColor}
-    Arcade Button Color: ${arcadeButtonColor}
-    Strummer Side Color: ${strummerSideColor}
-  `;
+  const order_text = [
+    `Body: ${body_name}`,
+    `Headstock: ${headstock_name}`,
+    isDualNeck ? `Headstock2: ${headstock2_name}` : null,
+    `Inlay: ${inlay_name}`,
+    isDualNeck ? `Inlay2: ${inlay2_name}` : null,
+    `Star Power Button: ${starPowerButton ? "Enabled" : "Disabled"}`,
+    `Hand Orientation: ${isLeftHandOrientation ? "Left" : "Right"}`,
+    `Body Color: ${bodyColor}`,
+    `Neck Color: ${neckColor}`,
+    `Fretboard Color: ${fretBoardColor}`,
+    `Fretboard Binding Color: ${fretBoardBindingColor}`,
+    `Pick Guard Color: ${pickGuardColor}`,
+    `Hardware Color: ${hardwareColor}`,
+    `Inlay Color: ${inlayColor}`,
+    `Neck Button Color: ${neckButtonColor}`,
+    `Arcade Button Color: ${arcadeButtonColor}`,
+    `Strummer Side Color: ${strummerSideColor}`,
+  ]
+    .filter(Boolean) // Remove null or undefined lines
+    .join("\n"); // Join lines with a newline character
 
   const orderPageUrl = "https://www.hammeronguitars.com/shop"; // Default value for orderPageUrl
 
@@ -103,18 +107,25 @@ const OrderLightBox: React.FC = () => {
               <X size={20} className="text-gray-500" />
             </button>
 
-            <h3 className="text-sm text-white mb-4 pr-8">
-              Whilst we are working on improving your shopping experience, please copy the following order details on our ordering page
+            <h3 className="text-lg text-white mb-4 pr-8 text-center">
+            As we work towards a more seamless shopping experience, please enter the order details on the ordering page.
             </h3>
 
-            <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-800 text-sm mb-4">
+            <div
+              className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-800 text-sm mb-4"
+              style={{ whiteSpace: 'pre-wrap' }} // Ensure line breaks are rendered
+            >
               {order_text}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <button
                 onClick={handleCopy}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-opacity-50"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-white rounded-md hover:opacity-90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+                style={{
+                  backgroundColor: 'orange', // Set the button background color
+                  focusRingColor: '#0c3d64', // Optional: Set focus ring color
+                }}
               >
                 {copied ? (
                   <>

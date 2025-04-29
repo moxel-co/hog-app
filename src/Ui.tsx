@@ -16,6 +16,10 @@ const handleColorSelect = (colorType: string, color: string) => {
       useVariant.setState({ neckColor: color });
       useVariant.setState({ targetType: 'neck' });
       break;
+    case 'Headstock':
+      useVariant.setState({ headstockColor: color });
+      useVariant.setState({ targetType: 'headstock' });
+      break;
     case 'Fretboard':
       useVariant.setState({ fretBoardColor: color });
       useVariant.setState({ targetType: 'fretboard' });
