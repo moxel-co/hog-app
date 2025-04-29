@@ -125,7 +125,7 @@ function SubMenuItem({ item, parentOpen, onSubMenuOpen, activeSubMenuId, setActi
     switch (id) {
       case 'starPowerButton':
         useVariant.setState({ starPowerButton: !starPowerButton });
-        console.log("Star Power Button Clicked");
+        useVariant.setState({ targetType: 'body' });
         break;
       case 'leftHandOrientation':
         useVariant.setState({ isLeftHandOrientation: !isLeftHandOrientation });
