@@ -8,7 +8,7 @@ export default function ShowcaseCamera(props) {
   const group = useRef()
   const animatedCamRef = useRef()
   const { camera } = useThree()
-  const { animations } = useGLTF('./assets/prpGuitar/camera2.glb')
+  const { animations } = useGLTF('./assets/prpGuitar/camera.glb')
   const { actions } = useAnimations(animations, group)
 
   // Animation sequence
@@ -82,4 +82,4 @@ export default function ShowcaseCamera(props) {
   )
 }
 
-useGLTF.preload('./assets/prpGuitar/camera2.glb')
+useGLTF.preload('./assets/prpGuitar/camera.glb')

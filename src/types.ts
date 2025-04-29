@@ -34,6 +34,7 @@ export interface GuitarPresets {
   inlay2?: string;
   bodyColor: string;
   neckColor: string;
+  headstockColor: string;
   neckButtonColor?: string;
   pickguardColor?: string;
   fretboardColor?: string;

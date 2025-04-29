@@ -23,7 +23,7 @@ import {
 const asset_name = 'prpGuitar'
 
 export function Guitar(props) {
-  const { nodes, materials } = useGLTF(`./assets/${asset_name}/model2.glb`)
+  const { nodes, materials } = useGLTF(`./assets/${asset_name}/model.glb`)
 
   const body = useVariant((state) => state.body);
   const headstock = useVariant((state) => state.headstock);
@@ -51,7 +51,6 @@ export function Guitar(props) {
   const dualNeckOffsetRotLeft = useVariant((state) => state.dualNeckOffsetRotLeft);
   const isLeftHandOrientation = useVariant((state) => state.isLeftHandOrientation);
 
-  // console.log(headstockColorState)
 
   // Color library
   const bodyColor = BodyColorSwatches.find((color) => color.name === bodyColorState);
@@ -97,7 +96,7 @@ export function Guitar(props) {
   const m_hardwareMetal = new THREE.MeshStandardMaterial({color: hardwareColor?.color || '#ffffff', roughness: 0.2, metalness: hardwareColor?.metalness || 0})
   const m_chromeMetal = new THREE.MeshStandardMaterial({color: "white", roughness: 0.1, metalness: 1})
   const m_bodyPlastic = new THREE.MeshStandardMaterial({color: bodyColor?.color || '#ffffff', roughness: 0.4, metalness: bodyColor?.metalness || 0})
-  const m_headstockPlastic = new THREE.MeshStandardMaterial({color: headstockColor?.color || '#ffffff', roughness: 0.4, metalness: headstockColor?.metalness || 0})
+  const m_headstockPlastic = new THREE.MeshStandardMaterial({color: headstockColor?.color || '#ffffff', roughness: 0.4, metalness: headstockColor?.metalness || 0, normalMap: t_normal, normalScale: new THREE.Vector2(0.2, 0.2)})
   const m_arcadeButtonPlastic = new THREE.MeshStandardMaterial({color: arcadeButtonColor?.color || '#ffffff', roughness: 0.2, metalness: arcadeButtonColor?.metalness || 0})
   const m_neckButtonPlastic = new THREE.MeshStandardMaterial({color: neckButtonColor?.color || '#ffffff', roughness: neckButtonColor?.roughness || 0.3, metalness: neckButtonColor?.metalness || 0})
   const m_inlayPlastic = new THREE.MeshStandardMaterial({color: inlayColor?.color || '#ffffff', roughness: 0.4, metalness: inlayColor?.metalness || 0})
@@ -1056,8 +1055,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_arrow_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_arrow_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_arrow_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1102,8 +1101,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_briefcase_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_briefcase_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_briefcase_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_briefcase_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1176,8 +1175,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_ninjastar_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_ninjastar_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_ninjastar_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_ninjastar_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1228,8 +1227,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_plankspanker_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_plankspanker_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_plankspanker_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1260,8 +1259,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_reliable_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_reliable_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_reliable_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_reliable_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1292,8 +1291,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_reliable12_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_reliable12_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_reliable12_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_reliable12_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1324,8 +1323,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_summit_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_summit_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_summit_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_summit_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1362,8 +1361,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_thunderbird_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_thunderbird_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_thunderbird_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1406,8 +1405,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_viper_front__blackPlastic__geo.geometry}
-          material={nodes.headstock_viper_front__blackPlastic__geo.material}
+          geometry={nodes.headstock_viper_front__headstockPlastic__geo.geometry}
+          material={nodes.headstock_viper_front__headstockPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1649,8 +1648,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_arrow_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_arrow_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_arrow_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_arrow_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1695,8 +1694,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_briefcase_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_briefcase_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_briefcase_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_briefcase_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1769,8 +1768,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_ninjastar_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_ninjastar_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_ninjastar_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_ninjastar_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1821,8 +1820,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_plankspanker_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_plankspanker_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_plankspanker_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_plankspanker_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1853,8 +1852,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_reliable_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_reliable_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_reliable_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_reliable_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1885,8 +1884,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_reliable12_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_reliable12_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_reliable12_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_reliable12_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1917,8 +1916,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_summit_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_summit_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_summit_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_summit_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1955,8 +1954,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_thunderbird_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_thunderbird_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_thunderbird_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_thunderbird_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -1999,8 +1998,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_viper_front__blackPlastic__geo.geometry}
-            material={nodes.headstock_viper_front__blackPlastic__geo.material}
+            geometry={nodes.headstock_viper_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_viper_front__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -2280,4 +2279,4 @@ export function Guitar(props) {
   )
 }
 
-useGLTF.preload(`./assets/${asset_name}/model1.glb`)
+useGLTF.preload(`./assets/${asset_name}/model.glb`)

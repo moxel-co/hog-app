@@ -616,3 +616,29 @@ export const StrummerSideIcon = ({ size, color = 'currentColor' }: IconProps) =>
     }}
   />
 );
+
+
+export const HandRightIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/handRight.png") center/contain no-repeat`,
+      mask: `url("/icons/handRight.png") center/contain no-repeat`,
+    }}
+  />
+);
+
+
+export const HandLeftIcon = ({ size, color = 'currentColor' }: IconProps) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      backgroundColor: color,
+      WebkitMask: `url("/icons/handLeft.png") center/contain no-repeat`,
+      mask: `url("/icons/handLeft.png") center/contain no-repeat`,
+    }}
+  />
+);

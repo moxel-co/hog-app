@@ -17,6 +17,8 @@ import {
   NeckButtonsIcon,
   PickGuardIcon,
   StrummerSideIcon,
+  HandLeftIcon,
+  HandRightIcon
 } from './icons.tsx';
 import { MenuItem } from '../types';
 import { 
@@ -201,6 +203,7 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
             starPowerButton: variant.starPowerButton,
             bodyColor: variant.bodyColor,
             neckColor: variant.neckColor,
+            headstockColor: variant.headstockColor,
             fretBoardColor: variant.fretBoardColor,
             fretBoardBindingColor: variant.fretBoardBindingColor,
             pickGuardColor: variant.pickGuardColor,
@@ -316,9 +319,9 @@ export const useCustomiseMenuItems = (): MenuItem[] => {
       active: starPowerButton,
     },
     {
-      icon: <Hand size={56} />,
-      label: 'Left Hand Orientation',
-      isToggle: true,
+      icon: isLeftHandOrientation ? <HandLeftIcon size={56} /> : <HandRightIcon size={56} />,
+      label: 'Hand Orientation',
+      isToggle: false,
       id: 'leftHandOrientation',
       active: isLeftHandOrientation,
     },
