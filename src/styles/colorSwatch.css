@@ -1,20 +1,25 @@
 /* Color swatch container */
 .color-swatches {
   @apply fixed flex items-center justify-center pointer-events-auto;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-height: 90vh; /* Ensure it doesn't go off screen */
+  overflow-y: auto; /* Allow scrolling if needed */
   z-index: 9999;
 }
 
 .color-grid {
   @apply grid grid-cols-3 gap-2 p-2.5 bg-gray-900/90 rounded-lg;
   min-width: max-content;
+  max-height: calc(90vh - 2rem); /* Account for padding */
 }
 
 /* Individual color swatch */
 .color-swatch {
-  @apply w-5 h-5 md:w-6 md:h-6 2xl:w-8 2xl:h-8 4xl:w-10 4xl:h-10
+  @apply w-7 h-7 /* 50% larger for mobile */
+         md:w-6 md:h-6 2xl:w-8 2xl:h-8 4xl:w-10 4xl:h-10
          rounded-full shadow-lg 
          transition-all duration-300 ease-in-out 
          cursor-pointer 

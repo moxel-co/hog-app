@@ -9,7 +9,8 @@
 
 /* Menu button styles */
 .menu-button {
-  @apply relative flex items-center justify-center w-[1.53rem] h-[1.53rem] 
+  @apply relative flex items-center justify-center 
+         w-[2.3rem] h-[2.3rem] /* 50% larger for mobile */
          md:w-[2.19rem] md:h-[2.19rem] 2xl:w-[3.06rem] 2xl:h-[3.06rem] 
          4xl:w-[4.9rem] 4xl:h-[4.9rem] rounded-full transition-all duration-200 
          text-white cursor-pointer bg-white/5;
@@ -29,7 +30,7 @@
 
 .menu-button-icon,
 .cart-button-icon {
-  @apply absolute inset-0 flex items-center justify-center scale-[0.41] 
+  @apply absolute inset-0 flex items-center justify-center scale-[0.615] /* 50% larger for mobile */
          md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138] transition-all duration-200;
 }
 
