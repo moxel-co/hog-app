@@ -454,6 +454,7 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_hammer_buttonSP__buttonPlastic__geo.geometry}
           material={nodes.body_hammer_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
         />
         <mesh
           castShadow
@@ -809,6 +810,7 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_shredhammer_buttonSP__buttonPlastic__geo.geometry}
           material={nodes.body_shredhammer_buttonSP__buttonPlastic__geo.material}
+          visible={starPowerButton}
         />
         <mesh
           castShadow
@@ -1135,8 +1137,8 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_fallenangel_detail__whitePlastic__geo.geometry}
-          material={nodes.headstock_fallenangel_detail__whitePlastic__geo.material}
+          geometry={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.geometry}
+          material={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.material}
         />
         <mesh
           castShadow
@@ -1590,6 +1592,12 @@ export function Guitar(props) {
         <mesh
           castShadow
           receiveShadow
+          geometry={nodes.neck_fretTop__whitePlastic__geo.geometry}
+          material={nodes.neck_fretTop__whitePlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.neck_polybar__fretboardBindingPlastic__geo.geometry}
           material={m_fretboardBindingPlastic}
         />
@@ -1728,8 +1736,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_fallenangel_detail__whitePlastic__geo.geometry}
-            material={nodes.headstock_fallenangel_detail__whitePlastic__geo.material}
+            geometry={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.geometry}
+            material={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -2061,6 +2069,12 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.neck_frets__brushedMetal__geo.geometry}
           material={nodes.neck_frets__brushedMetal__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.neck_fretTop__whitePlastic__geo.geometry}
+          material={nodes.neck_fretTop__whitePlastic__geo.material}
         />
         <mesh
           castShadow

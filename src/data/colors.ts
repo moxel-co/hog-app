@@ -13,7 +13,7 @@ export const BodyColorSwatches: ColorSwatch[] = [
   { color: '#db5166', name: 'Pink', metalness: 0, roughness: 0.3 },
   { color: '#D8BFD8', name: 'Light Purple', metalness: 0, roughness: 0.3 },
   { color: '#762c9c', name: 'Purple', metalness: 0, roughness: 0.3 },
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
@@ -33,7 +33,7 @@ export const HeadstockColorSwatches: ColorSwatch[] = [
   { color: '#db5166', name: 'Pink', metalness: 0, roughness: 0.3 },
   { color: '#D8BFD8', name: 'Light Purple', metalness: 0, roughness: 0.3 },
   { color: '#762c9c', name: 'Purple', metalness: 0, roughness: 0.3 },
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
@@ -53,7 +53,7 @@ export const NeckColorSwatches: ColorSwatch[] = [
   { color: '#db5166', name: 'Pink', metalness: 0, roughness: 0.3 },
   { color: '#D8BFD8', name: 'Light Purple', metalness: 0, roughness: 0.3 },
   { color: '#762c9c', name: 'Purple', metalness: 0, roughness: 0.3 },
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
@@ -73,7 +73,7 @@ export const PickGuardColorSwatches: ColorSwatch[] = [
   { color: '#db5166', name: 'Pink', metalness: 0, roughness: 0.3 },
   { color: '#D8BFD8', name: 'Light Purple', metalness: 0, roughness: 0.3 },
   { color: '#762c9c', name: 'Purple', metalness: 0, roughness: 0.3 },
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
@@ -104,7 +104,7 @@ export const NeckButtonColorSwatches: ColorSwatch[] = [
   { color: '#ff7b86', name: 'Pink', metalness: 0, roughness: 0.3 },
   { color: '#505bb0', name: 'Light Purple', metalness: 0, roughness: 0.3 },
   { color: '#674287', name: 'Purple', metalness: 0, roughness: 0.3 },
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
@@ -133,12 +133,13 @@ export const HardwareColorSwatches: ColorSwatch[] = [
 export const NeckBindingColorSwatches: ColorSwatch[] = [
   { color: '#FFFFFF', name: 'White', metalness: 0, roughness: 0.3 },
   { color: '#000000', name: 'Black', metalness: 0, roughness: 0.3 },
-  { color: '#938368', name: 'Tan', metalness: 0, roughness: 0.3 },
+  { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
 ];
 
 export const FretboardColorSwatches: ColorSwatch[] = [
+  { color: '#FFFFFF', name: 'White', metalness: 0, roughness: 0.3 },
   { color: '#96693c', name: 'Tan', metalness: 0, roughness: 0.3 },
   { color: '#5e3e30', name: 'Brown', metalness: 0, roughness: 0.3 },
   { color: '#2d1e23', name: 'Dark Brown', metalness: 0, roughness: 0.3 },
@@ -146,7 +147,7 @@ export const FretboardColorSwatches: ColorSwatch[] = [
 ];
 
 export const StrummerSideColorSwatches: ColorSwatch[] = [
-  { color: '#FFFFFF', name: 'Clear', metalness: 0, roughness: 0.3 },
+  // { color: '#FFFFFF', name: 'Clear', metalness: 0, roughness: 0.3 },
   { color: '#8c1521', name: 'Red', metalness: 0, roughness: 0.3 },
   { color: '#e33a0b', name: 'Orange', metalness: 0, roughness: 0.3 },
   { color: '#c9a41e', name: 'Yellow', metalness: 0, roughness: 0.3 },
