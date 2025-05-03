@@ -16,6 +16,8 @@ export interface GuitarVariant {
   shadowOffset: number;
   isDualNeck?: boolean;
   offsetPos: number[];
+  neckOffsetPosLeft: number[];
+  neckOffsetRotLeft: number[];
   dualNeckOffsetPos: number[];
   dualNeckOffsetRot: number[];
   dualNeckOffsetPosLeft: number[];
@@ -44,6 +46,8 @@ export interface GuitarPresets {
   strummerOffset: number;
   shadowOffset: number;
   offsetPos: number[];
+  neckOffsetPosLeft: number[];
+  neckOffsetRotLeft: number[];
   dualNeckOffsetPos: number[];
   dualNeckOffsetRot: number[];
   dualNeckOffsetPosLeft: number[];

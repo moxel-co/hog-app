@@ -75,7 +75,7 @@
 
 /* Submenu styles */
 .submenu-container {
-  @apply absolute right-full top-1/2 -translate-y-1/2 mr-1 md:mr-1.5 
+  @apply absolute right-full top-0 mr-1 md:mr-1.5 
          2xl:mr-2 4xl:mr-6 animate-slide-left z-[50];
 }
 
@@ -108,7 +108,7 @@
 
 /* Submenu button styles */
 .submenu-button {
-  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 
+  @apply relative w-[2.3rem] h-[2.3rem] md:w-[2.19rem] md:h-[2.19rem] 
          2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem] 
          rounded-full transition-all duration-200 bg-white/10 flex items-center 
          justify-center text-white hover:bg-[#0c3d64] hover:opacity-90 cursor-pointer z-10;
@@ -119,12 +119,12 @@
 }
 
 .submenu-button .menu-button-icon {
-  @apply scale-[0.41] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138];
+  @apply scale-[0.615] md:scale-[0.547] 2xl:scale-[0.711] 4xl:scale-[1.138];
 }
 
 /* Custom submenu styles */
 .custom-submenu {
-  @apply absolute right-full top-0 mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 
+  @apply absolute right-full top-[50%] -translate-y-[50%] mr-1 md:mr-1.5 2xl:mr-2 4xl:mr-6 
          space-y-1 md:space-y-2 2xl:space-y-3 4xl:space-y-8;
 }
 
@@ -144,7 +144,7 @@
 
 /* Option item styles */
 .option-item {
-  @apply relative w-[1.53rem] h-[1.53rem] md:w-[2.19rem] md:h-[2.19rem] 
+  @apply relative w-[2.3rem] h-[2.3rem] md:w-[2.19rem] md:h-[2.19rem] 
          2xl:w-[3.06rem] 2xl:h-[3.06rem] 4xl:w-[4.9rem] 4xl:h-[4.9rem] 
          rounded-full transition-all duration-200 flex items-center justify-center 
          text-white bg-white/20 hover:bg-[#0c3d64]/20 hover:opacity-90 cursor-pointer z-10;

@@ -45,6 +45,8 @@ export function Guitar(props) {
   const strummerOffset = useVariant((state) => state.strummerOffset);
   const isDualNeck = useVariant((state) => state.isDualNeck);
   const offsetPos = useVariant((state) => state.offsetPos);
+  const neckOffsetPosLeft = useVariant((state) => state.neckOffsetPosLeft);
+  const neckOffsetRotLeft = useVariant((state) => state.neckOffsetRotLeft);
   const dualNeckOffsetPos = useVariant((state) => state.dualNeckOffsetPos);
   const dualNeckOffsetRot = useVariant((state) => state.dualNeckOffsetRot);
   const dualNeckOffsetPosLeft = useVariant((state) => state.dualNeckOffsetPosLeft);
@@ -156,8 +158,8 @@ export function Guitar(props) {
   })
 
   return (
-    <group {...props} dispose={null} position={isLeftHandOrientation? [-offsetPos[0],offsetPos[1],0] : [offsetPos[0],offsetPos[1],0]}>
-      <group visible={body === "body_arrow"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03, 0, 0] : [0, 0, 0]}>
+    <group {...props} dispose={null} position={[offsetPos[0],offsetPos[1],0]} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]}>
+      <group visible={body === "body_arrow"} >
         <mesh
           castShadow
           receiveShadow
@@ -208,7 +210,7 @@ export function Guitar(props) {
           material={nodes.body_arrow_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_aviator"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.02 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_aviator"} position={isLeftHandOrientation? [ -0.75,offsetPos[1],0] : [offsetPos[1],offsetPos[1],0]}>
         <mesh
           castShadow
           receiveShadow
@@ -265,7 +267,7 @@ export function Guitar(props) {
           material={nodes.body_aviator_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_briefcase"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_briefcase"} >
         <mesh
           castShadow
           receiveShadow
@@ -316,7 +318,7 @@ export function Guitar(props) {
           material={nodes.body_briefcase_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_broadcaster"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_broadcaster"} >
         <mesh
           castShadow
           receiveShadow
@@ -373,7 +375,7 @@ export function Guitar(props) {
           material={nodes.body_broadcaster_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_fallenangel"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_fallenangel"} >
         <mesh
           castShadow
           receiveShadow
@@ -424,7 +426,7 @@ export function Guitar(props) {
           material={nodes.body_fallenangel_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_hammer"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_hammer" } >
         <mesh
           castShadow
           receiveShadow
@@ -481,7 +483,7 @@ export function Guitar(props) {
           material={nodes.body_hammer_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_headless"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_headless"} >
         <mesh
           castShadow
           receiveShadow
@@ -533,7 +535,7 @@ export function Guitar(props) {
           material={nodes.body_headless_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_headlessPickguard"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_headlessPickguard"} >
         <mesh
           castShadow
           receiveShadow
@@ -584,7 +586,7 @@ export function Guitar(props) {
           material={nodes.body_headless_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_jazzy"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_jazzy"} >
         <mesh
           castShadow
           receiveShadow
@@ -641,7 +643,7 @@ export function Guitar(props) {
           material={nodes.body_jazzy_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_plankspanker"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_plankspanker"} >
         <mesh
           castShadow
           receiveShadow
@@ -716,7 +718,7 @@ export function Guitar(props) {
           material={nodes.body_plankspanker_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_reliable"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_reliable"} >
         <mesh
           castShadow
           receiveShadow
@@ -780,7 +782,7 @@ export function Guitar(props) {
           material={nodes.body_reliable_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_shredhammer"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_shredhammer"} position={isLeftHandOrientation? [ -1.12,offsetPos[1],0] : [offsetPos[1],offsetPos[1],0]}>
         <mesh
           castShadow
           receiveShadow
@@ -810,7 +812,6 @@ export function Guitar(props) {
           receiveShadow
           geometry={nodes.body_shredhammer_buttonSP__buttonPlastic__geo.geometry}
           material={nodes.body_shredhammer_buttonSP__buttonPlastic__geo.material}
-          visible={starPowerButton}
         />
         <mesh
           castShadow
@@ -837,7 +838,7 @@ export function Guitar(props) {
           material={nodes.body_shredhammer_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_summit"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_summit"} >
         <mesh
           castShadow
           receiveShadow
@@ -882,7 +883,7 @@ export function Guitar(props) {
           material={nodes.body_summit_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_thunderbird"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_thunderbird"} >
         <mesh
           castShadow
           receiveShadow
@@ -939,7 +940,7 @@ export function Guitar(props) {
           material={nodes.body_thunderbird_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_viper"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03, 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_viper"} >
         <mesh
           castShadow
           receiveShadow
@@ -984,7 +985,7 @@ export function Guitar(props) {
           material={nodes.body_viper_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={body === "body_youngster"} scale={isLeftHandOrientation? [-1, 1, 1] : [1, 1, 1]} position={isLeftHandOrientation? [-0.03 , 0, 0] : [0, 0, 0]}>
+      <group visible={body === "body_youngster"} >
         <mesh
           castShadow
           receiveShadow
@@ -1041,605 +1042,636 @@ export function Guitar(props) {
           material={nodes.body_youngster_strapMount__blackPlastic__geo.material}
         />
       </group>
-      <group visible={headstock === "headstock_arrow"}>
+      <group name='assembly_neck' position={isLeftHandOrientation? [ neckOffsetPosLeft[0],neckOffsetPosLeft[1],0] : [0,0,0]} rotation={isLeftHandOrientation? [ 0,0,neckOffsetRotLeft[2]] : [0,0,0]}>
+        <group visible={headstock === "headstock_arrow"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_arrow_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_arrow_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_arrow_detail__bodyPlastic__geo.geometry}
+            material={nodes.headstock_arrow_detail__bodyPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_arrow_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_arrow_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_arrow_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_arrow_pegs__hardwareMetal__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_aviator"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_aviator_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_aviator_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_aviator_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_aviator_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_aviator_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_aviator_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_aviator_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_aviator_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_briefcase"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_briefcase_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_briefcase_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_briefcase_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_briefcase_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_briefcase_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_briefcase_pegs__hardwareMetal__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_broadcaster"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_broadcaster_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_broadcaster_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_broadcaster_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_broadcaster_pegs__hardwareMetal__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_fallenangel"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_fallenangel_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_fallenangel_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_fallenangel_detail__headstockPlastic__geo.geometry}
+            material={nodes.headstock_fallenangel_detail__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_fallenangel_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_fallenangel_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_fallenangel_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_fallenangel_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_fallenangel_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_fallenangel_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_headless"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_headless_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_headless_back__neckPlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_ninjastar"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_ninjastar_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_ninjastar_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_ninjastar_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_ninjastar_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_ninjastar_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_ninjastar_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_ninjastar_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_ninjastar_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_ninjastar_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_ninjastar_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_oversized"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_oversized_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_oversized_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_oversized_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_oversized_pegs__hardwareMetal__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_plankspanker"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_plankspanker_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_plankspanker_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_plankspanker_detail__whitePlastic__geo.geometry}
+            material={nodes.headstock_plankspanker_detail__whitePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_plankspanker_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_plankspanker_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_plankspanker_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_plankspanker_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_plankspanker_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_plankspanker_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_plankspanker_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_plankspanker_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_reliable"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_reliable_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_reliable_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_reliable_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_reliable_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_reliable_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_reliable12"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable12_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_reliable12_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable12_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_reliable12_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable12_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_reliable12_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable12_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_reliable12_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_reliable12_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_reliable12_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_summit"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_summit_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_summit_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_summit_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_summit_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_summit_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_summit_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_summit_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_summit_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_summit_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_summit_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_thunderbird"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_thunderbird_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_thunderbird_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_thunderbird_detail__whitePlastic__geo.geometry}
+            material={nodes.headstock_thunderbird_detail__whitePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_thunderbird_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_thunderbird_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_thunderbird_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_thunderbird_pegs__hardwareMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_thunderbird_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_thunderbird_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_thunderbird_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_thunderbird_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+        </group>
+        <group visible={headstock === "headstock_viper"}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_viper_back__neckPlastic__geo.geometry}
+            material={nodes.headstock_viper_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.geometry}
+            material={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.geometry}
+            material={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_viper_front__headstockPlastic__geo.geometry}
+            material={nodes.headstock_viper_front__headstockPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.headstock_viper_pegs__hardwareMetal__geo.geometry}
+            material={nodes.headstock_viper_pegs__hardwareMetal__geo.material}
+          />
+        </group>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_arrow_back__neckPlastic__geo.material}
+          geometry={nodes.inlay_bird__inlayPlastic__geo.geometry}
+          material={nodes.inlay_bird__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_bird'}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_detail__bodyPlastic__geo.geometry}
-          material={nodes.headstock_arrow_detail__bodyPlastic__geo.material}
+          geometry={nodes.inlay_block__inlayPlastic__geo.geometry}
+          material={nodes.inlay_block__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_block'}
+        />
+          <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_cloud__inlayPlastic__geo.geometry}
+          material={nodes.inlay_cloud__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_cloud'}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_arrow_front__headstockPlastic__geo.material}
+          geometry={nodes.inlay_classicDot__inlayPlastic__geo.geometry}
+          material={nodes.inlay_classicDot__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_classicDot'}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.headstock_arrow_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_arrow_pegs__hardwareMetal__geo.material}
+          geometry={nodes.inlay_deathbat__inlayPlastic__geo.geometry}
+          material={nodes.inlay_deathbat__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_deathbat'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_lightning__inlayPlastic__geo.geometry}
+          material={nodes.inlay_lightning__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_lightning'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_offsetDot__inlayPlastic__geo.geometry}
+          material={nodes.inlay_offsetDot__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_offsetDot'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_offsetSwapped__inlayPlastic__geo.geometry}
+          material={nodes.inlay_offsetSwapped__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_offsetSwapped'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_parallelogram__inlayPlastic__geo.geometry}
+          material={nodes.inlay_parallelogram__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_parallelogram'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_razor__inlayPlastic__geo.geometry}
+          material={nodes.inlay_razor__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_razor'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_sawblade__inlayPlastic__geo.geometry}
+          material={nodes.inlay_sawblade__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_sawblade'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_sharkfin__inlayPlastic__geo.geometry}
+          material={nodes.inlay_sharkfin__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_sharkfin'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_snake__inlayPlastic__geo.geometry}
+          material={nodes.inlay_snake__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_snake'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_trapezoid__inlayPlastic__geo.geometry}
+          material={nodes.inlay_trapezoid__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_trapezoid'}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.inlay_tree__inlayPlastic__geo.geometry}
+          material={nodes.inlay_tree__inlayPlastic__geo.material}
+          visible={inlay === 'inlay_tree'}
+        />
+        <group name='assembly_logo' scale={isLeftHandOrientation? [-1,1,1]:[1,1,1]} position={isLeftHandOrientation? [-0.03,0,0]:[0,0,0]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.logo_plate__chromeMetal__geo.geometry}
+            material={nodes.logo_plate__chromeMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.logo_text___blackPlastic__geo.geometry}
+            material={nodes.logo_text___blackPlastic__geo.material}
+          />
+        </group>
+        <group>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_back__neckPlastic__geo.geometry}
+            material={nodes.neck_back__neckPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
+            material={neckButtonColor.color==='rainbow'? m_greenPlastic : m_neckButtonPlastic}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_buttonB__neckButtonPlastic__geo.geometry}
+            material={neckButtonColor.color==='rainbow'? m_redPlastic : m_neckButtonPlastic}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_buttonC__neckButtonPlastic__geo.geometry}
+            material={neckButtonColor.color==='rainbow'? m_yellowPlastic : m_neckButtonPlastic}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_buttonD__neckButtonPlastic__geo.geometry}
+            material={neckButtonColor.color==='rainbow'? m_bluePlastic : m_neckButtonPlastic}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_buttonE__neckButtonPlastic__geo.geometry}
+            material={neckButtonColor.color==='rainbow'? m_orangePlastic : m_neckButtonPlastic}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_buttonTrim__translucentPlastic__geo.geometry}
+            material={nodes.neck_buttonTrim__translucentPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_fretboard__fretBoardWood__geo.geometry}
+            material={nodes.neck_fretboard__fretBoardWood__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_frets__brushedMetal__geo.geometry}
+            material={nodes.neck_frets__brushedMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_fretTop__whitePlastic__geo.geometry}
+            material={nodes.neck_fretTop__whitePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_polybar__fretboardBindingPlastic__geo.geometry}
+            material={m_fretboardBindingPlastic}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_riviet1__bluePlastic__geo.geometry}
+            material={nodes.neck_riviet1__bluePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_riviet2__redPlastic__geo.geometry}
+            material={nodes.neck_riviet2__redPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_riviet3__yellowPlastic__geo.geometry}
+            material={nodes.neck_riviet3__yellowPlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_riviet4__bluePlastic__geo.geometry}
+            material={nodes.neck_riviet4__bluePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_riviet5__orangePlastic__geo.geometry}
+            material={nodes.neck_riviet5__orangePlastic__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.neck_riviets__blackPlastic__geo.geometry}
+            material={nodes.neck_riviets__blackPlastic__geo.material}
+          />
+        </group>
+        <group position={[0, strummerOffset, 0]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.strummer_base__blackPlastic__geo.geometry}
+          material={nodes.strummer_base__blackPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.strummer_insertA__strummerPlastic__geo.geometry}
+          material={body === "body_thunderbird" ? m_blackPlastic : nodes.strummer_insertA__strummerPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.strummer_insertB__strummerPlastic__geo.geometry}
+          material={nodes.strummer_insertB__strummerPlastic__geo.material}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.strummer_main__translucentPlastic__geo.geometry}
+          material={nodes.strummer_main__translucentPlastic__geo.material}
+          ref={strummerRef}
         />
       </group>
-      <group visible={headstock === "headstock_aviator"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_aviator_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_aviator_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_aviator_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_aviator_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_aviator_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_aviator_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_aviator_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_aviator_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_briefcase"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_briefcase_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_briefcase_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_briefcase_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_briefcase_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_briefcase_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_briefcase_pegs__hardwareMetal__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_broadcaster"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_broadcaster_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_broadcaster_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_broadcaster_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_broadcaster_pegs__hardwareMetal__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_fallenangel"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_fallenangel_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_fallenangel_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.geometry}
-          material={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_fallenangel_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_fallenangel_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_fallenangel_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_fallenangel_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_fallenangel_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_fallenangel_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_headless"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_headless_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_headless_back__neckPlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_ninjastar"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_ninjastar_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_ninjastar_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_ninjastar_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_ninjastar_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_ninjastar_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_ninjastar_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_ninjastar_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_ninjastar_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_ninjastar_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_ninjastar_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_oversized"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_oversized_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_oversized_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_oversized_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_oversized_pegs__hardwareMetal__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_plankspanker"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_plankspanker_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_plankspanker_detail__whitePlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_detail__whitePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_plankspanker_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_plankspanker_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_plankspanker_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_plankspanker_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_plankspanker_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_plankspanker_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_reliable"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_reliable_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_reliable_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_reliable_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_reliable_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_reliable_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_reliable12"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable12_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_reliable12_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable12_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_reliable12_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable12_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_reliable12_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable12_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_reliable12_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_reliable12_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_reliable12_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_summit"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_summit_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_summit_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_summit_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_summit_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_summit_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_summit_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_summit_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_summit_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_summit_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_summit_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_thunderbird"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_thunderbird_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_thunderbird_detail__whitePlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_detail__whitePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_thunderbird_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_thunderbird_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_thunderbird_pegs__hardwareMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_thunderbird_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_thunderbird_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_thunderbird_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-      </group>
-      <group visible={headstock === "headstock_viper"}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_viper_back__neckPlastic__geo.geometry}
-          material={nodes.headstock_viper_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.geometry}
-          material={nodes.headstock_viper_trussRoadCover__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.geometry}
-          material={nodes.headstock_viper_trussRoadCoverTrim__whitePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_viper_front__headstockPlastic__geo.geometry}
-          material={nodes.headstock_viper_front__headstockPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.headstock_viper_pegs__hardwareMetal__geo.geometry}
-          material={nodes.headstock_viper_pegs__hardwareMetal__geo.material}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_bird__inlayPlastic__geo.geometry}
-        material={nodes.inlay_bird__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_bird'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_block__inlayPlastic__geo.geometry}
-        material={nodes.inlay_block__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_block'}
-      />
-        <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_cloud__inlayPlastic__geo.geometry}
-        material={nodes.inlay_cloud__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_cloud'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_classicDot__inlayPlastic__geo.geometry}
-        material={nodes.inlay_classicDot__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_classicDot'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_deathbat__inlayPlastic__geo.geometry}
-        material={nodes.inlay_deathbat__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_deathbat'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_lightning__inlayPlastic__geo.geometry}
-        material={nodes.inlay_lightning__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_lightning'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_offsetDot__inlayPlastic__geo.geometry}
-        material={nodes.inlay_offsetDot__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_offsetDot'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_offsetSwapped__inlayPlastic__geo.geometry}
-        material={nodes.inlay_offsetSwapped__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_offsetSwapped'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_parallelogram__inlayPlastic__geo.geometry}
-        material={nodes.inlay_parallelogram__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_parallelogram'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_razor__inlayPlastic__geo.geometry}
-        material={nodes.inlay_razor__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_razor'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_sawblade__inlayPlastic__geo.geometry}
-        material={nodes.inlay_sawblade__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_sawblade'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_sharkfin__inlayPlastic__geo.geometry}
-        material={nodes.inlay_sharkfin__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_sharkfin'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_snake__inlayPlastic__geo.geometry}
-        material={nodes.inlay_snake__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_snake'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_trapezoid__inlayPlastic__geo.geometry}
-        material={nodes.inlay_trapezoid__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_trapezoid'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.inlay_tree__inlayPlastic__geo.geometry}
-        material={nodes.inlay_tree__inlayPlastic__geo.material}
-        visible={inlay === 'inlay_tree'}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.logo_plate__chromeMetal__geo.geometry}
-        material={nodes.logo_plate__chromeMetal__geo.material}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.logo_text___blackPlastic__geo.geometry}
-        material={nodes.logo_text___blackPlastic__geo.material}
-      />
-      <group>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_back__neckPlastic__geo.geometry}
-          material={nodes.neck_back__neckPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
-          material={neckButtonColor.color==='rainbow'? m_greenPlastic : m_neckButtonPlastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonB__neckButtonPlastic__geo.geometry}
-          material={neckButtonColor.color==='rainbow'? m_redPlastic : m_neckButtonPlastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonC__neckButtonPlastic__geo.geometry}
-          material={neckButtonColor.color==='rainbow'? m_yellowPlastic : m_neckButtonPlastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonD__neckButtonPlastic__geo.geometry}
-          material={neckButtonColor.color==='rainbow'? m_bluePlastic : m_neckButtonPlastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonE__neckButtonPlastic__geo.geometry}
-          material={neckButtonColor.color==='rainbow'? m_orangePlastic : m_neckButtonPlastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_buttonTrim__translucentPlastic__geo.geometry}
-          material={nodes.neck_buttonTrim__translucentPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_fretboard__fretBoardWood__geo.geometry}
-          material={nodes.neck_fretboard__fretBoardWood__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_frets__brushedMetal__geo.geometry}
-          material={nodes.neck_frets__brushedMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_fretTop__whitePlastic__geo.geometry}
-          material={nodes.neck_fretTop__whitePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_polybar__fretboardBindingPlastic__geo.geometry}
-          material={m_fretboardBindingPlastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_riviet1__bluePlastic__geo.geometry}
-          material={nodes.neck_riviet1__bluePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_riviet2__redPlastic__geo.geometry}
-          material={nodes.neck_riviet2__redPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_riviet3__yellowPlastic__geo.geometry}
-          material={nodes.neck_riviet3__yellowPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_riviet4__bluePlastic__geo.geometry}
-          material={nodes.neck_riviet4__bluePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_riviet5__orangePlastic__geo.geometry}
-          material={nodes.neck_riviet5__orangePlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.neck_riviets__blackPlastic__geo.geometry}
-          material={nodes.neck_riviets__blackPlastic__geo.material}
-        />
       </group>
       {/* position={isLeftHandOrientation? [-0.02 , 0, 0] : [0, 0, 0]} */}
-      <group name='dualNeck' visible={isDualNeck} position={isLeftHandOrientation? dualNeckOffsetPosLeft : dualNeckOffsetPos} rotation={isLeftHandOrientation? dualNeckOffsetRotLeft : dualNeckOffsetRot}>
+      <group name='assembly_dualNeck' visible={isDualNeck} position={isLeftHandOrientation? dualNeckOffsetPosLeft : dualNeckOffsetPos} rotation={isLeftHandOrientation? dualNeckOffsetRotLeft : dualNeckOffsetRot}>
         <group visible={headstock2 === "headstock_arrow"}>
           <mesh
             castShadow
@@ -1736,8 +1768,8 @@ export function Guitar(props) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.geometry}
-            material={nodes.headstock_fallenangel_detail__pickGuardPlastic__geo.material}
+            geometry={nodes.headstock_fallenangel_detail__headstockPlastic__geo.geometry}
+            material={nodes.headstock_fallenangel_detail__headstockPlastic__geo.material}
           />
           <mesh
             castShadow
@@ -2023,34 +2055,34 @@ export function Guitar(props) {
         material={nodes.neck_back__neckPlastic__geo.material}
         />
         <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
-        material={nodes.neck_buttonA__neckButtonPlastic__geo.material}
+          castShadow
+          receiveShadow
+          geometry={nodes.neck_buttonA__neckButtonPlastic__geo.geometry}
+          material={neckButtonColor.color==='rainbow'? m_greenPlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonB__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonB__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_redPlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonC__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonC__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_yellowPlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonD__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonD__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_bluePlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.neck_buttonE__neckButtonPlastic__geo.geometry}
-          material={nodes.neck_buttonE__neckButtonPlastic__geo.material}
+          material={neckButtonColor.color==='rainbow'? m_orangePlastic : m_neckButtonPlastic}
         />
         <mesh
           castShadow
@@ -2249,45 +2281,20 @@ export function Guitar(props) {
             material={nodes.strummer_main__translucentPlastic__geo.material}
           />
         </group>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.logo_plate__chromeMetal__geo.geometry}
-          material={nodes.logo_plate__chromeMetal__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.logo_text___blackPlastic__geo.geometry}
-          material={nodes.logo_text___blackPlastic__geo.material}
-        />
-      </group>
-      <group position={[0, strummerOffset, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.strummer_base__blackPlastic__geo.geometry}
-          material={nodes.strummer_base__blackPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.strummer_insertA__strummerPlastic__geo.geometry}
-          material={body === "body_thunderbird" ? m_blackPlastic : nodes.strummer_insertA__strummerPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.strummer_insertB__strummerPlastic__geo.geometry}
-          material={nodes.strummer_insertB__strummerPlastic__geo.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.strummer_main__translucentPlastic__geo.geometry}
-          material={nodes.strummer_main__translucentPlastic__geo.material}
-          ref={strummerRef}
-        />
+        <group name='assembly_logo' scale={isLeftHandOrientation? [-1,1,1]:[1,1,1]} position={isLeftHandOrientation? [-0.03,0,0]:[0,0,0]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.logo_plate__chromeMetal__geo.geometry}
+            material={nodes.logo_plate__chromeMetal__geo.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.logo_text___blackPlastic__geo.geometry}
+            material={nodes.logo_text___blackPlastic__geo.material}
+          />
+        </group>
       </group>
     </group>
   )
