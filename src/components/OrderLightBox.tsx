@@ -82,12 +82,38 @@ const OrderLightBox: React.FC = () => {
   }, [isOrderLightBoxOpen]);
 
   const handleCopy = () => {
-    // Normalize the text for iOS devices
-    const normalizedText = order_text.replace(/\n/g, '\r\n'); // Replace line breaks with CRLF
-    navigator.clipboard.writeText(normalizedText).then(() => {
+    const textToCopy = decodeURIComponent(order_text); // Decode the text to ensure proper formatting
+
+    function handleSuccess() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    });
+    }
+
+    function handleFailure(err: any) {
+      console.error("Failed to copy text: ", err);
+      // Optionally provide user feedback on failure
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      // Modern approach using the Clipboard API
+      navigator.clipboard.writeText(textToCopy)
+        .then(handleSuccess)
+        .catch(handleFailure);
+    } else {
+      // Fallback for older browsers or environments where Clipboard API might not be fully supported
+      const textArea = document.createElement('textarea');
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        const successful = document.execCommand('copy');
+        successful ? handleSuccess() : handleFailure('execCommand failed');
+      } catch (err) {
+        handleFailure(err);
+      } finally {
+        document.body.removeChild(textArea);
+      }
+    }
   };
 
   return (
