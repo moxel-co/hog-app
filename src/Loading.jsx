@@ -2,53 +2,64 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Html, ContactShadows, OrbitControls, DeviceOrientationControls, useGLTF } from '@react-three/drei'
 import { isMobile } from 'react-device-detect'
-// import * as THREE from 'three'
-import { Perf } from 'r3f-perf'
-// import { useControls } from 'leva'
+import React, { useState, useEffect, useTransition } from 'react';
 
-export default function Loading()
-{
-    const { nodes } = useGLTF('./logo.glb')
-    const logo = useRef()
+export default function Loading() {
+    const [progress, setProgress] = useState(0);
+    const progressRef = useRef(0);
+    const [isPending, startTransition] = useTransition();
 
-    useFrame(( {mouse, viewport} ) => {
-        const x = (mouse.x * viewport.width) / 30
-        const y = (mouse.y * viewport.height) / 30
-        logo.current.lookAt(x, y, 1)
-    })
-
-    return <>
-        <OrbitControls
-            makeDefault
-            enableDamping
-            enablePan={false}
-            enableRotate={false}
-            minDistance={2}
-            maxDistance={6}
+    useEffect(() => {
+        let rafId;
+        const updateProgress = () => {
+            progressRef.current += 1;
             
-        />
-        {/* <DeviceOrientationControls /> */}
-        <directionalLight position={ [-2 , 2, 0] } intensity={ 8 }/>
-        <ambientLight intensity={ 1.6 }/>
-        <ContactShadows position={ [0, -0.4, 0] } opacity={0.3}/>
-        
-        <group ref={logo}>
-            <mesh 
-                geometry={ nodes.moxel_logo.geometry }
-                rotation={ nodes.moxel_logo.rotation }
-                scale={0.2}
-                >
-                <meshStandardMaterial color="#145892" />
-                {/* <Html
-                    wrapperClass='loadingProgress'
-                    distanceFactor={ 4 }
-                    center
-                    occlude={[logo]}
-                >100%
-                </Html> */}
-            </mesh>
-        </group>
-    </>
-}
+            if (progressRef.current <= 100) {
+                setProgress(progressRef.current);
+                rafId = requestAnimationFrame(updateProgress);
+            }
+        };
 
-useGLTF.preload('./logo.glb')
+        startTransition(() => {
+            rafId = requestAnimationFrame(updateProgress);
+        });
+
+        return () => {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+            }
+        };
+    }, []);
+
+    const safeProgress = Math.min(Math.max(progress, 0), 100);
+
+    return (
+        <Html center>
+            <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#242424]">
+                <div className="relative w-64 h-64">
+                    <img
+                        src="/hammer-on-guitar.png"
+                        alt="Loading"
+                        className="w-full h-full"
+                        style={{
+                            filter: 'grayscale(100%)',
+                            opacity: 0.5,
+                        }}
+                    />
+                    <img
+                        src="/hammer-on-guitar.png"
+                        alt="Loading"
+                        className="absolute top-0 left-0 w-full h-full"
+                        style={{
+                            clipPath: `polygon(0 ${100 - safeProgress}%, 100% ${100 - safeProgress}%, 100% 100%, 0 100%)`,
+                        }}
+                    />
+                </div>
+                <div className="mt-4 text-white font-medium text-center">
+                    <div>Loading</div>
+                    <div>{safeProgress}%</div>
+                </div>
+            </div>
+        </Html>
+    );
+}

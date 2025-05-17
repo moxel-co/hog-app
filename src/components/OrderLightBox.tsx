@@ -17,6 +17,7 @@ const OrderLightBox: React.FC = () => {
   const starPowerButton = useVariant((state) => state.starPowerButton);
   const bodyColor = useVariant((state) => state.bodyColor);
   const neckColor = useVariant((state) => state.neckColor);
+  const headstockColor = useVariant((state) => state.headstockColor);
   const fretBoardColor = useVariant((state) => state.fretBoardColor);
   const fretBoardBindingColor = useVariant((state) => state.fretBoardBindingColor);
   const pickGuardColor = useVariant((state) => state.pickGuardColor);
@@ -44,6 +45,7 @@ const OrderLightBox: React.FC = () => {
     `Hand Orientation: ${isLeftHandOrientation ? "Left" : "Right"}`,
     `Body Color: ${bodyColor}`,
     `Neck Color: ${neckColor}`,
+    `Headstock Color: ${headstockColor}`,
     `Fretboard Color: ${fretBoardColor}`,
     `Fretboard Binding Color: ${fretBoardBindingColor}`,
     `Pick Guard Color: ${pickGuardColor}`,
@@ -56,7 +58,7 @@ const OrderLightBox: React.FC = () => {
     .filter(Boolean) // Remove null or undefined lines
     .join("\n"); // Join lines with a newline character
 
-  const orderPageUrl = "https://www.hammeronguitars.com/shop"; // Default value for orderPageUrl
+  const orderPageUrl = "https://www.hammeronguitars.com/shop/p/commission-guitar-controller-pysy9"; // Default value for orderPageUrl
 
   const closeLightbox = () => setIsOrderLightBoxOpen(false); // Update global state to close the lightbox
 
@@ -80,7 +82,9 @@ const OrderLightBox: React.FC = () => {
   }, [isOrderLightBoxOpen]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(order_text).then(() => {
+    // Normalize the text for iOS devices
+    const normalizedText = order_text.replace(/\n/g, '\r\n'); // Replace line breaks with CRLF
+    navigator.clipboard.writeText(normalizedText).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -107,8 +111,8 @@ const OrderLightBox: React.FC = () => {
               <X size={20} className="text-gray-500" />
             </button>
 
-            <h3 className="text-lg text-white mb-4 pr-8 text-center">
-            As we work towards a more seamless shopping experience, please enter the order details on the ordering page.
+            <h3 className="text-base text-white mb-4 pr-8 text-center">
+            Please click the "Copy" button below and paste the text to your order, linked through the "Order page" button.
             </h3>
 
             <div
